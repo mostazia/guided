@@ -1,0 +1,240 @@
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --freshGuac: #aebe89;
+  --aloeCream: #dae3bb;
+  --whiteLace: #fff7ec;
+  --brookGreen: #a8ead5;
+  --colaBrown: #2b2119;
+}
+
+/* General CSS */
+.stripHeading {
+  font-size: 5vh;
+  font-family: "Barlow Condensed", sans-serif;
+  color: var(--colaBrown);
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Home Strip */
+
+#homeStripMain {
+  height: 75vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  border-bottom: 0.25vh solid var(--aloeCream);
+}
+
+#mainStripLLeaves {
+  height: 100%;
+  margin-left: 0;
+  margin-right: auto;
+  aspect-ratio: calc(1029 / 1194);
+  background-image: url("../Images/HomeLeafDecor.png");
+  background-size: contain;
+  opacity: 0.7;
+}
+
+#mainStripRLeaves {
+  height: 100%;
+  margin-left: auto;
+  margin-right: 0;
+  aspect-ratio: calc(1029 / 1194);
+  background-image: url("../Images/HomeLeafDecor.png");
+  background-size: contain;
+  transform: rotate(180deg);
+  opacity: 0.7;
+}
+
+#mainStripPreviewContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* border: 2px solid purple; */
+  box-sizing: border-box;
+  height: 75vh;
+  position: absolute;
+  z-index: 5;
+}
+
+#mainStripHeading {
+  font-size: 10.75vh;
+  font-family: "Barlow Condensed", sans-serif;
+  color: var(--colaBrown);
+  font-weight: 600;
+  margin-top: 5vh;
+  text-align: center;
+}
+
+#mainStripDescription {
+  font-size: 3.5vh;
+  font-family: "Urbanist", sans-serif;
+  color: var(--freshGuac);
+  font-weight: 400;
+  margin-top: 4vh;
+  line-height: 1.75;
+  text-align: center;
+}
+
+#mainStripDocPreview {
+  height: 47.5%;
+  margin-top: auto;
+  margin-bottom: 0;
+  border-top-left-radius: 2vh;
+  border-top-right-radius: 2vh;
+  aspect-ratio: 2.85;
+  background-image: url("../Images/SampleStudyGuideCover.png");
+  background-size: cover;
+  box-shadow: 0 0 3.5vh 1.75vh rgba(0, 0, 0, 0.25);
+  clip-path: inset(-10vh -10vh 0px -10vh);
+}
+
+/* About Strip */
+#homeStripAbout {
+  height: 75vh;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  user-select: none;
+  border-bottom: 0.25vh solid var(--aloeCream);
+  box-sizing: border-box;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+}
+
+.homeStripAboutContainer {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+/* Guides Strip */
+#homeStripGuides {
+  height: 75vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+  border-bottom: 0.25vh solid var(--aloeCream);
+  box-sizing: border-box;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+}
+
+#homeStripGuideContainer {
+  /* border: 2px solid saddlebrown; */
+  height: 52.5vh;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.homeGuidePreviewBox {
+  border: 0.325vh solid var(--freshGuac);
+  height: 100%;
+  aspect-ratio: 0.85;
+  border-radius: calc(52.5vh * 0.85 * 0.05);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.homeGuidePreviewImage {
+  width: 100%;
+  aspect-ratio: 1.1;
+  z-index: 0;
+}
+
+.homeGuidePreviewInfo {
+  position: relative;
+  top: auto;
+  bottom: 0;
+  height: calc(52.5vh - (52.5vh * 0.85 / 1.1));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0.75vh;
+  padding-bottom: 0.75vh;
+  box-sizing: border-box;
+  z-index: 5;
+}
+
+.homeGuidePreviewName {
+  font-size: 3vh;
+  font-family: "Urbanist", sans-serif;
+  color: var(--freshGuac);
+  font-weight: 500;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.homeGuidePreviewSub {
+  font-size: 2.5vh;
+  font-family: "Urbanist", sans-serif;
+  color: var(--colaBrown);
+  font-weight: 400;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.homeGuidePreviewAdd {
+  height: 5vh;
+  aspect-ratio: 6;
+  background-color: var(--aloeCream);
+  margin-bottom: 0.5vh;
+  margin-top: auto;
+  border-radius: calc(5vh * 6 * 0.05);
+  font-size: 2.5vh;
+  font-family: "Urbanist", sans-serif;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.homeGuidePreviewNew {
+  margin-left: auto;
+  margin-right: calc(52.5vh * 0.85 * 0.035);
+  margin-top: calc(52.5vh * 0.85 * 0.035);
+  height: 3.5vh;
+  aspect-ratio: 2;
+  background: var(--aloeCream);
+  color: white;
+  font-weight: 400;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 2.25vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.homeGuidePreviewBox:hover > .homeGuidePreviewInfo {
+  height: calc(52.5vh - (52.5vh * 0.85 / 1.1) + 9vh);
+}
+
+.homeGuidePreviewBox:hover > .homeGuidePreviewInfo > .homeGuidePreviewAdd {
+  display: flex;
+}
+
+.homeGuidePreviewAdd:hover {
+  background-color: transparent;
+  border: 0.315vh solid var(--aloeCream);
+  color: var(--freshGuac);
+  cursor: pointer;
+}

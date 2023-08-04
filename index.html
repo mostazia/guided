@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" content="initial-scale=1" />
+    <title>GuidEd by Stacy</title>
+    <link rel="stylesheet" href="CSS/home.css" />
+    <link rel="stylesheet" href="CSS/template.css" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <meta
+      name="description"
+      content="Stacy Vazquez is a first-year student studying Mathematics and Computer Science at MIT. This is her personal website and blog."
+    />
+    <meta name="author" content="Stacy Vazquez" />
+    <meta
+      name="keywords"
+      content="HTML, CSS, JavaScript, Web Developer, Student, Computer Science, Mathematics, MIT, Technology"
+    />
+    <script id="navbarHeightScript">
+      window.onscroll = function () {
+        scrollFunction();
+      };
+      var r = document.querySelector(":root");
+      var timer = null;
+
+      function scrollFunction() {
+        r.style.setProperty("--scrollbarColor", "#a8ead5");
+        if (
+          document.body.scrollTop > 1 ||
+          document.documentElement.scrollTop > 1
+        ) {
+          r.style.setProperty("--navbarHeight", "10vh");
+        } else {
+          r.style.setProperty("--navbarHeight", "12vh");
+        }
+        if (timer !== null) {
+          clearTimeout(timer);
+        }
+        timer = setTimeout(function () {
+          r.style.setProperty("--scrollbarColor", "#dae3bb");
+        }, 100);
+      }
+    </script>
+    <script id="cartScript">
+      function addToCart(productName) {
+        document.cookie = "test=test; path=/";
+        let cart = JSON.parse(getCookie("cart") || "{}");
+        if (!cart[productName]) {
+          cart[productName] = {
+            quantity: 1,
+          };
+          setCookie("cart", JSON.stringify(cart));
+        }
+      }
+      // Function to retrieve a cookie by name
+      function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(";").shift();
+      }
+      // Function to set a cookie
+      function setCookie(name, value) {
+        document.cookie = `${name}=${value}; path=/`;
+        console.log(`${name}=${value}; path=/`);
+      }
+
+      // Function to display the cart contents on the cart page
+      function displayCart() {
+        let cart = JSON.parse(getCookie("cart") || "{}");
+        let cartDiv = document.getElementById("cart");
+        cartDiv.innerHTML = "<h2>Shopping Cart</h2>";
+
+        for (let product in cart) {
+          let { price, quantity } = cart[product];
+          let totalPrice = price * quantity;
+          cartDiv.innerHTML += `<p>${product} - Quantity: ${quantity} - Price: $${totalPrice}</p>`;
+        }
+      }
+
+      // Call the displayCart function on the cart page to show the cart contents
+      if (window.location.href.includes("cart.html")) {
+        displayCart();
+      }
+    </script>
+  </head>
+  <body>
+    <div id="navbar">
+      <div id="navbarMenuContainer"></div>
+      <div id="navbarLogoContainer">
+        <div id="navbarMainLogo">GuidEd</div>
+        <div id="navbarSubLogo">By Stacy</div>
+      </div>
+      <div id="navbarOptionsContainer">
+        <div
+          id="navbarBackpackIcon"
+          onClick="console.log(document.cookie)"
+        ></div>
+      </div>
+    </div>
+    <div id="pagebody">
+      <div id="homeStripMain">
+        <div id="mainStripLLeaves"></div>
+        <div id="mainStripRLeaves"></div>
+        <div id="mainStripPreviewContainer">
+          <div id="mainStripHeading">Free Educational Resources</div>
+          <div id="mainStripDescription">
+            Accessible. Comprehensive. Reliable. <br />Designed by an MIT
+            student to promote academic growth, <i> from root to fruit. </i>
+          </div>
+          <div id="mainStripDocPreview"></div>
+        </div>
+      </div>
+      <div id="homeStripAbout">
+        <div class="homeStripAboutContainer">
+          <div class="stripHeading">Introducing GuidEd</div>
+        </div>
+        <div class="homeStripAboutContainer">
+          <iframe
+            style="width: 90%; aspect-ratio: calc(560 / 315)"
+            src="https://www.youtube-nocookie.com/embed/AR0Qo3-lfas"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+      <div id="homeStripGuides">
+        <div class="stripHeading">Popular Guides</div>
+        <div id="homeStripGuideContainer">
+          <div class="homeGuidePreviewBox">
+            <div class="homeGuidePreviewImage">
+              <div class="homeGuidePreviewNew">NEW!</div>
+            </div>
+            <div class="homeGuidePreviewInfo">
+              <div class="homeGuidePreviewName">One Pagers Bundle</div>
+              <div class="homeGuidePreviewSub">AP Biology</div>
+              <div class="homeGuidePreviewAdd" onClick="addToCart('Onepagers')">
+                Add to Backpack
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
