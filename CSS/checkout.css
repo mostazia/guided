@@ -1,0 +1,395 @@
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --freshGuac: #aebe89;
+  --aloeCream: #dae3bb;
+  --whiteLace: #fff7ec;
+  --brookGreen: #a8ead5;
+  --colaBrown: #2b2119;
+  --navbarHeight: 10vh;
+  --scrollbarColor: var(--aloeCream);
+}
+
+body {
+  background-color: var(--whiteLace);
+  overflow: overlay;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+}
+
+#pagebody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  margin-top: 10vh;
+  box-sizing: border-box;
+}
+
+/* SCROLL */
+
+::-webkit-scrollbar {
+  width: 0.5vw;
+  border-radius: 0.25vw;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbarColor);
+  border-radius: 0.25vw;
+}
+
+/* CART CSS */
+
+#checkoutContainer {
+  min-height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: left;
+}
+
+#cartDisplayContainer {
+  position: fixed;
+  right: 0;
+  width: 35vw;
+  height: calc(100vh - 34.5vw / 3.75);
+  background: var(--whiteLace);
+  display: flex;
+  flex-direction: column;
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  box-sizing: border-box;
+  overflow: overlay;
+  overflow-x: hidden;
+}
+
+#cartDisplayHeading {
+  height: 8vh;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  user-select: none;
+  margin-bottom: 3vh;
+}
+
+#cartDisplayTitle {
+  font-size: 4vh;
+  font-family: "Barlow Condensed", sans-serif;
+  color: var(--colaBrown);
+  font-weight: 500;
+  margin-left: 0;
+}
+
+#cartDisplayCount {
+  font-size: 2.5vh;
+  font-family: "Urbanist", sans-serif;
+  color: var(--freshGuac);
+  font-weight: 400;
+  margin-top: calc(1.5vh / 2);
+  margin-left: 2vw;
+  margin-right: auto;
+}
+
+#cartDisplayX {
+  height: 3vh;
+  aspect-ratio: 1;
+  margin-left: auto;
+  margin-right: 0;
+  background-image: url("../Images/BackpackXIcon.png");
+  background-size: contain;
+  cursor: pointer;
+}
+
+#cartDisplayX:hover {
+  background-image: url("../Images/BackpackXIconHover.png");
+}
+
+.cartItemContainer {
+  border: 0.325vh solid var(--freshGuac);
+  width: 100%;
+  aspect-ratio: 4.5;
+  border-radius: calc(52.5vh * 0.85 * 0.05);
+  display: flex;
+  flex-direction: row;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.cartItemImage {
+  width: 40%;
+  height: 100%;
+  background-size: cover;
+}
+
+.cartItemInfoBox {
+  width: 60%;
+  height: 100%;
+  padding-left: 1vw;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-evenly;
+}
+
+.cartItemName {
+  font-size: calc(31vw / 6 * 0.25);
+  font-family: "Urbanist", sans-serif;
+  color: var(--freshGuac);
+  font-weight: 500;
+  line-height: 1.75;
+}
+
+.cartItemSubject {
+  font-size: calc(31vw / 6 * 0.2);
+  font-family: "Urbanist", sans-serif;
+  color: var(--colaBrown);
+  font-weight: 400;
+  line-height: 1.75;
+}
+
+.cartItemRemove {
+  font-size: calc(31vw / 6 * 0.2);
+  font-family: "Urbanist", sans-serif;
+  color: var(--freshGuac);
+  font-weight: 400;
+  line-height: 1.75;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.cartItemRemove:hover {
+  text-decoration: underline;
+}
+
+#cartCheckoutContainer {
+  width: 34.5vw;
+  aspect-ratio: 3.75;
+  position: fixed;
+  bottom: 0;
+  right: 0vw;
+  box-sizing: border-box;
+  background: var(--whiteLace);
+  border-top: 0.5vh solid var(--aloeCream);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  padding-left: 2vw;
+  padding-right: 2vw;
+}
+
+#cartCheckoutText {
+  font-size: calc(34.5vw / 3.75 * 0.12);
+  font-family: "Urbanist", sans-serif;
+  color: var(--colaBrown);
+  font-weight: 300;
+  line-height: 1.5;
+  text-align: center;
+}
+
+#cartCheckoutButton {
+  width: 70%;
+  aspect-ratio: 9;
+  background: var(--aloeCream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--colaBrown);
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: calc(34.5vw * 0.7 / 9 * 0.5);
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+}
+
+#cartCheckoutButton:hover {
+  background: transparent;
+  border: 0.325vh solid var(--aloeCream);
+  color: var(--aloeCream);
+}
+
+/* CHECKOUT CSS */
+
+#checkoutBox {
+  min-height: 100vh;
+  width: 65vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#navbarLogoContainer {
+  margin-top: 3vh;
+  margin-bottom: 5vh;
+  width: 25vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+#navbarMainLogo {
+  font-size: calc(0.5 * var(--navbarHeight));
+  color: var(--freshGuac);
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 400;
+}
+
+#navbarSubLogo {
+  font-size: calc(0.2 * var(--navbarHeight));
+  color: var(--colaBrown);
+  font-family: "Urbanist", sans-serif;
+  font-weight: 500;
+}
+
+#checkoutForm {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+#checkoutTitle {
+  width: 100%;
+  font-size: 5vh;
+  font-family: "Barlow Condensed", sans-serif;
+  color: var(--colaBrown);
+  font-weight: 500;
+  text-align: left;
+  margin-bottom: 6vh;
+}
+
+.formSmallInput {
+  width: 42.5%;
+  aspect-ratio: 6.5;
+  border: 0.325vh solid var(--freshGuac);
+  background: transparent;
+  outline: none;
+  font-family: "Urbanist", sans-serif;
+  color: var(--colaBrown);
+  font-weight: 400;
+  font-size: calc(65vw * 0.8 * 0.425 / 6.5 / 2.5);
+  margin-bottom: 5vh;
+  padding-left: calc(65vw * 0.8 * 0.425 * 0.05);
+}
+
+.formSmallInput::placeholder {
+  color: var(--freshGuac);
+}
+
+.formLargeInput {
+  width: 100%;
+  height: calc(65vw * 0.8 * 0.425 / 6.5);
+  border: 0.325vh solid var(--freshGuac);
+  background: transparent;
+  outline: none;
+  font-family: "Urbanist", sans-serif;
+  color: var(--colaBrown);
+  font-weight: 400;
+  font-size: calc(65vw * 0.8 * 0.425 / 6.5 / 2.5);
+  margin-bottom: 5vh;
+  padding-left: calc(65vw * 0.8 * 0.425 * 0.05);
+}
+
+.formLargeInput::placeholder {
+  color: var(--freshGuac);
+}
+
+/* Hide the default checkbox input */
+input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The container */
+.container {
+  display: block;
+  position: relative;
+  padding-left: calc(65vw * 0.8 * 0.425 / 6.5 / 2 + 1vw);
+  margin-bottom: 5vh;
+  cursor: pointer;
+  font-size: calc(65vw * 0.8 * 0.425 / 6.5 / 2.75);
+  font-family: "Urbanist", sans-serif;
+  color: var(--colaBrown);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  height: calc(65vw * 0.8 * 0.425 / 6.5 / 2);
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: calc(65vw * 0.8 * 0.425 / 6.5 / 2);
+  aspect-ratio: 1;
+  background: transparent;
+  border: 0.325vh solid var(--freshGuac);
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: var(--aloeCream);
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: var(--freshGuac);
+  display: flex;
+  justify-content: center;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  top: calc(
+    (
+        65vw * 0.8 * 0.425 / 6.5 / 2 - 0.70710678118 *
+          (65vw * 0.8 * 0.425 / 6.5 / 4)
+      ) / 2 - 0.70710678118 * (65vw * 0.8 * 0.425 / 6.5 / 8)
+  );
+  aspect-ratio: 0.5;
+  height: calc(65vw * 0.8 * 0.425 / 6.5 / 4);
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
