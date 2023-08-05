@@ -105,12 +105,22 @@
         cart = cart.filter((product) => product !== productString);
         setCookie("cart", JSON.stringify(cart));
         createCartElements();
+        allowCheckout();
       }
-
-      // Call the displayCart function on the cart page to show the cart contents
-      // if (window.location.href.includes("cart.html")) {
-      //   displayCart();
-      // }
+    </script>
+    <script id="checkoutConditionsScript">
+      function allowCheckout() {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        if (cart.length === 0) {
+          document.getElementById("checkoutForm").style.display = "none";
+          document.getElementById("checkoutBlockedWarning").style.display =
+            "flex";
+        } else {
+          document.getElementById("checkoutForm").style.display = "flex";
+          document.getElementById("checkoutBlockedWarning").style.display =
+            "none";
+        }
+      }
     </script>
     <script id="rememberMeScript">
       function updateRememberMe() {
@@ -136,6 +146,7 @@
         (loadContent = () => {
           let rememberMe = JSON.parse(getCookie("rememberMe") || "[]");
           createCartElements();
+          allowCheckout();
           if (rememberMe.length !== 0) {
             console.log(rememberMe);
             document.getElementById("firstNameInput").value = rememberMe[0];
@@ -148,7 +159,6 @@
             } else document.getElementById("emailSignUpCheck").checked = false;
             document.getElementById("rememberMeCheck").checked = true;
           } else {
-            document.getElementById("firstNameInput").value = "function check";
             document.getElementById("rememberMeCheck").checked = false;
             document.getElementById("emailSignUpCheck").checked = false;
           }
@@ -162,6 +172,19 @@
         <div id="navbarLogoContainer">
           <div id="navbarMainLogo">GuidEd</div>
           <div id="navbarSubLogo">By Stacy</div>
+        </div>
+        <div id="checkoutBlockWarning">
+          <br />
+
+          <div>
+            Sorry, you must have at least one item in your backpack to checkout!
+            We don't want you to leave empty handed :)
+          </div>
+          <br />
+          <br />
+          <div>
+            You may click <u>here</u> to be redirected to our guides' page.
+          </div>
         </div>
         <form id="checkoutForm">
           <div id="checkoutTitle">Checkout</div>

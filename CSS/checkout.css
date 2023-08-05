@@ -411,3 +411,17 @@ input[type="checkbox"] {
   color: var(--freshGuac);
   background: transparent;
 }
+
+#checkoutBlockWarning {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-left: 5%;
+  padding-right: 5%;
+  color: var(--colaBrown);
+  font-family: "Urbanist", sans-serif;
+  font-size: 3vh;
+  font-weight: 300;
+  text-align: center;
+}
