@@ -45,20 +45,7 @@
   </head>
   <body>
     <div id="cartBackdrop">
-      <div id="cartDisplayContainer">
-        <!-- <div id="cartDisplayHeading">
-          <div id="cartDisplayTitle">Backpack</div>
-          <div id="cartDisplayCount">0 Items</div>
-          <div id="cartDisplayX" onClick="displayCart(false)"></div>
-        </div>
-        <div id="cartCheckoutContainer">
-          <div id="cartCheckoutText">
-            Found everything you need? <br />Let's prepare your digital
-            downloads!
-          </div>
-          <div id="cartCheckoutButton">Check Out</div>
-        </div> -->
-      </div>
+      <div id="cartDisplayContainer"></div>
     </div>
     <script id="cartScript" type="text/javascript">
       function displayCart(bool) {
@@ -77,18 +64,15 @@
           setCookie("cart", JSON.stringify(cart));
         }
       }
-      // Function to retrieve a cookie by name
       function getCookie(name) {
         const value = `; ${document.cookie}`;
         const parts = value.split(`; ${name}=`);
         if (parts.length === 2) return parts.pop().split(";").shift();
       }
-      // Function to set a cookie
       function setCookie(name, value) {
         document.cookie = `${name}=${value}; path=/`;
       }
 
-      // Function to display the cart contents on the cart page
       function createCartElements() {
         let cart = JSON.parse(getCookie("cart") || "[]");
         let cartContainer = document.getElementById("cartDisplayContainer");
@@ -119,13 +103,12 @@
           ">Check Out</div> </div>";
 
         cart.forEach((product) => {
-          console.log(product);
-          console.log(window[product]);
           var name = window[product].name;
           var subject = window[product].subject;
+          var im1 = window[product].im1;
           cartContainer.innerHTML += `
           <div class="cartItemContainer">
-          <div class="cartItemImage"></div>
+          <div class="cartItemImage" style="background-image: url('${im1}') "></div>
           <div class="cartItemInfoBox">
             <div class="cartItemName"> ${name} </div>
             <div class="cartItemSubject"> ${subject} </div>

@@ -200,7 +200,7 @@ body {
 .cartItemImage {
   width: 40%;
   height: 100%;
-  background: lavender;
+  background-size: cover;
 }
 
 .cartItemInfoBox {
