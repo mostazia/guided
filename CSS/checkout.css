@@ -306,7 +306,6 @@ body {
   color: var(--freshGuac);
 }
 
-/* Hide the default checkbox input */
 input[type="checkbox"] {
   position: absolute;
   opacity: 0;
@@ -314,7 +313,6 @@ input[type="checkbox"] {
   height: 0;
 }
 
-/* The container */
 .container {
   display: block;
   position: relative;
@@ -333,7 +331,6 @@ input[type="checkbox"] {
   height: calc(65vw * 0.8 * 0.425 / 6.5 / 2);
 }
 
-/* Hide the browser's default checkbox */
 .container input {
   position: absolute;
   opacity: 0;
@@ -342,7 +339,6 @@ input[type="checkbox"] {
   width: 0;
 }
 
-/* Create a custom checkbox */
 .checkmark {
   position: absolute;
   top: 0;
@@ -353,31 +349,26 @@ input[type="checkbox"] {
   border: 0.325vh solid var(--freshGuac);
 }
 
-/* On mouse-over, add a grey background color */
 .container:hover input ~ .checkmark {
   background-color: var(--aloeCream);
 }
 
-/* When the checkbox is checked, add a blue background */
 .container input:checked ~ .checkmark {
   background-color: var(--freshGuac);
   display: flex;
   justify-content: center;
 }
 
-/* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
   content: "";
   position: absolute;
   display: none;
 }
 
-/* Show the checkmark when checked */
 .container input:checked ~ .checkmark:after {
   display: block;
 }
 
-/* Style the checkmark/indicator */
 .container .checkmark:after {
   top: calc(
     (
@@ -392,4 +383,31 @@ input[type="checkbox"] {
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+
+#checkoutButtonContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 3vh;
+}
+
+#checkoutButton {
+  height: calc(65vw * 0.8 * 0.425 / 6.5);
+  aspect-ratio: 5;
+  background: var(--colaBrown);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--whiteLace);
+  font-size: calc(65vw * 0.8 * 0.425 / 6.5 / 2);
+  font-weight: 300;
+  font-family: "Barlow Condensed", sans-serif;
+  cursor: pointer;
+}
+
+#checkoutButton:hover {
+  border: 0.325vh solid var(--freshGuac);
+  color: var(--freshGuac);
+  background: transparent;
 }

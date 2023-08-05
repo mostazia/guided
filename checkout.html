@@ -32,8 +32,6 @@
       }
     </script>
     <script type="text/javascript" src="JS/products.js"></script>
-  </head>
-  <body>
     <script id="cartScript" type="text/javascript">
       function displayCart(bool) {
         if (bool) {
@@ -118,6 +116,51 @@
       //   displayCart();
       // }
     </script>
+    <script id="rememberMeScript">
+      function updateRememberMe() {
+        var remCheck = document.getElementById("rememberMeCheck");
+        let rememberMe = [];
+        if (remCheck.checked) {
+          rememberMe.push(document.getElementById("firstNameInput").value);
+          rememberMe.push(document.getElementById("lastNameInput").value);
+          rememberMe.push(document.getElementById("emailInput").value);
+          rememberMe.push(document.getElementById("gradeInput").value);
+          rememberMe.push(document.getElementById("cityStateInput").value);
+          if (document.getElementById("emailSignUpCheck").checked) {
+            rememberMe.push("yes");
+          } else {
+            rememberMe.push("no");
+          }
+        }
+        setCookie("rememberMe", JSON.stringify(rememberMe));
+        console.log(rememberMe);
+      }
+      document.addEventListener(
+        "DOMContentLoaded",
+        (loadContent = () => {
+          let rememberMe = JSON.parse(getCookie("rememberMe") || "[]");
+          createCartElements();
+          if (rememberMe.length !== 0) {
+            console.log(rememberMe);
+            document.getElementById("firstNameInput").value = rememberMe[0];
+            document.getElementById("lastNameInput").value = rememberMe[1];
+            document.getElementById("emailInput").value = rememberMe[2];
+            document.getElementById("gradeInput").value = rememberMe[3];
+            document.getElementById("cityStateInput").value = rememberMe[4];
+            if (rememberMe[5] === "yes") {
+              document.getElementById("emailSignUpCheck").checked = true;
+            } else document.getElementById("emailSignUpCheck").checked = false;
+            document.getElementById("rememberMeCheck").checked = true;
+          } else {
+            document.getElementById("firstNameInput").value = "function check";
+            document.getElementById("rememberMeCheck").checked = false;
+            document.getElementById("emailSignUpCheck").checked = false;
+          }
+        })
+      );
+    </script>
+  </head>
+  <body>
     <div id="checkoutContainer">
       <div id="checkoutBox">
         <div id="navbarLogoContainer">
@@ -126,21 +169,45 @@
         </div>
         <form id="checkoutForm">
           <div id="checkoutTitle">Checkout</div>
-          <input class="formSmallInput" placeholder="First Name*" />
-          <input class="formSmallInput" placeholder="Last Name*" />
-          <input class="formLargeInput" type="email" placeholder="Email*" />
-          <input class="formSmallInput" placeholder="Grade Level (Optional)" />
-          <input class="formSmallInput" placeholder="City, State (Optional)" />
+          <input
+            id="firstNameInput"
+            class="formSmallInput"
+            placeholder="First Name*"
+          />
+          <input
+            id="lastNameInput"
+            class="formSmallInput"
+            placeholder="Last Name*"
+          />
+          <input
+            id="emailInput"
+            class="formLargeInput"
+            type="email"
+            placeholder="Email*"
+          />
+          <input
+            id="gradeInput"
+            class="formSmallInput"
+            placeholder="Grade Level (Optional)"
+          />
+          <input
+            id="cityStateInput"
+            class="formSmallInput"
+            placeholder="City, State (Optional)"
+          />
           <label class="container"
             >Remember Me
-            <input type="checkbox" checked="checked" />
+            <input id="rememberMeCheck" type="checkbox" checked="checked" />
             <span class="checkmark"></span>
           </label>
           <label class="container"
             >Email me with news and updates
-            <input type="checkbox" />
+            <input id="emailSignUpCheck" type="checkbox" checked="checked" />
             <span class="checkmark"></span>
           </label>
+          <div id="checkoutButtonContainer">
+            <div id="checkoutButton" onClick="updateRememberMe()">Checkout</div>
+          </div>
         </form>
       </div>
       <div id="cartDisplayContainer">
