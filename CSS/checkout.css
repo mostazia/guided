@@ -412,7 +412,7 @@ input[type="checkbox"] {
   background: transparent;
 }
 
-#checkoutBlockWarning {
+#checkoutBlockedWarning {
   width: 80%;
   display: flex;
   justify-content: center;
