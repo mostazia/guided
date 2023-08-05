@@ -42,7 +42,7 @@
       }
     </script>
     <script type="text/javascript" src="JS/products.js"></script>
-    <script id="cartScript">
+    <script id="cartScript" src="JS/products.js">
       function displayCart(bool) {
         if (bool) {
           document.getElementById("cartBackdrop").style.display = "flex";
@@ -102,7 +102,7 @@
 
         for (let product in cart) {
           var name = window[product].name;
-          var subject = productVar.subject;
+          var subject = window[product].subject;
           cartContainer.innerHTML += `
           <div class="cartItemContainer">
           <div class="cartItemImage"></div>
