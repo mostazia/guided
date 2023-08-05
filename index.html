@@ -62,6 +62,7 @@
         if (!cart.includes(productString)) {
           cart.push(productString);
           setCookie("cart", JSON.stringify(cart));
+          displayCart(true);
         }
       }
       function getCookie(name) {
