@@ -112,10 +112,17 @@
           <div class="cartItemInfoBox">
             <div class="cartItemName"> ${name} </div>
             <div class="cartItemSubject"> ${subject} </div>
-            <div class="cartItemRemove"> remove </div>
+            <div class="cartItemRemove" onClick="removeFromCart(${product})"> remove </div>
           </div>
         </div>`;
         });
+      }
+
+      function removeFromCart(productString) {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        cart = cart.filter((product) => product !== productString);
+        setCookie("cart", JSON.stringify(cart));
+        createCartElements();
       }
 
       // Call the displayCart function on the cart page to show the cart contents
