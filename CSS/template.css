@@ -127,6 +127,12 @@ body {
   justify-content: right;
 }
 
+#cartLeaveContainer {
+  width: 65vw;
+  height: 100%;
+  background: transparent;
+}
+
 #cartDisplayContainer {
   width: 35vw;
   height: calc(100vh - 34.5vw / 3.75);
