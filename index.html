@@ -119,6 +119,7 @@
           ">Check Out</div> </div>";
 
         for (let product in cart) {
+          console.log(window[product]);
           var name = window[product].name;
           var subject = window[product].subject;
           cartContainer.innerHTML += `
