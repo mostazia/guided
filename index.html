@@ -42,7 +42,25 @@
       }
     </script>
     <script type="text/javascript" src="JS/products.js"></script>
-    <script id="cartScript" src="JS/products.js">
+  </head>
+  <body>
+    <div id="cartBackdrop">
+      <div id="cartDisplayContainer">
+        <!-- <div id="cartDisplayHeading">
+          <div id="cartDisplayTitle">Backpack</div>
+          <div id="cartDisplayCount">0 Items</div>
+          <div id="cartDisplayX" onClick="displayCart(false)"></div>
+        </div>
+        <div id="cartCheckoutContainer">
+          <div id="cartCheckoutText">
+            Found everything you need? <br />Let's prepare your digital
+            downloads!
+          </div>
+          <div id="cartCheckoutButton">Check Out</div>
+        </div> -->
+      </div>
+    </div>
+    <script id="cartScript" type="text/javascript">
       function displayCart(bool) {
         if (bool) {
           document.getElementById("cartBackdrop").style.display = "flex";
@@ -120,24 +138,6 @@
       //   displayCart();
       // }
     </script>
-  </head>
-  <body>
-    <div id="cartBackdrop">
-      <div id="cartDisplayContainer">
-        <!-- <div id="cartDisplayHeading">
-          <div id="cartDisplayTitle">Backpack</div>
-          <div id="cartDisplayCount">0 Items</div>
-          <div id="cartDisplayX" onClick="displayCart(false)"></div>
-        </div>
-        <div id="cartCheckoutContainer">
-          <div id="cartCheckoutText">
-            Found everything you need? <br />Let's prepare your digital
-            downloads!
-          </div>
-          <div id="cartCheckoutButton">Check Out</div>
-        </div> -->
-      </div>
-    </div>
     <div id="navbar">
       <div id="navbarMenuContainer"></div>
       <div id="navbarLogoContainer">
