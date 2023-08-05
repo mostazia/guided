@@ -101,13 +101,14 @@
           ">Check Out</div> </div>";
 
         for (let product in cart) {
-          let productVar = window[product];
+          var name = window[product].name;
+          var subject = productVar.subject;
           cartContainer.innerHTML += `
           <div class="cartItemContainer">
           <div class="cartItemImage"></div>
           <div class="cartItemInfoBox">
-            <div class="cartItemName"> ${productVar.name} </div>
-            <div class="cartItemSubject"> ${productVar.subject} </div>
+            <div class="cartItemName"> ${name} </div>
+            <div class="cartItemSubject"> ${subject} </div>
             <div class="cartItemRemove"> remove </div>
           </div>
         </div>`;
