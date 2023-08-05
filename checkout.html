@@ -75,18 +75,14 @@
           `>${cart.length} Items</div>` +
           "<div id=" +
           "cartDisplayX" +
-          " " +
-          "onClick=" +
-          "displayCart(false)" +
-          "></div> </div>" +
-          "<div id=" +
-          "cartCheckoutContainer" +
-          "> <div id=" +
-          "cartCheckoutText" +
-          "> Found everything you need? <br />Let's prepare your digital downloads! </div>" +
-          "<div id=" +
-          "cartCheckoutButton" +
-          ">Check Out</div> </div>";
+          "></div>" +
+          `<div id="cartCheckoutContainer">
+          <div id="cartCheckoutText">
+            We will <b> email </b> your order as <b>free</b> digital files! Most
+            orders are processed instantly, but please allow up to a day before
+            reaching out!
+          </div>
+        </div>`;
 
         cart.forEach((product) => {
           var name = window[product].name;
