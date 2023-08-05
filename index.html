@@ -55,7 +55,7 @@
       function addToCart(productString) {
         let cart = JSON.parse(getCookie("cart") || "[]");
         if (!cart.includes(productString)) {
-          cart.push(productName);
+          cart.push(productString);
           setCookie("cart", JSON.stringify(cart));
         }
       }
