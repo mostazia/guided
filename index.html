@@ -41,14 +41,21 @@
         }, 100);
       }
     </script>
+    <script type="text/javascript" src="/JS/products.js"></script>
     <script id="cartScript">
-      function addToCart(productName) {
-        document.cookie = "test=test; path=/";
-        let cart = JSON.parse(getCookie("cart") || "{}");
-        if (!cart[productName]) {
-          cart[productName] = {
-            quantity: 1,
-          };
+      function displayCart(bool) {
+        if (bool) {
+          document.getElementById("cartBackdrop").style.display = "flex";
+          createCartElements();
+        } else {
+          document.getElementById("cartBackdrop").style.display = "none";
+        }
+      }
+
+      function addToCart(productString) {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        if (!cart.includes(productString)) {
+          cart.push(productName);
           setCookie("cart", JSON.stringify(cart));
         }
       }
@@ -61,29 +68,75 @@
       // Function to set a cookie
       function setCookie(name, value) {
         document.cookie = `${name}=${value}; path=/`;
-        console.log(`${name}=${value}; path=/`);
       }
 
       // Function to display the cart contents on the cart page
-      function displayCart() {
-        let cart = JSON.parse(getCookie("cart") || "{}");
-        let cartDiv = document.getElementById("cart");
-        cartDiv.innerHTML = "<h2>Shopping Cart</h2>";
+      function createCartElements() {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        let cartContainer = document.getElementById("cartDisplayContainer");
+
+        cartContainer.innerHTML =
+          "<div id=" +
+          "cartDisplayHeading" +
+          ">" +
+          "<div id=" +
+          "cartDisplayTitle" +
+          ">Backpack</div>" +
+          "<div id=" +
+          "cartDisplayCount" +
+          `>${cart.length} Items</div>` +
+          "<div id=" +
+          "cartDisplayX" +
+          " " +
+          "onClick=" +
+          "displayCart(false)" +
+          "></div> </div>" +
+          "<div id=" +
+          "cartCheckoutContainer" +
+          "> <div id=" +
+          "cartCheckoutText" +
+          "> Found everything you need? <br />Let's prepare your digital downloads! </div>" +
+          "<div id=" +
+          "cartCheckoutButton" +
+          ">Check Out</div> </div>";
 
         for (let product in cart) {
-          let { price, quantity } = cart[product];
-          let totalPrice = price * quantity;
-          cartDiv.innerHTML += `<p>${product} - Quantity: ${quantity} - Price: $${totalPrice}</p>`;
+          let productVar = window[product];
+          cartContainer.innnerHTML += `
+          <div class="cartItemContainer">
+          <div class="cartItemImage"></div>
+          <div class="cartItemInfoBox">
+            <div class="cartItemName"> ${productVar.name} </div>
+            <div class="cartItemSubject"> ${productVar.subject} </div>
+            <div class="cartItemRemove"> remove </div>
+          </div>
+        </div>`;
         }
       }
 
       // Call the displayCart function on the cart page to show the cart contents
-      if (window.location.href.includes("cart.html")) {
-        displayCart();
-      }
+      // if (window.location.href.includes("cart.html")) {
+      //   displayCart();
+      // }
     </script>
   </head>
   <body>
+    <div id="cartBackdrop">
+      <div id="cartDisplayContainer">
+        <!-- <div id="cartDisplayHeading">
+          <div id="cartDisplayTitle">Backpack</div>
+          <div id="cartDisplayCount">0 Items</div>
+          <div id="cartDisplayX" onClick="displayCart(false)"></div>
+        </div>
+        <div id="cartCheckoutContainer">
+          <div id="cartCheckoutText">
+            Found everything you need? <br />Let's prepare your digital
+            downloads!
+          </div>
+          <div id="cartCheckoutButton">Check Out</div>
+        </div> -->
+      </div>
+    </div>
     <div id="navbar">
       <div id="navbarMenuContainer"></div>
       <div id="navbarLogoContainer">
@@ -91,10 +144,7 @@
         <div id="navbarSubLogo">By Stacy</div>
       </div>
       <div id="navbarOptionsContainer">
-        <div
-          id="navbarBackpackIcon"
-          onClick="console.log(document.cookie)"
-        ></div>
+        <div id="navbarBackpackIcon" onClick="displayCart(true)"></div>
       </div>
     </div>
     <div id="pagebody">
@@ -135,7 +185,7 @@
             <div class="homeGuidePreviewInfo">
               <div class="homeGuidePreviewName">One Pagers Bundle</div>
               <div class="homeGuidePreviewSub">AP Biology</div>
-              <div class="homeGuidePreviewAdd" onClick="addToCart('Onepagers')">
+              <div class="homeGuidePreviewAdd" onClick="addToCart('_10000001')">
                 Add to Backpack
               </div>
             </div>
