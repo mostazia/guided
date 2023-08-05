@@ -118,7 +118,8 @@
           "cartCheckoutButton" +
           ">Check Out</div> </div>";
 
-        for (let product in cart) {
+        cart.forEach((product) => {
+          console.log(product);
           console.log(window[product]);
           var name = window[product].name;
           var subject = window[product].subject;
@@ -131,7 +132,7 @@
             <div class="cartItemRemove"> remove </div>
           </div>
         </div>`;
-        }
+        });
       }
 
       // Call the displayCart function on the cart page to show the cart contents
