@@ -136,10 +136,7 @@
         let checkIds = ["firstNameInput", "lastNameInput", "emailInput"];
         let visible = true;
         for (let field in checkIds) {
-          if (
-            document.getElementById(field).value === null ||
-            document.getElementById(field).value === ""
-          ) {
+          if (!document.getElementById(field).value === null) {
             visible = false;
             break;
           }
