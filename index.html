@@ -111,6 +111,9 @@
           var name = window[product].name;
           var subject = window[product].subject;
           var im1 = window[product].im1;
+          if (name.length >= 29) {
+            name = name.substring(0, 25) + " ...";
+          }
           cartContainer.innerHTML += `
           <div class="cartItemContainer">
           <div class="cartItemImage" style="background-image: url('${im1}') "></div>
