@@ -175,6 +175,7 @@
           let rememberMe = JSON.parse(getCookie("rememberMe") || "[]");
           createCartElements();
           allowCheckout();
+          updateMailingOption();
           if (rememberMe.length !== 0) {
             document.getElementById("firstNameInput").value = rememberMe[0];
             document.getElementById("lastNameInput").value = rememberMe[1];
@@ -301,14 +302,19 @@
             if (cart.length !== 0) {
               document.getElementById("formProductsInput").value =
                 JSON.stringify(cart);
+              setCookie("cart", JSON.stringify([]));
               document.getElementById("checkoutForm").submit();
-              setTimeout(function () {
-                cart = [];
-                setCookie("cart", JSON.stringify(cart));
-                window.location.href = "confirmation";
-              }, 1000);
             }
           }
+          document
+            .getElementById("checkoutForm")
+            .addEventListener("submit", function (event) {
+              event.preventDefault;
+              document.getElementById("checkoutForm").submit();
+              setTimeout(function () {
+                window.location.href = "confirmation";
+              }, 1000);
+            });
         </script>
       </div>
       <div id="cartDisplayContainer">
