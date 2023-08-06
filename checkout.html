@@ -230,6 +230,8 @@
         <form
           id="checkoutForm"
           action="https://docs.google.com/forms/u/4/d/e/1FAIpQLSe6QlztXZK5b7njwuGqZK7QNRHK8OrH4FA4f9fJsXQ1r1EeWg/formResponse"
+          method="post"
+          target="hidden_iframe"
         >
           <div id="checkoutTitle">Checkout</div>
           <input
@@ -304,7 +306,6 @@
             .getElementById("checkoutForm")
             .addEventListener("submit", function (event) {
               event.preventDefault();
-              console.log("here");
               document.getElementById("checkoutForm").submit();
               setTimeout(function () {
                 document.getElementById("emailInput").value = null;
