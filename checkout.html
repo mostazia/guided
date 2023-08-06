@@ -285,11 +285,7 @@
           <input id="formSubjectInput" class="hp" name="entry.751348616" />
           <input id="formMessageInput" class="hp" name="entry.351761176" />
           <div id="checkoutButtonContainer">
-            <div
-              id="checkoutButton"
-              type="submit"
-              onClick="updateRememberMe(); formSubmit()"
-            >
+            <div id="checkoutButton" onClick="updateRememberMe(); formSubmit()">
               Checkout
             </div>
             <div id="checkoutButtonUnclick"></div>
@@ -313,7 +309,7 @@
               document.getElementById("checkoutForm").submit();
               setTimeout(function () {
                 window.location.href = "confirmation";
-              }, 1000);
+              }, 500);
             });
         </script>
       </div>
