@@ -305,9 +305,11 @@
                 document.getElementById("formProductsInput").value =
                   JSON.stringify(cart);
                 document.getElementById("checkoutForm").submit();
-                cart = [];
-                setCookie("cart", JSON.stringify(cart));
-                window.location.href = "confirmation";
+                setTimeout(function () {
+                  cart = [];
+                  setCookie("cart", JSON.stringify(cart));
+                  window.location.href = "confirmation";
+                }, 1000);
               }
             });
         </script>
