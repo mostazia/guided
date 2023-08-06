@@ -284,34 +284,29 @@
           <input id="formSubjectInput" class="hp" name="entry.751348616" />
           <input id="formMessageInput" class="hp" name="entry.351761176" />
           <div id="checkoutButtonContainer">
-            <button
+            <div
               id="checkoutButton"
               type="submit"
-              onClick="updateRememberMe()"
+              onClick="updateRememberMe(); formSubmit()"
             >
               Checkout
-            </button>
+            </div>
             <div id="checkoutButtonUnclick"></div>
           </div>
         </form>
         <iframe name="hidden_iframe" style="display: none"></iframe>
         <script>
-          document
-            .getElementById("checkoutForm")
-            .addEventListener("submit", function (event) {
-              event.preventDefault();
-              let cart = JSON.parse(getCookie("cart") || "[]");
-              if (cart.length !== 0) {
-                document.getElementById("formProductsInput").value =
+          const formSubmit = () => {
+            let cart = JSON.parse(getCookie("cart") || "[]");
+            if (cart.length !== 0) {
+              document.getElementById("formProductsInput").value =
                   JSON.stringify(cart);
-                document.getElementById("checkoutForm").submit();
-                setTimeout(function () {
+              document.getElementById("checkoutForm").submit();
+              setTimeout(function () {
                   cart = [];
                   setCookie("cart", JSON.stringify(cart));
                   window.location.href = "confirmation";
                 }, 1000);
-              }
-            });
         </script>
       </div>
       <div id="cartDisplayContainer">
