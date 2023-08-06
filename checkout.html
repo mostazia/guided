@@ -303,31 +303,12 @@
           document
             .getElementById("checkoutForm")
             .addEventListener("submit", function (event) {
-              event.preventDefault(); // Prevent the default form submission
-              // Get the form data as a URL-encoded string
-              const formData = new URLSearchParams(new FormData(this));
-
-              // Submit the form data to Google Forms using Fetch API or XMLHttpRequest
-              submitFormDataToGoogleForms(formData);
-
-              // Perform any other actions after submitting the data
-              // For example, clear the value of firstNameInput and call updateRememberMe function
+              event.preventDefault();
+              document.getElementById("checkoutForm").submit();
               setTimeout(function () {
-                document.getElementById("firstNameInput").value = null;
-                updateRememberMe();
-              }, 1000);
+                document.getElementById("emailInput").value = null;
+              }, 1000); // Adjust the delay as needed
             });
-          // Function to submit the form data to Google Forms
-          function submitFormDataToGoogleForms(formData) {
-            const url =
-              "https://docs.google.com/forms/u/4/d/e/1FAIpQLSe6QlztXZK5b7njwuGqZK7QNRHK8OrH4FA4f9fJsXQ1r1EeWg/formResponse"; // Replace with your Google Forms URL
-
-            // Using Fetch API
-            fetch(url, {
-              method: "POST",
-              body: formData,
-            }).catch((error) => console.error("Error submitting form:", error));
-          }
         </script>
       </div>
       <div id="cartDisplayContainer">
