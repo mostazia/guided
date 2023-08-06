@@ -48,6 +48,7 @@
           cart.push(productString);
           setCookie("cart", JSON.stringify(cart));
           displayCart(true);
+          updateCartInput();
         }
       }
       function getCookie(name) {
@@ -107,6 +108,7 @@
         setCookie("cart", JSON.stringify(cart));
         createCartElements();
         allowCheckout();
+        updateCartInput();
       }
     </script>
     <script id="checkoutScript">
@@ -130,6 +132,12 @@
         } else {
           document.getElementById("formMailingInput").value = "no";
         }
+      }
+
+      function updateCartInput() {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        document.getElementById("formProductsInput").value =
+          JSON.stringify(cart);
       }
 
       function buttonVisibility() {
@@ -176,6 +184,7 @@
           createCartElements();
           allowCheckout();
           updateMailingOption();
+          updateCartInput();
           if (rememberMe.length !== 0) {
             document.getElementById("firstNameInput").value = rememberMe[0];
             document.getElementById("lastNameInput").value = rememberMe[1];
@@ -285,31 +294,26 @@
           <input id="formSubjectInput" class="hp" name="entry.751348616" />
           <input id="formMessageInput" class="hp" name="entry.351761176" />
           <div id="checkoutButtonContainer">
-            <div id="checkoutButton" onClick="updateRememberMe(); formSubmit()">
+            <button
+              id="checkoutButton"
+              type="submit"
+              onClick="updateRememberMe(); formSubmit()"
+            >
               Checkout
-            </div>
+            </button>
             <div id="checkoutButtonUnclick"></div>
           </div>
         </form>
         <iframe name="hidden_iframe" style="display: none"></iframe>
         <script>
-          function formSubmit() {
-            let cart = JSON.parse(getCookie("cart") || "[]");
-            if (cart.length !== 0) {
-              document.getElementById("formProductsInput").value =
-                JSON.stringify(cart);
-              setCookie("cart", JSON.stringify([]));
-              document.getElementById("checkoutForm").submit();
-            }
-          }
           document
             .getElementById("checkoutForm")
             .addEventListener("submit", function (event) {
-              event.preventDefault;
+              event.preventDefault();
               document.getElementById("checkoutForm").submit();
               setTimeout(function () {
                 window.location.href = "confirmation";
-              }, 500);
+              }, 1000);
             });
         </script>
       </div>
