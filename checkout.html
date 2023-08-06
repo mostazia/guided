@@ -136,7 +136,7 @@
         let checkIds = ["firstNameInput", "lastNameInput", "emailInput"];
         let visible = true;
         checkIds.forEach((field) => {
-          if (!document.getElementById(field).value === null) {
+          if (!document.getElementById(field).value) {
             visible = false;
           }
         });
@@ -176,7 +176,6 @@
           createCartElements();
           allowCheckout();
           if (rememberMe.length !== 0) {
-            console.log(rememberMe);
             document.getElementById("firstNameInput").value = rememberMe[0];
             document.getElementById("lastNameInput").value = rememberMe[1];
             document.getElementById("emailInput").value = rememberMe[2];
