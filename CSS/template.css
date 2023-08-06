@@ -24,6 +24,10 @@ body {
   padding: 0;
 }
 
+a {
+  text-decoration: none;
+}
+
 #pagebody {
   display: flex;
   flex-direction: column;
@@ -111,6 +115,27 @@ body {
 
 #navbarBackpackIcon:hover {
   background-image: url("../Images/NavbarBackpackIconHover.png");
+}
+
+#navbarBackpackCount {
+  height: calc(0.8 * 0.75 * 0.5 * var(--navbarHeight));
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: var(--aloeCream);
+  position: relative;
+  z-index: 40;
+  left: calc(
+    0.8 * 0.75 * var(--navbarHeight) - (0.8 * 0.75 * 0.5 * var(--navbarHeight)) /
+      2
+  );
+  top: calc(- (0.8 * 0.75 * 0.5 * var(--navbarHeight)) / 2);
+  color: var(--colaBrown);
+  font-size: calc(0.6 * 0.75 * 0.5 * var(--navbarHeight));
+  font-weight: 400;
+  font-family: "Barlow Condensed", sans-serif;
+  display: none;
+  align-items: center;
+  justify-content: center;
 }
 
 /* CART LIGHTBOX */

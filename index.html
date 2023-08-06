@@ -63,6 +63,7 @@
         if (!cart.includes(productString)) {
           cart.push(productString);
           setCookie("cart", JSON.stringify(cart));
+          updateCartCount();
           if (cart.length === 1) {
             displayCart(true);
           }
@@ -127,6 +128,16 @@
         cart = cart.filter((product) => product !== productString);
         setCookie("cart", JSON.stringify(cart));
         createCartElements();
+        updateCartCount();
+      }
+
+      function updateCartCount() {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        if (cart.length !== 0) {
+          document.getElementById("navbarBackpackCount").style.display = "flex";
+          document.getElementById("navbarBackpackCount").innerHTML =
+            cart.length;
+        }
       }
 
       // Call the displayCart function on the cart page to show the cart contents
@@ -141,7 +152,9 @@
         <div id="navbarSubLogo">By Stacy</div>
       </div>
       <div id="navbarOptionsContainer">
-        <div id="navbarBackpackIcon" onClick="displayCart(true)"></div>
+        <div id="navbarBackpackIcon" onClick="displayCart(true)">
+          <div id="navbarBackpackCount">1</div>
+        </div>
       </div>
     </div>
     <div id="pagebody">
@@ -186,6 +199,36 @@
               <div class="homeGuidePreviewName">One Pagers Bundle</div>
               <div class="homeGuidePreviewSub">AP Biology</div>
               <div class="homeGuidePreviewAdd" onClick="addToCart('_10000001')">
+                Add to Backpack
+              </div>
+            </div>
+          </div>
+          <div class="homeGuidePreviewBox">
+            <div
+              class="homeGuidePreviewImage"
+              style="background-image: url('Images/10000007_1.jpeg')"
+            >
+              <div class="homeGuidePreviewNew">NEW!</div>
+            </div>
+            <div class="homeGuidePreviewInfo">
+              <div class="homeGuidePreviewName">Unit Six One Pager</div>
+              <div class="homeGuidePreviewSub">AP Biology</div>
+              <div class="homeGuidePreviewAdd" onClick="addToCart('_10000007')">
+                Add to Backpack
+              </div>
+            </div>
+          </div>
+          <div class="homeGuidePreviewBox">
+            <div
+              class="homeGuidePreviewImage"
+              style="background-image: url('Images/10000004_1.jpeg')"
+            >
+              <div class="homeGuidePreviewNew">NEW!</div>
+            </div>
+            <div class="homeGuidePreviewInfo">
+              <div class="homeGuidePreviewName">Unit Three One Pager</div>
+              <div class="homeGuidePreviewSub">AP Biology</div>
+              <div class="homeGuidePreviewAdd" onClick="addToCart('_10000004')">
                 Add to Backpack
               </div>
             </div>
