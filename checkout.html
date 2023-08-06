@@ -312,6 +312,7 @@
                 document.getElementById("checkoutForm").submit();
                 cart = [];
                 setCookie("cart", JSON.stringify(cart));
+                window.location.href = "/confirmation";
               }
             });
         </script>
