@@ -78,7 +78,8 @@
           "></div>" +
           `<div id="cartCheckoutContainer">
           <div id="cartCheckoutText">
-            We will <b> email </b> your order as <b>free</b> digital files! Most
+            We will <b> email </b> your order as <b>free</b> digital files, no
+            physical product will be shipped! Most
             orders are processed instantly, but please allow up to a day before
             reaching out!
           </div>
@@ -108,7 +109,7 @@
         allowCheckout();
       }
     </script>
-    <script id="checkoutConditionsScript">
+    <script id="checkoutScript">
       function allowCheckout() {
         let cart = JSON.parse(getCookie("cart") || "[]");
         if (cart.length === 0) {
@@ -119,6 +120,14 @@
           document.getElementById("checkoutForm").style.display = "flex";
           document.getElementById("checkoutBlockedWarning").style.display =
             "none";
+        }
+      }
+      function updateMailingOption() {
+        let mailingCheck = document.getElementById("emailSignUpCheck");
+        if (mailingCheck.checked) {
+          document.getElementById("formMailingInput").value = "yes";
+        } else {
+          document.getElementById("formMailingInput").value = "no";
         }
       }
     </script>
@@ -139,7 +148,6 @@
           }
         }
         setCookie("rememberMe", JSON.stringify(rememberMe));
-        console.log(rememberMe);
       }
       document.addEventListener(
         "DOMContentLoaded",
@@ -156,7 +164,11 @@
             document.getElementById("cityStateInput").value = rememberMe[4];
             if (rememberMe[5] === "yes") {
               document.getElementById("emailSignUpCheck").checked = true;
-            } else document.getElementById("emailSignUpCheck").checked = false;
+              document.getElementById("formMailingInput").value = "yes";
+            } else {
+              document.getElementById("emailSignUpCheck").checked = false;
+              document.getElementById("formMailingInput").value = "no";
+            }
             document.getElementById("rememberMeCheck").checked = true;
           } else {
             document.getElementById("rememberMeCheck").checked = false;
@@ -186,33 +198,41 @@
             You may click <u>here</u> to be redirected to our guides' page.
           </div>
         </div>
-        <form id="checkoutForm">
+        <form
+          id="checkoutForm"
+          action="https://docs.google.com/forms/u/4/d/e/1FAIpQLSe6QlztXZK5b7njwuGqZK7QNRHK8OrH4FA4f9fJsXQ1r1EeWg/formResponse"
+        >
           <div id="checkoutTitle">Checkout</div>
           <input
             id="firstNameInput"
             class="formSmallInput"
             placeholder="First Name*"
+            name="entry.469154956"
           />
           <input
             id="lastNameInput"
             class="formSmallInput"
             placeholder="Last Name*"
+            name="entry.798704662"
           />
           <input
             id="emailInput"
             class="formLargeInput"
             type="email"
             placeholder="Email*"
+            name="entry.23648170"
           />
           <input
             id="gradeInput"
             class="formSmallInput"
             placeholder="Grade Level (Optional)"
+            name="entry.1919878139"
           />
           <input
             id="cityStateInput"
             class="formSmallInput"
             placeholder="City, State (Optional)"
+            name="entry.1539173717"
           />
           <label class="container"
             >Remember Me
@@ -221,13 +241,52 @@
           </label>
           <label class="container"
             >Email me with news and updates
-            <input id="emailSignUpCheck" type="checkbox" checked="checked" />
+            <input
+              id="emailSignUpCheck"
+              type="checkbox"
+              checked="checked"
+              onchange="updateMailingOption()"
+            />
             <span class="checkmark"></span>
           </label>
+          <input
+            id="formMailingInput"
+            style="display: none"
+            name="entry.1010586423"
+          />
+          <input
+            id="formProductsInput"
+            style="display: none"
+            name="entry.406316262"
+          />
+          <input id="formSubjectInput" class="hp" name="entry.751348616" />
+          <input id="formMessageInput" class="hp" name="entry.351761176" />
           <div id="checkoutButtonContainer">
-            <div id="checkoutButton" onClick="updateRememberMe()">Checkout</div>
+            <button
+              id="checkoutButton"
+              type="submit"
+              onClick="updateRememberMe()"
+            >
+              Checkout
+            </button>
           </div>
         </form>
+        <iframe name="hidden_iframe" style="display: none"></iframe>
+        <script>
+          document
+            .getElementById("checkoutForm")
+            .addEventListener("submit", function (event) {
+              event.preventDefault();
+              let cart = JSON.parse(getCookie("cart") || "[]");
+              if (cart.length !== 0) {
+                document.getElementById("formProductsInput").value =
+                  JSON.stringify(cart);
+                document.getElementById("checkoutForm").submit();
+                cart = [];
+                setCookie("cart", JSON.stringify(cart));
+              }
+            });
+        </script>
       </div>
       <div id="cartDisplayContainer">
         <div id="cartDisplayHeading">
@@ -237,9 +296,9 @@
         </div>
         <div id="cartCheckoutContainer">
           <div id="cartCheckoutText">
-            We will <b> email </b> your order as <b>free</b> digital files! Most
-            orders are processed instantly, but please allow up to a day before
-            reaching out!
+            We will <b> email </b> your order as <b>free</b> digital files, no
+            physical product will be shipped. Most orders are processed
+            instantly, but please allow up to a day before reaching out!
           </div>
         </div>
       </div>

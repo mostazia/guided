@@ -425,3 +425,7 @@ input[type="checkbox"] {
   font-weight: 300;
   text-align: center;
 }
+
+.hp {
+  display: none;
+}
