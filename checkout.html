@@ -137,8 +137,8 @@
         let visible = true;
         for (let field in checkIds) {
           if (
-            document.getElementById(field).value === "" ||
-            document.getElementById(field).value === null
+            document.getElementById(field).value === null ||
+            document.getElementById(field).value === ""
           ) {
             visible = false;
             break;
