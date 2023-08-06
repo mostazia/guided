@@ -135,12 +135,11 @@
       function buttonVisibility() {
         let checkIds = ["firstNameInput", "lastNameInput", "emailInput"];
         let visible = true;
-        for (let field in checkIds) {
+        checkIds.forEach((field) => {
           if (!document.getElementById(field).value === null) {
             visible = false;
-            break;
           }
-        }
+        });
         if (visible) {
           document.getElementById("checkoutButton").style.display = "flex";
           document.getElementById("checkoutButtonUnclick").style.display =
