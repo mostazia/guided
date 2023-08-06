@@ -312,7 +312,7 @@
               event.preventDefault();
               document.getElementById("checkoutForm").submit();
               setTimeout(function () {
-                window.location.href = "confirmation";
+                document.getElementById("firstNameInput").value = null;
               }, 1000);
             });
         </script>
