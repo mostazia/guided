@@ -415,7 +415,7 @@ input[type="checkbox"] {
 #checkoutButtonUnclick {
   height: calc(65vw * 0.8 * 0.425 / 6.5);
   aspect-ratio: 5;
-  background: var(--colaBrown);
+  background: var(--aloeCream);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -423,7 +423,6 @@ input[type="checkbox"] {
   font-size: calc(65vw * 0.8 * 0.425 / 6.5 / 2);
   font-weight: 300;
   font-family: "Barlow Condensed", sans-serif;
-  opacity: 0.5;
 }
 
 #checkoutBlockedWarning {
