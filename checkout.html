@@ -293,6 +293,11 @@
             style="display: none"
             name="entry.406316262"
           />
+          <input
+            id="formConCodeInput"
+            style="display: none"
+            name="entry.767775383"
+          />
           <input id="formSubjectInput" class="hp" name="entry.751348616" />
           <input id="formMessageInput" class="hp" name="entry.351761176" />
           <div id="checkoutButtonContainer">
@@ -306,11 +311,31 @@
             .getElementById("checkoutForm")
             .addEventListener("submit", function (event) {
               event.preventDefault();
+              const currentDate = new Date();
+              const year = currentDate.getFullYear();
+              const month = currentDate.getMonth() + 1; // Month is zero-based, so add 1
+              const day = currentDate.getDate();
+              const hours = currentDate.getHours();
+              const minutes = currentDate.getMinutes();
+              const seconds = currentDate.getSeconds();
+              const extra = Math.floor(Math.random() * 99) + 1;
+              document.getElementyById(
+                "formConCodeInput"
+              ).value = `${year}${month}${day}${hours}${minutes}${seconds}${extra}`;
               document.getElementById("checkoutForm").submit();
               setTimeout(function () {
                 setCookie("cart", "[]");
-                window.location.href = "confirmation";
-              }, 1000); // Adjust the delay as needed
+                window.location.href =
+                  "confirmation" +
+                  "?cc=" +
+                  encodeURIComponent(year) +
+                  encodeURIComponent(month) +
+                  encodeURIComponent(day) +
+                  encodeURIComponent(hours) +
+                  encodeURIComponent(minutes) +
+                  encodeURIComponent(seconds) +
+                  encodeURIComponent(extra);
+              }, 100);
             });
         </script>
       </div>

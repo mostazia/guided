@@ -1,0 +1,73 @@
+<head>
+  <meta charset="UTF-8" content="initial-scale=1" />
+  <title>GuidEd by Stacy</title>
+  <link rel="stylesheet" href="CSS/confirmation.css" />
+  <link rel="stylesheet" href="CSS/template.css" />
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <script id="navbarHeightScript">
+    window.onscroll = function () {
+      scrollFunction();
+    };
+    var r = document.querySelector(":root");
+    var timer = null;
+
+    function scrollFunction() {
+      r.style.setProperty("--scrollbarColor", "#a8ead5");
+      if (
+        document.body.scrollTop > 1 ||
+        document.documentElement.scrollTop > 1
+      ) {
+        r.style.setProperty("--navbarHeight", "10vh");
+      } else {
+        r.style.setProperty("--navbarHeight", "12vh");
+      }
+      if (timer !== null) {
+        clearTimeout(timer);
+      }
+      timer = setTimeout(function () {
+        r.style.setProperty("--scrollbarColor", "#dae3bb");
+      }, 100);
+    }
+  </script>
+  <script id="confirmationGenerationScript">
+    document.addEventListener(
+      "DOMContentLoaded",
+      (loadContent = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const conCode = urlParams.get("cc");
+        document.getElementById(
+          "confirmationMessage"
+        ).innerHTML = `Your confirmation code is: ${conCode}
+      <br /><br />
+      We have received your order and will process it as soon as possible. We
+      typically process orders instantly, but we might experience delays due to
+      a high volume of orders. So, we ask that you please wait at least day
+      before reaching out about a missing order. It is possible that your order
+      may be flagged as spam, so keep an eye on that folder as well. If you
+      still don't receive your order, please reach out to us at
+      <a href="mailto:guidedbystacy@gmail.com" class="conEmailLink"> guidedbystacy@gmail.com. </a>
+      <br /><br />
+      You will be able to download, print, and use the files you requested as
+      soon as we email your order! Thank you for making us part of your learning
+      journey. It is truly an honor :)`;
+      })
+    );
+  </script>
+</head>
+<body>
+  <div id="navbar">
+    <div id="navbarMenuContainer"></div>
+    <div id="navbarLogoContainer">
+      <div id="navbarMainLogo">GuidEd</div>
+      <div id="navbarSubLogo">By Stacy</div>
+    </div>
+    <div id="navbarOptionsContainer">
+      <div id="navbarBackpackIcon" onClick="displayCart(true)"></div>
+    </div>
+  </div>
+  <div id="confirmationBody">
+    <div id="thankYou">Thank you for ordering!</div>
+    <div id="confirmationMessage"></div>
+  </div>
+</body>
