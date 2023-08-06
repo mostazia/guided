@@ -118,6 +118,7 @@
             "flex";
         } else {
           document.getElementById("checkoutForm").style.display = "flex";
+          buttonVisibility();
           document.getElementById("checkoutBlockedWarning").style.display =
             "none";
         }
@@ -128,6 +129,29 @@
           document.getElementById("formMailingInput").value = "yes";
         } else {
           document.getElementById("formMailingInput").value = "no";
+        }
+      }
+
+      function buttonVisibility() {
+        let checkIds = ["firstNameInput", "lastNameInput", "emailInput"];
+        let visible = true;
+        for (let field in checkIds) {
+          if (
+            document.getElementById(field).value === "" ||
+            document.getElementById(field).value === null
+          ) {
+            visible = false;
+            break;
+          }
+        }
+        if (visible) {
+          document.getElementById("checkoutButton").style.display = "flex";
+          document.getElementById("checkoutButtonUnclick").style.display =
+            "none";
+        } else {
+          document.getElementById("checkoutButton").style.display = "none";
+          document.getElementById("checkoutButtonUnclick").style.display =
+            "flex";
         }
       }
     </script>
@@ -208,12 +232,14 @@
             class="formSmallInput"
             placeholder="First Name*"
             name="entry.469154956"
+            onchange="buttonVisibility()"
           />
           <input
             id="lastNameInput"
             class="formSmallInput"
             placeholder="Last Name*"
             name="entry.798704662"
+            onchange="buttonVisibility()"
           />
           <input
             id="emailInput"
@@ -221,6 +247,7 @@
             type="email"
             placeholder="Email*"
             name="entry.23648170"
+            onchange="buttonVisibility()"
           />
           <input
             id="gradeInput"
@@ -269,6 +296,7 @@
             >
               Checkout
             </button>
+            <button id="checkoutButtonUnclick"></button>
           </div>
         </form>
         <iframe name="hidden_iframe" style="display: none"></iframe>

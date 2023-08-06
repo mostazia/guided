@@ -412,6 +412,20 @@ input[type="checkbox"] {
   background: transparent;
 }
 
+#checkoutButtonUnclick {
+  height: calc(65vw * 0.8 * 0.425 / 6.5);
+  aspect-ratio: 5;
+  background: var(--colaBrown);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--whiteLace);
+  font-size: calc(65vw * 0.8 * 0.425 / 6.5 / 2);
+  font-weight: 300;
+  font-family: "Barlow Condensed", sans-serif;
+  opacity: 0.5;
+}
+
 #checkoutBlockedWarning {
   width: 80%;
   display: flex;
