@@ -304,6 +304,7 @@
             .getElementById("checkoutForm")
             .addEventListener("submit", function (event) {
               event.preventDefault();
+              console.log("here");
               document.getElementById("checkoutForm").submit();
               setTimeout(function () {
                 document.getElementById("emailInput").value = null;
