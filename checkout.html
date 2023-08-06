@@ -319,7 +319,7 @@
               const minutes = currentDate.getMinutes();
               const seconds = currentDate.getSeconds();
               const extra = Math.floor(Math.random() * 99) + 1;
-              document.getElementyById(
+              document.getElementById(
                 "formConCodeInput"
               ).value = `${year}${month}${day}${hours}${minutes}${seconds}${extra}`;
               document.getElementById("checkoutForm").submit();
