@@ -308,7 +308,8 @@
               event.preventDefault();
               document.getElementById("checkoutForm").submit();
               setTimeout(function () {
-                document.getElementById("emailInput").value = null;
+                setCookie("cart", "[]");
+                window.location.href = "confirmation";
               }, 1000); // Adjust the delay as needed
             });
         </script>
