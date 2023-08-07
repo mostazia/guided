@@ -102,11 +102,12 @@
           "cartCheckoutContainer" +
           "> <div id=" +
           "cartCheckoutText" +
-          "> Found everything you need? <br />Let's prepare your digital downloads! </div>" +
+          "></div>" +
           `<a href="checkout" id=` +
           "cartCheckoutButton" +
           ">Check Out</a> </div>";
 
+        showCheckoutButton();
         cart.forEach((product) => {
           var name = window[product].name;
           var subject = window[product].subject;
@@ -140,6 +141,19 @@
           document.getElementById("navbarBackpackCount").style.display = "flex";
           document.getElementById("navbarBackpackCount").innerHTML =
             cart.length;
+        }
+      }
+
+      function showCheckoutButton() {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        if (cart.length !== 0) {
+          document.getElementById("cartCheckoutButton").style.display = "flex";
+          document.getElementById("cartCheckoutText").innerHTML =
+            "Found everything you need? <br />Let's prepare your digital downloads!";
+        } else {
+          document.getElementById("cartCheckoutButton").style.display = "none";
+          document.getElementById("cartCheckoutText").innerHTML =
+            "Please add items to your backpack to check out :)";
         }
       }
 
