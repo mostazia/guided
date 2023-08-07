@@ -141,6 +141,8 @@
           document.getElementById("navbarBackpackCount").style.display = "flex";
           document.getElementById("navbarBackpackCount").innerHTML =
             cart.length;
+        } else {
+          document.getElementById("navbarBackpackCount").style.display = "none";
         }
       }
 
@@ -156,11 +158,17 @@
             "Please add items to your backpack to check out :)";
         }
       }
-
-      // Call the displayCart function on the cart page to show the cart contents
-      // if (window.location.href.includes("cart.html")) {
-      //   displayCart();
-      // }
+    </script>
+    <script id="loadCartCountScript">
+      document.addEventListener(
+        "DOMContentLoaded",
+        (loadContent = () => {
+          let cart = JSON.parse(getCookie("cart") || "[]");
+          if (cart.length !== 0) {
+            updateCartCount();
+          }
+        })
+      );
     </script>
     <div id="navbar">
       <div id="navbarMenuContainer"></div>
