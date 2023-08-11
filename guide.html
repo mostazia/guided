@@ -21,6 +21,8 @@
           }
 
           scrollableCSS();
+          createShareLinks();
+          findRatable();
 
           const urlParams = new URLSearchParams(window.location.search);
           const guideCode = "_" + urlParams.get("g");
@@ -31,6 +33,7 @@
           const guideNew = window[guideCode].new;
           const guideImg1 = window[guideCode].im1;
           const guideOtherIms = window[guideCode].otherIms;
+          const guideDescription = window[guideCode].description;
 
           document.getElementById("guidePageSubject").innerHTML = guideSub;
           if (guideNew) {
@@ -48,6 +51,9 @@
           }
 
           document.getElementById("guidePageName").innerHTML = guideName;
+          document.getElementById("guideDescriptionText").innerHTML =
+            guideDescription;
+
           document.getElementById(
             "guidePageImageMain"
           ).style.backgroundImage = `url(${guideImg1})`;
@@ -127,6 +133,7 @@
         const parts = value.split(`; ${name}=`);
         if (parts.length === 2) return parts.pop().split(";").shift();
       }
+
       function setCookie(name, value) {
         document.cookie = `${name}=${value}; path=/`;
       }
@@ -257,8 +264,337 @@
         }
       }
     </script>
+    <script id="scrollScript">
+      window.onscroll = function () {
+        scrollFunction();
+      };
+      var r = document.querySelector(":root");
+      var timer = null;
+
+      function scrollFunction() {
+        r.style.setProperty("--scrollbarColor", "#a8ead5");
+        if (timer !== null) {
+          clearTimeout(timer);
+        }
+        timer = setTimeout(function () {
+          r.style.setProperty("--scrollbarColor", "#dae3bb");
+        }, 100);
+      }
+    </script>
+    <script
+      async
+      defer
+      crossorigin="anonymous"
+      src="https://connect.facebook.net/en_US/sdk.js"
+    ></script>
+    <script id="shareScript">
+      const pageURL = window.location.href;
+
+      function createShareLinks() {
+        document.getElementById(
+          "whatsappBrandBox"
+        ).href = `https://api.whatsapp.com/send/?text=${encodeURIComponent(
+          pageURL
+        )}&type=custom_url&app_absent=0`;
+        document.getElementById(
+          "twitterBrandBox"
+        ).href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+          pageURL
+        )}`;
+        document.getElementById(
+          "emailBrandBox"
+        ).href = `mailto:?body=${encodeURIComponent(pageURL)}`;
+        // ("https://www.facebook.com/dialog/share?app_id=975691220307362&href=google.com&display=popup");
+      }
+
+      function toggleShareLightbox(bool) {
+        if (bool) {
+          let copyPageURL = pageURL;
+          if (pageURL.length >= 39) {
+            copyPageURL = pageURL.substring(0, 36) + "...";
+          }
+          document.getElementById("shareGuideLinkText").innerHTML = copyPageURL;
+          document.getElementById("shareGuideLightbox").style.display = "flex";
+          document.getElementById(
+            "shareGuideLightboxBackground"
+          ).style.display = "block";
+        } else {
+          document.getElementById("shareGuideLightbox").style.display = "none";
+          document.getElementById(
+            "shareGuideLightboxBackground"
+          ).style.display = "none";
+        }
+      }
+
+      function copyPostLink() {
+        navigator.clipboard.writeText(pageURL);
+        alert("Copied link to clipboard!");
+      }
+    </script>
+    <script id="rateScript">
+      let starRates = [0, 0, 0, 0, 0];
+      var ratable = true;
+      let rated = JSON.parse(getCookie("ratings") || "[]");
+
+      function* range(from, to, step = 1) {
+        let value = from;
+        while (value <= to) {
+          yield value;
+          value += step;
+        }
+      }
+
+      function toggleRateLightbox(bool) {
+        if (bool) {
+          document.getElementById(
+            "shareGuideLightboxBackground"
+          ).style.display = "block";
+          document.getElementById("rateGuideLightbox").style.display = "flex";
+        } else {
+          document.getElementById(
+            "shareGuideLightboxBackground"
+          ).style.display = "none";
+          document.getElementById("rateGuideLightbox").style.display = "none";
+        }
+      }
+
+      function findRatable() {
+        if (rated.includes(guideCode)) {
+          ratable = false;
+          document.getElementById("rateGuideSubmit").style.display = "none";
+          document.getElementById("rateGuideConfirmation").style.display =
+            "block";
+        }
+      }
+
+      function starUpdate(number) {
+        if (starRates[number - 1] === 0) {
+          starRates[number - 1] = 0.5;
+          document
+            .getElementById(`formStar${number}`)
+            .setAttribute("class", "");
+          document
+            .getElementById(`formStar${number}`)
+            .classList.add("rateGuideStar", "guidePageStarIncomplete");
+          for (const value of range(0, number - 2)) {
+            starRates[value] = 1;
+            document
+              .getElementById(`formStar${value + 1}`)
+              .setAttribute("class", "");
+            document
+              .getElementById(`formStar${value + 1}`)
+              .classList.add("rateGuideStar", "guidePageStarComplete");
+          }
+          for (const value of range(number, 4)) {
+            starRates[value] = 0;
+            document
+              .getElementById(`formStar${value + 1}`)
+              .setAttribute("class", "");
+            document
+              .getElementById(`formStar${value + 1}`)
+              .classList.add("rateGuideStar", "guidePageStarEmpty");
+          }
+        } else if (starRates[number - 1] === 0.5) {
+          starRates[number - 1] = 1;
+          document
+            .getElementById(`formStar${number}`)
+            .setAttribute("class", "");
+          document
+            .getElementById(`formStar${number}`)
+            .classList.add("rateGuideStar", "guidePageStarComplete");
+          for (const value of range(0, number - 2)) {
+            starRates[value] = 1;
+            document
+              .getElementById(`formStar${value + 1}`)
+              .setAttribute("class", "");
+            document
+              .getElementById(`formStar${value + 1}`)
+              .classList.add("rateGuideStar", "guidePageStarComplete");
+          }
+          for (const value of range(number, 4)) {
+            starRates[value] = 0;
+            document
+              .getElementById(`formStar${value + 1}`)
+              .setAttribute("class", "");
+            document
+              .getElementById(`formStar${value + 1}`)
+              .classList.add("rateGuideStar", "guidePageStarEmpty");
+          }
+        } else {
+          starRates[number - 1] = 0;
+          document
+            .getElementById(`formStar${number}`)
+            .setAttribute("class", "");
+          document
+            .getElementById(`formStar${number}`)
+            .classList.add("rateGuideStar", "guidePageStarEmpty");
+          for (const value of range(0, number - 2)) {
+            starRates[value] = 0;
+            document
+              .getElementById(`formStar${value + 1}`)
+              .setAttribute("class", "");
+            document
+              .getElementById(`formStar${value + 1}`)
+              .classList.add("rateGuideStar", "guidePageStarEmpty");
+          }
+          for (const value of range(number, 4)) {
+            starRates[value] = 0;
+            document
+              .getElementById(`formStar${value + 1}`)
+              .setAttribute("class", "");
+            document
+              .getElementById(`formStar${value + 1}`)
+              .classList.add("rateGuideStar", "guidePageStarEmpty");
+          }
+        }
+      }
+
+      function submitRating() {
+        if (ratable) {
+          document.getElementById("formProductCode").value = guideCode;
+          document.getElementById("formRating").value = starRates.reduce(
+            (a, b) => a + b,
+            0
+          );
+          document.getElementById("ratingForm").submit();
+          document.getElementById("rateGuideSubmit").style.display = "none";
+          document.getElementById("rateGuideConfirmation").style.display =
+            "block";
+          rated.push(guideCode);
+          setCookie("ratings", JSON.stringify(rated));
+          setTimeout(function () {
+            toggleRateLightbox(false);
+          }, 3000);
+        }
+      }
+    </script>
   </head>
   <body>
+    <div
+      id="shareGuideLightboxBackground"
+      onclick="toggleShareLightbox(false); toggleRateLightbox(false)"
+    ></div>
+    <div id="shareGuideLightbox">
+      <div id="shareGuideLBHeading">
+        Share Guide
+        <div id="shareGuideLBX" onclick="toggleShareLightbox(false)"></div>
+      </div>
+      <div id="shareGuideShareBox">
+        <div id="shareGuideShareColumn">
+          <a class="shareGuideBrandBox" id="embedBrandBox">
+            <div
+              class="shareGuideBrandIcon"
+              style="background-image: url('Images/GuideShareEmbedIcon.png')"
+            ></div>
+            <div class="shareGuideBrandText">Embed</div>
+          </a>
+          <a class="shareGuideBrandBox" id="emailBrandBox" target="_blank">
+            <div
+              class="shareGuideBrandIcon"
+              style="background-image: url('Images/GuideShareEmailIcon.png')"
+            ></div>
+            <div class="shareGuideBrandText">Email</div>
+          </a>
+          <a class="shareGuideBrandBox" id="twitterBrandBox" target="_blank">
+            <div
+              class="shareGuideBrandIcon"
+              style="background-image: url('Images/GuideShareTwitterIcon.png')"
+            ></div>
+            <div class="shareGuideBrandText">Twitter</div>
+          </a>
+          <a class="shareGuideBrandBox" id="facebookBrandBox" target="_blank">
+            <div
+              class="shareGuideBrandIcon"
+              style="background-image: url('Images/GuideShareFacebookIcon.png')"
+            ></div>
+            <div class="shareGuideBrandText">Facebook</div>
+          </a>
+          <a class="shareGuideBrandBox" id="whatsappBrandBox" target="_blank">
+            <div
+              class="shareGuideBrandIcon"
+              style="background-image: url('Images/GuideShareWhatsappIcon.png')"
+            ></div>
+            <div class="shareGuideBrandText">Whatsapp</div>
+          </a>
+        </div>
+        <div id="shareGuideLinkContainer">
+          <span id="shareGuideLinkText"></span>
+          <div id="shareGuideLinkButton" onclick="copyPostLink()">Copy</div>
+        </div>
+      </div>
+    </div>
+    <div id="rateGuideLightbox">
+      <div id="rateGuideLBHeading">
+        Rate Guide
+        <div id="rateGuideLBX" onclick="toggleRateLightbox(false)"></div>
+      </div>
+      <div id="rateGuideRateBox">
+        <div id="rateGuideStarColumn">
+          <div
+            class="rateGuideStar guidePageStarEmpty"
+            onclick="starUpdate(1)"
+            id="formStar1"
+          >
+            ★
+          </div>
+          <div
+            class="rateGuideStar guidePageStarEmpty"
+            onclick="starUpdate(2)"
+            id="formStar2"
+          >
+            ★
+          </div>
+          <div
+            class="rateGuideStar guidePageStarEmpty"
+            onclick="starUpdate(3)"
+            id="formStar3"
+          >
+            ★
+          </div>
+          <div
+            class="rateGuideStar guidePageStarEmpty"
+            onclick="starUpdate(4)"
+            id="formStar4"
+          >
+            ★
+          </div>
+          <div
+            class="rateGuideStar guidePageStarEmpty"
+            onclick="starUpdate(5)"
+            id="formStar5"
+          >
+            ★
+          </div>
+        </div>
+        <form
+          id="ratingForm"
+          action="https://docs.google.com/forms/u/4/d/e/1FAIpQLSfaDIhuk__L3DGUhuOCnBq-VUalLae67E9uC5lhoB_L5s03zg/formResponse"
+          method="post"
+          target="hidden_iframe"
+        >
+          <input
+            id="formProductCode"
+            class="rateFormInvisible"
+            name="entry.139466847"
+          />
+          <input
+            id="formRating"
+            class="rateFormInvisible"
+            name="entry.1821197750"
+          />
+          <input
+            id="formName"
+            class="rateFormInvisible"
+            name="entry.1635951193"
+          />
+        </form>
+        <div id="rateGuideSubmit" onclick="submitRating()">Submit</div>
+        <div id="rateGuideConfirmation">
+          Your submission was received. Thank you for rating!
+        </div>
+        <iframe name="hidden_iframe" style="display: none"></iframe>
+      </div>
+    </div>
     <div id="cartBackdrop">
       <div id="cartLeaveContainer" onClick="displayCart(false)"></div>
       <div id="cartDisplayContainer"></div>
@@ -292,7 +628,7 @@
         <div id="guidePageInfoBox">
           <div id="guidePageSubject"></div>
           <div id="guidePageName"></div>
-          <div id="guidePageRatingContainer">
+          <div id="guidePageRatingContainer" onclick="toggleRateLightbox(true)">
             <div id="ratingStar1" class="">★</div>
             <div id="ratingStar2" class="">★</div>
             <div id="ratingStar3" class="">★</div>
@@ -303,7 +639,9 @@
             <div id="addToBackpackButton" onclick="addToCart(`${guideCode}`)">
               Add to Backpack
             </div>
+            <a id="shareGuideIcon" onclick="toggleShareLightbox(true)"></a>
           </div>
+          <div id="guideDescriptionText"></div>
         </div>
       </div>
     </div>
