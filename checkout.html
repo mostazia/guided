@@ -322,6 +322,24 @@
               const minutes = currentDate.getMinutes();
               const seconds = currentDate.getSeconds();
               const extra = Math.floor(Math.random() * 99) + 1;
+              if (month <= 9) {
+                month = `0${month}`;
+              }
+              if (day <= 9) {
+                day = `0${day}`;
+              }
+              if (hours < 9) {
+                hours = `0${hours}`;
+              }
+              if (minutes < 9) {
+                minutes = `0${minutes}`;
+              }
+              if (seconds < 9) {
+                seconds = `0${seconds}`;
+              }
+              if (extra < 9) {
+                extra = `0${extra}`;
+              }
               document.getElementById(
                 "formConCodeInput"
               ).value = `${year}${month}${day}${hours}${minutes}${seconds}${extra}`;

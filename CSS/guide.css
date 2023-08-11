@@ -1,0 +1,195 @@
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --freshGuac: #aebe89;
+  --aloeCream: #dae3bb;
+  --whiteLace: #fff7ec;
+  --brookGreen: #a8ead5;
+  --colaBrown: #2b2119;
+  /* Scaling Variables */
+  --navbarHeight: 10vh;
+  /* Rating Variables */
+  --starRatingPercentage: 50%;
+}
+
+#guidePageContainer {
+  min-height: 90vh;
+  width: 95%;
+  display: flex;
+}
+
+#guidePageImageBox {
+  width: 50%;
+  height: 90vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: sticky;
+  top: 10vh;
+}
+
+#guidePageCarousel {
+  height: min(calc(95vw / 2 * 0.8), 80vh);
+  width: calc(95vw / 2 * 0.175);
+  border-radius: calc(min(95vw / 2 * 0.8, 80vh) * 0.025);
+  margin-right: auto;
+  margin-left: 0;
+}
+
+#guidePageCarouselUp {
+  width: 100%;
+  aspect-ratio: 3;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#guidePageCarouselDown {
+  width: 100%;
+  aspect-ratio: 3;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  transform: rotate(180deg);
+}
+
+.guidePageCarouselArrow {
+  height: 50%;
+  aspect-ratio: 1;
+  transform: rotate(45deg);
+  box-sizing: border-box;
+  border-top: 0.325vh solid var(--freshGuac);
+  border-left: 0.325vh solid var(--freshGuac);
+  margin-top: calc(((0.175 * 95vw / 6) - (0.175 * 95vw / 24)) / 2);
+}
+
+#guidePageImageCarousel {
+  height: calc(min(95vw / 2 * 0.8, 80vh) - 0.175 * 95vw / 3);
+  overflow: auto;
+  width: 100%;
+}
+
+#guidePageImageCarousel::-webkit-scrollbar {
+  width: 0;
+}
+
+.guidePageCarouselImg {
+  width: 100%;
+  aspect-ratio: 1;
+  margin-bottom: calc((min(95vw / 2 * 0.8, 80vh) - 0.175 * 95vw / 3) * 0.1);
+  background-size: cover;
+  background-position: center;
+}
+
+#guidePageImageMain {
+  width: min(calc(95vw / 2 * 0.8), 80vh);
+  aspect-ratio: 1;
+  border-radius: calc(95vw / 2 * 0.8 * 0.025);
+  background-size: cover;
+  background-position: center;
+}
+
+#guidePageInfoBox {
+  width: 50%;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding-left: calc(95vw / 2 * 0.05);
+}
+
+#guidePageSubject {
+  margin-top: calc((90vh - min(95vw / 2 * 0.8, 80vh)) / 2);
+  font-size: 2.5vh;
+  color: var(--colaBrown);
+  font-family: "Urbanist", sans-serif;
+  font-weight: 600;
+  text-align: left;
+  height: 3.5vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#guidePageNew {
+  margin-left: auto;
+  margin-right: 0;
+  height: 3.5vh;
+  aspect-ratio: 2;
+  background: var(--aloeCream);
+  color: white;
+  font-weight: 400;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 2.5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#guidePageName {
+  margin-top: 3vh;
+  font-size: 6vh;
+  color: var(--freshGuac);
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 300;
+}
+
+#guidePageRatingContainer {
+  margin-top: 1vh;
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: left;
+  font-size: 4.5vh;
+  font-family: "Urbanist", sans-serif;
+  color: transparent;
+}
+
+.guidePageStarComplete {
+  color: var(--colaBrown);
+  cursor: pointer;
+}
+
+.guidePageStarIncomplete {
+  background: -webkit-linear-gradient(
+    0turn,
+    var(--colaBrown) 0 var(--starRatingPercentage),
+    var(--aloeCream) var(--starRatingPercentage) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+.guidePageStarEmpty {
+  color: var(--aloeCream);
+  cursor: pointer;
+}
+
+#guideButtonContainer {
+  margin-top: 5vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#addToBackpackButton {
+  height: 7vh;
+  width: calc(7vh * 6);
+  background: var(--aloeCream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 3.5vh;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+#addToBackpackButton:hover {
+  border: 0.325vh solid var(--freshGuac);
+  background: transparent;
+  color: var(--freshGuac);
+}

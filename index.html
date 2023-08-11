@@ -159,17 +159,6 @@
         }
       }
     </script>
-    <script id="loadCartCountScript">
-      document.addEventListener(
-        "DOMContentLoaded",
-        (loadContent = () => {
-          let cart = JSON.parse(getCookie("cart") || "[]");
-          if (cart.length !== 0) {
-            updateCartCount();
-          }
-        })
-      );
-    </script>
     <div id="navbar">
       <div id="navbarMenuContainer"></div>
       <div id="navbarLogoContainer">
@@ -258,6 +247,34 @@
               </div>
             </div>
           </div>
+        </div>
+        <div id="homeGuidesButton">See More</div>
+      </div>
+      <div id="homeStripTestimonials">
+        <div class="stripHeading">Testimonials</div>
+        <div id="testimonialsStrip">
+          <br />
+          "Stacy tutored me pre-covid when I was in 8th grade. Personally, math
+          has always been a difficult subject for me to understand, she was
+          willing to help me the second semester and tutrored me after school on
+          Friday's, where we looked over what I learned that week. As a visual
+          learner, she would help explain to me step by step how to understand
+          and solve a problem. She always had the patience to do problems over
+          and over again, and I ended the school year with an A." <br />
+          - Student
+          <br />
+          <br />
+          "Stacy taught me during the pandemic when, due to pandemic issues, I
+          could no longer attend the institute where I studied. Since English is
+          the most widely spoken language in the world, I needed to have
+          extensive knowledge about it. Stacy not only gave me advice, but also
+          prepared didactic material and infographic references so that the days
+          we were not in class I could continue practicing. In addition, I was
+          constantly evaluated, which allowed me to learn much more.
+          Additionally, her patience, dedication and extensive knowledge made
+          the experience more than pleasant. Our objective was fulfilled since I
+          obtained a promotion in my job in which I currently work as a
+          community manager." <br />- Student
         </div>
       </div>
     </div>

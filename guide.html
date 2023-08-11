@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" content="initial-scale=1" />
+    <title>GuidEd by Stacy</title>
+    <link rel="stylesheet" href="CSS/template.css" />
+    <link rel="stylesheet" href="CSS/guide.css" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <script type="text/javascript" src="JS/products.js"></script>
+    <script type="text/javascript" src="JS/ratings.js"></script>
+    <script id="onLoadScript">
+      var r = document.querySelector(":root");
+
+      document.addEventListener(
+        "DOMContentLoaded",
+        (loadContent = () => {
+          let cart = JSON.parse(getCookie("cart") || "[]");
+          if (cart.length !== 0) {
+            updateCartCount();
+          }
+
+          scrollableCSS();
+
+          const urlParams = new URLSearchParams(window.location.search);
+          const guideCode = "_" + urlParams.get("g");
+
+          const guideName = window[guideCode].name;
+          const guideSub = window[guideCode].subject;
+          const guideRate = ratingList[parseInt(urlParams.get("g")) - 10000001];
+          const guideNew = window[guideCode].new;
+          const guideImg1 = window[guideCode].im1;
+          const guideOtherIms = window[guideCode].otherIms;
+
+          document.getElementById("guidePageSubject").innerHTML = guideSub;
+          if (guideNew) {
+            document.getElementById(
+              "guidePageSubject"
+            ).innerHTML += `<div id="guidePageNew">NEW!</div>`;
+          }
+
+          function* range(from, to, step = 1) {
+            let value = from;
+            while (value <= to) {
+              yield value;
+              value += step;
+            }
+          }
+
+          document.getElementById("guidePageName").innerHTML = guideName;
+          document.getElementById(
+            "guidePageImageMain"
+          ).style.backgroundImage = `url(${guideImg1})`;
+
+          document.getElementById(
+            "guidePageImageCarousel"
+          ).innerHTML = `<div class="guidePageCarouselImg" id="im1" onClick="changeMainIm(1)" style="background-image: url(${guideImg1})"></div>`;
+
+          for (const value of range(0, guideOtherIms.length - 1)) {
+            document.getElementById(
+              "guidePageImageCarousel"
+            ).innerHTML += `<div class="guidePageCarouselImg" id="im${
+              value + 2
+            }" onClick="changeMainIm(${
+              value + 2
+            })" style="background-image: url(${guideOtherIms[value]})"></div>`;
+          }
+
+          let guideRateDec = 0;
+          let lastStar = 0;
+          for (const value of range(1, guideRate)) {
+            document
+              .getElementById(`ratingStar${value}`)
+              .classList.add("guidePageStarComplete");
+            if (guideRate - value < 1) {
+              guideRateDec = (guideRate - value) * 100;
+              lastStar = value;
+            }
+          }
+          if (guideRateDec !== 0) {
+            r.style.setProperty("--starRatingPercentage", `${guideRateDec}%`);
+            document
+              .getElementById(`ratingStar${lastStar + 1}`)
+              .classList.add("guidePageStarIncomplete");
+            if (lastStar < 4) {
+              for (const value of range(lastStar + 1, 5)) {
+                document
+                  .getElementById(`ratingStar${value}`)
+                  .classList.add("guidePageStarEmpty");
+              }
+            }
+          }
+        })
+      );
+
+      function scrollableCSS() {
+        const pageHeight = document.body.scrollHeight;
+        const windowHeight = window.innerHeight;
+        if (pageHeight < windowHeight) {
+          r.style.setProperty("--pageScroll", "0vw");
+        }
+      }
+    </script>
+    <script id="cartScript" type="text/javascript">
+      function displayCart(bool) {
+        if (bool) {
+          document.getElementById("cartBackdrop").style.display = "flex";
+          createCartElements();
+        } else {
+          document.getElementById("cartBackdrop").style.display = "none";
+        }
+      }
+
+      function addToCart(productString) {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        if (!cart.includes(productString)) {
+          cart.push(productString);
+          setCookie("cart", JSON.stringify(cart));
+          updateCartCount();
+          if (cart.length === 1) {
+            displayCart(true);
+          }
+        }
+      }
+      function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(";").shift();
+      }
+      function setCookie(name, value) {
+        document.cookie = `${name}=${value}; path=/`;
+      }
+
+      function createCartElements() {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        let cartContainer = document.getElementById("cartDisplayContainer");
+
+        cartContainer.innerHTML =
+          "<div id=" +
+          "cartDisplayHeading" +
+          ">" +
+          "<div id=" +
+          "cartDisplayTitle" +
+          ">Backpack</div>" +
+          "<div id=" +
+          "cartDisplayCount" +
+          `>${cart.length} Items</div>` +
+          "<div id=" +
+          "cartDisplayX" +
+          " " +
+          "onClick=" +
+          "displayCart(false)" +
+          "></div> </div>" +
+          "<div id=" +
+          "cartCheckoutContainer" +
+          "> <div id=" +
+          "cartCheckoutText" +
+          "></div>" +
+          `<a href="checkout" id=` +
+          "cartCheckoutButton" +
+          ">Check Out</a> </div>";
+
+        showCheckoutButton();
+        cart.forEach((product) => {
+          var name = window[product].name;
+          var subject = window[product].subject;
+          var im1 = window[product].im1;
+          if (name.length >= 29) {
+            name = name.substring(0, 25) + " ...";
+          }
+          cartContainer.innerHTML += `
+            <div class="cartItemContainer">
+            <div class="cartItemImage" style="background-image: url('${im1}') "></div>
+            <div class="cartItemInfoBox">
+              <div class="cartItemName"> ${name} </div>
+              <div class="cartItemSubject"> ${subject} </div>
+              <div class="cartItemRemove" onClick="removeFromCart('${product}')"> remove </div>
+            </div>
+          </div>`;
+        });
+      }
+
+      function removeFromCart(productString) {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        cart = cart.filter((product) => product !== productString);
+        setCookie("cart", JSON.stringify(cart));
+        createCartElements();
+        updateCartCount();
+      }
+
+      function updateCartCount() {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        if (cart.length !== 0) {
+          document.getElementById("navbarBackpackCount").style.display = "flex";
+          document.getElementById("navbarBackpackCount").innerHTML =
+            cart.length;
+        } else {
+          document.getElementById("navbarBackpackCount").style.display = "none";
+        }
+      }
+
+      function showCheckoutButton() {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        if (cart.length !== 0) {
+          document.getElementById("cartCheckoutButton").style.display = "flex";
+          document.getElementById("cartCheckoutText").innerHTML =
+            "Found everything you need? <br />Let's prepare your digital downloads!";
+        } else {
+          document.getElementById("cartCheckoutButton").style.display = "none";
+          document.getElementById("cartCheckoutText").innerHTML =
+            "Please add items to your backpack to check out :)";
+        }
+      }
+    </script>
+    <script id="carouselScript">
+      const urlParams = new URLSearchParams(window.location.search);
+      const guideCode = "_" + urlParams.get("g");
+      const guideImg1 = window[guideCode].im1;
+      const guideOtherIms = window[guideCode].otherIms;
+      const imageCount = guideOtherIms.length + 1;
+
+      let mainImage = 1;
+
+      scrollQuantity = (window.innerWidth / 2) * 0.175;
+      // calc((min(95vw / 2 * 0.8, 80vh) - 0.175 * 95vw / 3) * 0.1)
+
+      function carouselScroll(direction) {
+        var scrollableDiv = document.getElementById("guidePageImageCarousel");
+        var scrollTop = scrollableDiv.scrollTop;
+
+        if (direction === "down") {
+          var newScroll = scrollTop + scrollQuantity;
+          scrollableDiv.scrollTop = newScroll;
+          if (mainImage < imageCount) {
+            changeMainIm(mainImage + 1);
+            mainImage = mainImage + 1;
+          }
+        } else {
+          var newScroll = scrollTop - scrollQuantity;
+          scrollableDiv.scrollTop = newScroll;
+          if (mainImage > 1) {
+            changeMainIm(mainImage - 1);
+            mainImage = mainImage - 1;
+          }
+        }
+      }
+
+      function changeMainIm(num) {
+        if (num === 1) {
+          document.getElementById(
+            "guidePageImageMain"
+          ).style.backgroundImage = `url(${guideImg1}`;
+        } else {
+          document.getElementById(
+            "guidePageImageMain"
+          ).style.backgroundImage = `url(${guideOtherIms[num - 2]}`;
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="cartBackdrop">
+      <div id="cartLeaveContainer" onClick="displayCart(false)"></div>
+      <div id="cartDisplayContainer"></div>
+    </div>
+    <div id="navbar">
+      <div id="navbarMenuContainer"></div>
+      <div id="navbarLogoContainer">
+        <div id="navbarMainLogo">GuidEd</div>
+        <div id="navbarSubLogo">By Stacy</div>
+      </div>
+      <div id="navbarOptionsContainer">
+        <div id="navbarBackpackIcon" onClick="displayCart(true)">
+          <div id="navbarBackpackCount">1</div>
+        </div>
+      </div>
+    </div>
+    <div id="pagebody">
+      <div id="guidePageContainer">
+        <div id="guidePageImageBox">
+          <div id="guidePageCarousel">
+            <div id="guidePageCarouselUp" onclick="carouselScroll('up')">
+              <div class="guidePageCarouselArrow"></div>
+            </div>
+            <div id="guidePageImageCarousel"></div>
+            <div id="guidePageCarouselDown" onclick="carouselScroll('down')">
+              <div class="guidePageCarouselArrow"></div>
+            </div>
+          </div>
+          <div id="guidePageImageMain"></div>
+        </div>
+        <div id="guidePageInfoBox">
+          <div id="guidePageSubject"></div>
+          <div id="guidePageName"></div>
+          <div id="guidePageRatingContainer">
+            <div id="ratingStar1" class="">★</div>
+            <div id="ratingStar2" class="">★</div>
+            <div id="ratingStar3" class="">★</div>
+            <div id="ratingStar4" class="">★</div>
+            <div id="ratingStar5" class="">★</div>
+          </div>
+          <div id="guideButtonContainer">
+            <div id="addToBackpackButton" onclick="addToCart(`${guideCode}`)">
+              Add to Backpack
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

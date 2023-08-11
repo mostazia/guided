@@ -13,6 +13,7 @@
   /* Scaling Variables */
   --navbarHeight: 12vh;
   --scrollbarColor: var(--aloeCream);
+  --pageScroll: 0.5vw;
 }
 
 body {
@@ -160,7 +161,7 @@ a {
 
 #cartDisplayContainer {
   width: 35vw;
-  height: calc(100vh - 34.5vw / 3.75);
+  height: calc(100vh - (35vw - var(--pageScroll)) / 3.75);
   background: var(--whiteLace);
   display: flex;
   flex-direction: column;
@@ -275,7 +276,7 @@ a {
 }
 
 #cartCheckoutContainer {
-  width: 34.5vw;
+  width: calc(35vw - var(--pageScroll));
   aspect-ratio: 3.75;
   position: fixed;
   bottom: 0;
