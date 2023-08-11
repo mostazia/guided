@@ -20,7 +20,6 @@
             updateCartCount();
           }
 
-          scrollableCSS();
           createShareLinks();
           findRatable();
 
@@ -109,6 +108,7 @@
     </script>
     <script id="cartScript" type="text/javascript">
       function displayCart(bool) {
+        scrollableCSS();
         if (bool) {
           document.getElementById("cartBackdrop").style.display = "flex";
           createCartElements();
@@ -601,11 +601,17 @@
     </div>
     <div id="navbar">
       <div id="navbarMenuContainer"></div>
-      <div id="navbarLogoContainer">
+      <a id="navbarLogoContainer" href="..">
         <div id="navbarMainLogo">GuidEd</div>
         <div id="navbarSubLogo">By Stacy</div>
-      </div>
+      </a>
       <div id="navbarOptionsContainer">
+        <a
+          id="navbarDonateButton"
+          href="https://www.paypal.com/donate/?hosted_button_id=L75PL47XJCQCE"
+          target="_blank"
+          >Donate</a
+        >
         <div id="navbarBackpackIcon" onClick="displayCart(true)">
           <div id="navbarBackpackCount">1</div>
         </div>

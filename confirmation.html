@@ -5,12 +5,21 @@
   <link rel="stylesheet" href="CSS/template.css" />
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <script type="text/javascript" src="JS/products.js"></script>
   <script id="navbarHeightScript">
     window.onscroll = function () {
       scrollFunction();
     };
     var r = document.querySelector(":root");
     var timer = null;
+
+    function scrollableCSS() {
+      const pageHeight = document.body.scrollHeight;
+      const windowHeight = window.innerHeight;
+      if (pageHeight < windowHeight) {
+        r.style.setProperty("--pageScroll", "0vw");
+      }
+    }
 
     function scrollFunction() {
       r.style.setProperty("--scrollbarColor", "#a8ead5");
@@ -30,40 +39,140 @@
       }, 100);
     }
   </script>
-  <script id="confirmationGenerationScript">
-    document.addEventListener(
-      "DOMContentLoaded",
-      (loadContent = () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const conCode = urlParams.get("cc");
-        document.getElementById(
-          "confirmationMessage"
-        ).innerHTML = `Your confirmation code is: ${conCode}
-      <br /><br />
-      We have received your order and will process it as soon as possible. We
-      typically process orders instantly, but we might experience delays due to
-      a high volume of orders. So, we ask that you please wait at least day
-      before reaching out about a missing order. It is possible that your order
-      may be flagged as spam, so keep an eye on that folder as well. If you
-      still don't receive your order, please reach out to us at
-      <a href="mailto:guidedbystacy@gmail.com" class="conEmailLink"> guidedbystacy@gmail.com. </a>
-      <br /><br />
-      You will be able to download, print, and use the files you requested as
-      soon as we email your order! Thank you for making us part of your learning
-      journey. It is truly an honor :)`;
-      })
-    );
+  <script id="cartScript" type="text/javascript">
+    function displayCart(bool) {
+      scrollableCSS();
+      if (bool) {
+        document.getElementById("cartBackdrop").style.display = "flex";
+        createCartElements();
+      } else {
+        document.getElementById("cartBackdrop").style.display = "none";
+      }
+    }
+
+    function addToCart(productString) {
+      let cart = JSON.parse(getCookie("cart") || "[]");
+      if (!cart.includes(productString)) {
+        cart.push(productString);
+        setCookie("cart", JSON.stringify(cart));
+        updateCartCount();
+        if (cart.length === 1) {
+          displayCart(true);
+        }
+      }
+    }
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(";").shift();
+    }
+
+    function setCookie(name, value) {
+      document.cookie = `${name}=${value}; path=/`;
+    }
+
+    function createCartElements() {
+      let cart = JSON.parse(getCookie("cart") || "[]");
+      let cartContainer = document.getElementById("cartDisplayContainer");
+
+      cartContainer.innerHTML =
+        "<div id=" +
+        "cartDisplayHeading" +
+        ">" +
+        "<div id=" +
+        "cartDisplayTitle" +
+        ">Backpack</div>" +
+        "<div id=" +
+        "cartDisplayCount" +
+        `>${cart.length} Items</div>` +
+        "<div id=" +
+        "cartDisplayX" +
+        " " +
+        "onClick=" +
+        "displayCart(false)" +
+        "></div> </div>" +
+        "<div id=" +
+        "cartCheckoutContainer" +
+        "> <div id=" +
+        "cartCheckoutText" +
+        "></div>" +
+        `<a href="checkout" id=` +
+        "cartCheckoutButton" +
+        ">Check Out</a> </div>";
+
+      showCheckoutButton();
+      cart.forEach((product) => {
+        var name = window[product].name;
+        var subject = window[product].subject;
+        var im1 = window[product].im1;
+        if (name.length >= 29) {
+          name = name.substring(0, 25) + " ...";
+        }
+        cartContainer.innerHTML += `
+              <div class="cartItemContainer">
+              <div class="cartItemImage" style="background-image: url('${im1}') "></div>
+              <div class="cartItemInfoBox">
+                <div class="cartItemName"> ${name} </div>
+                <div class="cartItemSubject"> ${subject} </div>
+                <div class="cartItemRemove" onClick="removeFromCart('${product}')"> remove </div>
+              </div>
+            </div>`;
+      });
+    }
+
+    function removeFromCart(productString) {
+      let cart = JSON.parse(getCookie("cart") || "[]");
+      cart = cart.filter((product) => product !== productString);
+      setCookie("cart", JSON.stringify(cart));
+      createCartElements();
+      updateCartCount();
+    }
+
+    function updateCartCount() {
+      let cart = JSON.parse(getCookie("cart") || "[]");
+      if (cart.length !== 0) {
+        document.getElementById("navbarBackpackCount").style.display = "flex";
+        document.getElementById("navbarBackpackCount").innerHTML = cart.length;
+      } else {
+        document.getElementById("navbarBackpackCount").style.display = "none";
+      }
+    }
+
+    function showCheckoutButton() {
+      let cart = JSON.parse(getCookie("cart") || "[]");
+      if (cart.length !== 0) {
+        document.getElementById("cartCheckoutButton").style.display = "flex";
+        document.getElementById("cartCheckoutText").innerHTML =
+          "Found everything you need? <br />Let's prepare your digital downloads!";
+      } else {
+        document.getElementById("cartCheckoutButton").style.display = "none";
+        document.getElementById("cartCheckoutText").innerHTML =
+          "Please add items to your backpack to check out :)";
+      }
+    }
   </script>
 </head>
 <body>
+  <div id="cartBackdrop">
+    <div id="cartLeaveContainer" onClick="displayCart(false)"></div>
+    <div id="cartDisplayContainer"></div>
+  </div>
   <div id="navbar">
     <div id="navbarMenuContainer"></div>
-    <div id="navbarLogoContainer">
+    <a id="navbarLogoContainer" href="..">
       <div id="navbarMainLogo">GuidEd</div>
       <div id="navbarSubLogo">By Stacy</div>
-    </div>
+    </a>
     <div id="navbarOptionsContainer">
-      <div id="navbarBackpackIcon" onClick="displayCart(true)"></div>
+      <a
+        id="navbarDonateButton"
+        href="https://www.paypal.com/donate/?hosted_button_id=L75PL47XJCQCE"
+        target="_blank"
+        >Donate</a
+      >
+      <div id="navbarBackpackIcon" onClick="displayCart(true)">
+        <div id="navbarBackpackCount">1</div>
+      </div>
     </div>
   </div>
   <div id="confirmationBody">
