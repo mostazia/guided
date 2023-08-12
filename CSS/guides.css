@@ -1,0 +1,338 @@
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --freshGuac: #aebe89;
+  --aloeCream: #dae3bb;
+  --whiteLace: #fff7ec;
+  --brookGreen: #a8ead5;
+  --colaBrown: #2b2119;
+  --pageScroll: 0.5vw;
+}
+
+#guidesMainContainer {
+  width: 80vw;
+  min-height: 90vh;
+  /* border: 2px solid slateblue; */
+  padding-top: 6vh;
+  padding-bottom: 6vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#guidesHeadingContainer {
+  width: 100%;
+  height: 7vh;
+  max-height: 7vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#guidesHeading {
+  font-size: 6vh;
+  font-family: "Barlow Condensed", sans-serif;
+  color: var(--colaBrown);
+  font-weight: 500;
+  text-align: left;
+}
+
+#guidesTotal {
+  margin-left: auto;
+  margin-right: 0;
+  font-family: "Urbanist", sans-serif;
+  font-size: 3vh;
+  font-weight: 300;
+  color: var(--freshGuac);
+  user-select: none;
+}
+
+#sortDropdown {
+  margin-left: 2vw;
+  margin-right: 0;
+  height: 4.5vh;
+  max-height: 4.5vh;
+  aspect-ratio: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.dropdownInactive {
+  background: var(--aloeCream);
+  border-radius: calc(4.5vh / 2);
+}
+
+.dropdownInactive:hover {
+  border: 0.325vh solid var(--freshGuac);
+  background: transparent;
+}
+
+.dropdownActive {
+  background: transparent;
+  border-left: 0.325vh solid var(--freshGuac);
+  border-right: 0.325vh solid var(--freshGuac);
+  border-top: 0.325vh solid var(--freshGuac);
+  padding-bottom: 0.325vh;
+  border-top-left-radius: calc(4.5vh / 2);
+  border-top-right-radius: calc(4.5vh / 2);
+}
+
+#sortDropdownMenu {
+  position: absolute;
+  right: calc(12vw + 4.5vh * 4 - var(--pageScroll) + 0.5px);
+  top: calc(23vh - (7vh - 4.5vh) / 2);
+  height: calc(4 * 4.5vh);
+  width: calc(4.5vh * 4);
+  box-sizing: border-box;
+  border-left: 0.325vh solid var(--freshGuac);
+  border-right: 0.325vh solid var(--freshGuac);
+  border-bottom: 0.325vh solid var(--freshGuac);
+  border-bottom-left-radius: calc(4.5vh / 2);
+  border-bottom-right-radius: calc(4.5vh / 2);
+  display: none;
+  overflow: hidden;
+  background: var(--whiteLace);
+  z-index: 5;
+}
+
+.dropdownTextInactive {
+  font-family: "Urbanist", sans-serif;
+  font-size: calc(4.5vh / 1.5);
+  font-weight: 400;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 4.5vh;
+}
+
+.dropdownTextActive {
+  font-family: "Urbanist", sans-serif;
+  font-size: calc(4.5vh / 1.5);
+  font-weight: 400;
+  color: var(--freshGuac);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 4.5vh;
+}
+
+#sortDropdown:hover > .dropdownTextInactive {
+  color: var(--freshGuac);
+  height: calc(4.5vh - 0.65vh);
+}
+
+.dropdownArrowInactive {
+  display: inline;
+  height: calc(4.5vh / 3);
+  aspect-ratio: 1;
+  transform: rotate(45deg);
+  box-sizing: border-box;
+  border-right: 0.25vh solid white;
+  border-bottom: 0.25vh solid white;
+  margin-top: calc(-1 * (4.5vh / 9));
+}
+
+.dropdownArrowActive {
+  display: inline;
+  height: calc(4.5vh / 3);
+  aspect-ratio: 1;
+  transform: rotate(45deg);
+  box-sizing: border-box;
+  border-top: 0.25vh solid var(--freshGuac);
+  border-left: 0.25vh solid var(--freshGuac);
+  margin-top: calc(1 * (4.5vh / 6));
+}
+
+#sortDropdown:hover > .dropdownTextInactive > .dropdownArrowInactive {
+  border-right: 0.25vh solid var(--freshGuac);
+  border-bottom: 0.25vh solid var(--freshGuac);
+}
+
+#filterDropdown {
+  margin-left: 2vw;
+  margin-right: 0;
+  height: 4.5vh;
+  aspect-ratio: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+#filterDropdown:hover > .dropdownTextInactive {
+  color: var(--freshGuac);
+  height: calc(4.5vh - 0.65vh);
+}
+
+#filterDropdown:hover > .dropdownTextInactive > .dropdownArrowInactive {
+  border-right: 0.25vh solid var(--freshGuac);
+  border-bottom: 0.25vh solid var(--freshGuac);
+}
+
+#filterDropdownMenu {
+  position: absolute;
+  right: calc(10vw - var(--pageScroll) + 0.5px);
+  top: calc(23vh - (7vh - 4.5vh) / 2);
+  height: calc(2 * 4.5vh);
+  width: calc(4.5vh * 4);
+  box-sizing: border-box;
+  border-left: 0.325vh solid var(--freshGuac);
+  border-right: 0.325vh solid var(--freshGuac);
+  border-bottom: 0.325vh solid var(--freshGuac);
+  border-bottom-left-radius: calc(4.5vh / 2);
+  border-bottom-right-radius: calc(4.5vh / 2);
+  display: none;
+  overflow: hidden;
+  background: var(--whiteLace);
+  z-index: 5;
+}
+
+.guidesDropdownContainer {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: overlay;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.guidesDropdownOption {
+  height: calc((4 * 4.5vh - 0.325vh) / 4);
+  width: 100%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Urbanist", sans-serif;
+  font-size: 2.5vh;
+  color: var(--freshGuac);
+  cursor: pointer;
+}
+
+.guidesDropdownOption:hover {
+  color: var(--colaBrown);
+}
+
+#guidesPreviewContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 7.5vh;
+}
+
+.guidesPreviewBox {
+  border: 0.325vh solid var(--freshGuac);
+  height: 52.5vh;
+  aspect-ratio: 0.85;
+  border-radius: calc(52.5vh * 0.85 * 0.05);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin-bottom: 5vh;
+}
+
+.guidesPreviewImage {
+  width: 100%;
+  aspect-ratio: 1.1;
+  z-index: 0;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.guidesPreviewInfo {
+  position: relative;
+  top: auto;
+  bottom: 0;
+  height: calc(52.5vh - (52.5vh * 0.85 / 1.1));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0.75vh;
+  padding-bottom: 0.75vh;
+  border-top: 0.325vh solid var(--aloeCream);
+  box-sizing: border-box;
+  z-index: 5;
+}
+
+.guidesPreviewName {
+  font-size: 3vh;
+  font-family: "Urbanist", sans-serif;
+  color: var(--freshGuac);
+  font-weight: 500;
+  line-height: 1.75;
+  text-align: center;
+  cursor: pointer;
+}
+
+.guidesPreviewSub {
+  font-size: 2.5vh;
+  font-family: "Urbanist", sans-serif;
+  color: var(--colaBrown);
+  font-weight: 400;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.guidesPreviewAdd {
+  height: 5vh;
+  aspect-ratio: 6;
+  background-color: var(--aloeCream);
+  margin-bottom: 0.5vh;
+  margin-top: auto;
+  border-radius: calc(5vh * 6 * 0.05);
+  font-size: 2.5vh;
+  font-family: "Urbanist", sans-serif;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.guidesPreviewNew {
+  margin-left: auto;
+  margin-right: calc(52.5vh * 0.85 * 0.035);
+  margin-top: calc(52.5vh * 0.85 * 0.035);
+  height: 3.5vh;
+  aspect-ratio: 2;
+  background: var(--aloeCream);
+  color: white;
+  font-weight: 400;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 2.25vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.guidesPreviewBox:hover > .guidesPreviewInfo {
+  height: calc(52.5vh - (52.5vh * 0.85 / 1.1) + 9vh);
+}
+
+.guidesPreviewBox:hover > .guidesPreviewInfo > .guidesPreviewAdd {
+  display: flex;
+}
+
+.guidesPreviewAdd:hover {
+  background-color: transparent;
+  border: 0.315vh solid var(--aloeCream);
+  color: var(--freshGuac);
+  cursor: pointer;
+}
