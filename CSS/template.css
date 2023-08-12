@@ -27,6 +27,7 @@ body {
 
 a {
   text-decoration: none;
+  color: unset;
 }
 
 #pagebody {
@@ -41,6 +42,8 @@ a {
 /* SCROLL */
 
 ::-webkit-scrollbar {
+  position: absolute;
+  right: 0;
   width: 0.5vw;
   border-radius: 0.25vw;
 }
@@ -95,6 +98,26 @@ a {
 
 #navbarMenuContainer {
   width: calc(75vw / 2);
+  height: calc(0.8 * var(--navbarHeight));
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  font-family: "Urbanist", sans-serif;
+  color: var(--freshGuac);
+  font-size: calc(0.25 * var(--navbarHeight));
+  font-weight: 400;
+  box-sizing: border-box;
+  padding-left: 1vw;
+  padding-right: 1vw;
+}
+
+.navbarMenuOption {
+  cursor: pointer;
+}
+
+.navbarMenuOption:hover {
+  color: var(--colaBrown);
+  font-weight: 500;
 }
 
 #navbarOptionsContainer {

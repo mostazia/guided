@@ -9,6 +9,7 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <script type="text/javascript" src="JS/products.js"></script>
     <script type="text/javascript" src="JS/ratings.js"></script>
+    <script type="text/javascript" src="JS/subjects.js"></script>
     <script id="onLoadScript">
       var r = document.querySelector(":root");
 
@@ -28,6 +29,7 @@
 
           const guideName = window[guideCode].name;
           const guideSub = window[guideCode].subject;
+          const subCode = window[guideCode].subCode;
           const guideRate = ratingList[parseInt(urlParams.get("g")) - 10000001];
           const guideNew = window[guideCode].new;
           const guideImg1 = window[guideCode].im1;
@@ -35,6 +37,9 @@
           const guideDescription = window[guideCode].description;
 
           document.getElementById("guidePageSubject").innerHTML = guideSub;
+          document
+            .getElementById("guidePageSubject")
+            .setAttribute("href", `${window[subCode].link}`);
           if (guideNew) {
             document.getElementById(
               "guidePageSubject"
@@ -600,8 +605,13 @@
       <div id="cartDisplayContainer"></div>
     </div>
     <div id="navbar">
-      <div id="navbarMenuContainer"></div>
-      <a id="navbarLogoContainer" href="..">
+      <div id="navbarMenuContainer">
+        <div class="navbarMenuOption">Mission</div>
+        <a class="navbarMenuOption" href="./guides">Guides</a>
+        <div class="navbarMenuOption">Programs</div>
+        <div class="navbarMenuOption">Private Tutoring</div>
+      </div>
+      <a id="navbarLogoContainer" href="">
         <div id="navbarMainLogo">GuidEd</div>
         <div id="navbarSubLogo">By Stacy</div>
       </a>
@@ -632,7 +642,7 @@
           <div id="guidePageImageMain"></div>
         </div>
         <div id="guidePageInfoBox">
-          <div id="guidePageSubject"></div>
+          <a id="guidePageSubject"></a>
           <div id="guidePageName"></div>
           <div id="guidePageRatingContainer" onclick="toggleRateLightbox(true)">
             <div id="ratingStar1" class="">★</div>
