@@ -17,6 +17,7 @@
           if (cart.length !== 0) {
             updateCartCount();
           }
+          scrollableCSS();
           const urlParams = new URLSearchParams(window.location.search);
           let filter = urlParams.get("f") || "";
           if (filter !== "") {
@@ -131,6 +132,7 @@
         if (pageHeight <= windowHeight) {
           r.style.setProperty("--pageScroll", "0vw");
         }
+        r.style.setProperty("--scrollable", "calc(0.5vw - 0.5px)");
       }
 
       function scrollFunction() {

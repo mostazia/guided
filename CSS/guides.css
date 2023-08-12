@@ -7,7 +7,7 @@
   --whiteLace: #fff7ec;
   --brookGreen: #a8ead5;
   --colaBrown: #2b2119;
-  --pageScroll: 0.5vw;
+  --scrollable: 0.5vw;
 }
 
 #guidesMainContainer {
@@ -85,7 +85,7 @@
 
 #sortDropdownMenu {
   position: absolute;
-  right: calc(12vw + 4.5vh * 4 - var(--pageScroll) + 0.5px);
+  right: calc(12vw + 4.5vh * 4 - var(--scrollable));
   top: calc(23vh - (7vh - 4.5vh) / 2);
   height: calc(4 * 4.5vh);
   width: calc(4.5vh * 4);
@@ -182,7 +182,7 @@
 
 #filterDropdownMenu {
   position: absolute;
-  right: calc(10vw - var(--pageScroll) + 0.5px);
+  right: calc(10vw - var(--scrollable));
   top: calc(23vh - (7vh - 4.5vh) / 2);
   height: calc(2 * 4.5vh);
   width: calc(4.5vh * 4);
