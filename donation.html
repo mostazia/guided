@@ -6,6 +6,17 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <script type="text/javascript" src="JS/products.js"></script>
+  <script id="onLoadScript">
+    document.addEventListener(
+      "DOMContentLoaded",
+      (loadContent = () => {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        if (cart.length !== 0) {
+          updateCartCount();
+        }
+      })
+    );
+  </script>
   <script id="navbarHeightScript">
     window.onscroll = function () {
       scrollFunction();
