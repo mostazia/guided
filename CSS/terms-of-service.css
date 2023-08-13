@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --freshGuac: #aebe89;
+  --aloeCream: #dae3bb;
+  --whiteLace: #fff7ec;
+  --brookGreen: #a8ead5;
+  --colaBrown: #2b2119;
+}
+
+#termsContainer {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding-bottom: 7vh;
+}
+
+#termsTitle {
+  width: 100%;
+  font-size: 9vh;
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 600;
+  color: var(--brookGreen);
+  margin-top: 7vh;
+  text-align: center;
+}
+
+.termsHeading {
+  font-size: 6vh;
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 300;
+  color: var(--freshGuac);
+  margin-top: 5vh;
+  margin-bottom: 4vh;
+  text-align: left;
+}
+
+.termsText {
+  font-size: 2.75vh;
+  font-family: "Urbanist", sans-serif;
+  font-weight: 400;
+  color: var(--colaBrown);
+  line-height: 1.5;
+  text-align: left;
+}
