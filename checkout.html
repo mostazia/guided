@@ -69,6 +69,9 @@
         let cart = JSON.parse(getCookie("cart") || "[]");
         let cartContainer = document.getElementById("cartDisplayContainer");
 
+        const urlParams = new URLSearchParams(window.location.search);
+        let previous = urlParams.get("from") || "";
+
         cartContainer.innerHTML =
           "<div id=" +
           "cartDisplayHeading" +
@@ -79,9 +82,10 @@
           "<div id=" +
           "cartDisplayCount" +
           `>${cart.length} Items</div>` +
-          "<div id=" +
+          "<a id=" +
           "cartDisplayX" +
-          "></div>" +
+          " " +
+          `href="./${previous}"></a>` +
           `<div id="cartCheckoutContainer">
           <div id="cartCheckoutText">
             We will <b> email </b> your order as <b>free</b> digital files, no
