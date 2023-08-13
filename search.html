@@ -43,7 +43,10 @@
           if (guide === "") {
             break;
           }
-          if (guide.description.toLowerCase().includes(queryString)) {
+          if (
+            guide.description.toLowerCase().includes(queryString) ||
+            guide.name.toLowerCase().includes(queryString)
+          ) {
             let guideName = guide.preview;
             let guideSub = guide.subject;
             let subCode = guide.subCode;
