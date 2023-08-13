@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" content="initial-scale=1" />
+    <title>GuidEd by Stacy</title>
+    <link rel="stylesheet" href="CSS/privacy-policy.css" />
+    <link rel="stylesheet" href="CSS/template.css" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <script type="text/javascript" src="JS/products.js"></script>
+    <script id="onLoadScript">
+      document.addEventListener(
+        "DOMContentLoaded",
+        (loadContent = () => {
+          let cart = JSON.parse(getCookie("cart") || "[]");
+          if (cart.length !== 0) {
+            updateCartCount();
+          }
+
+          document
+            .getElementById("searchInput")
+            .addEventListener("keydown", function (event) {
+              if (event.key === "Enter") {
+                handleSearch(document.getElementById("searchInput").value);
+              }
+            });
+        })
+      );
+    </script>
+    <script id="navbarHeightScript">
+      window.onscroll = function () {
+        scrollFunction();
+      };
+      var r = document.querySelector(":root");
+      var timer = null;
+
+      function scrollFunction() {
+        r.style.setProperty("--scrollbarColor", "#a8ead5");
+        if (
+          document.body.scrollTop > 1 ||
+          document.documentElement.scrollTop > 1
+        ) {
+          r.style.setProperty("--navbarHeight", "10vh");
+        } else {
+          r.style.setProperty("--navbarHeight", "12vh");
+        }
+        if (timer !== null) {
+          clearTimeout(timer);
+        }
+        timer = setTimeout(function () {
+          r.style.setProperty("--scrollbarColor", "#dae3bb");
+        }, 100);
+      }
+    </script>
+    <script id="cartScript" type="text/javascript">
+      function displayCart(bool) {
+        if (bool) {
+          document.getElementById("cartBackdrop").style.display = "flex";
+          createCartElements();
+        } else {
+          document.getElementById("cartBackdrop").style.display = "none";
+        }
+      }
+
+      function addToCart(productString) {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        if (!cart.includes(productString)) {
+          cart.push(productString);
+          setCookie("cart", JSON.stringify(cart));
+          updateCartCount();
+          if (cart.length === 1) {
+            displayCart(true);
+          }
+        }
+      }
+      function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(";").shift();
+      }
+
+      function setCookie(name, value) {
+        document.cookie = `${name}=${value}; path=/`;
+      }
+
+      function createCartElements() {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        let cartContainer = document.getElementById("cartDisplayContainer");
+
+        cartContainer.innerHTML =
+          "<div id=" +
+          "cartDisplayHeading" +
+          ">" +
+          "<div id=" +
+          "cartDisplayTitle" +
+          ">Backpack</div>" +
+          "<div id=" +
+          "cartDisplayCount" +
+          `>${cart.length} Items</div>` +
+          "<div id=" +
+          "cartDisplayX" +
+          " " +
+          "onClick=" +
+          "displayCart(false)" +
+          "></div> </div>" +
+          "<div id=" +
+          "cartCheckoutContainer" +
+          "> <div id=" +
+          "cartCheckoutText" +
+          "></div>" +
+          `<a href="checkout?from=donation" id=` +
+          "cartCheckoutButton" +
+          ">Check Out</a> </div>";
+
+        showCheckoutButton();
+        cart.forEach((product) => {
+          var name = window[product].name;
+          var subject = window[product].subject;
+          var im1 = window[product].im1;
+          if (name.length >= 29) {
+            name = name.substring(0, 25) + " ...";
+          }
+          cartContainer.innerHTML += `
+                <div class="cartItemContainer">
+                <div class="cartItemImage" style="background-image: url('${im1}') "></div>
+                <div class="cartItemInfoBox">
+                  <div class="cartItemName"> ${name} </div>
+                  <div class="cartItemSubject"> ${subject} </div>
+                  <div class="cartItemRemove" onClick="removeFromCart('${product}')"> remove </div>
+                </div>
+              </div>`;
+        });
+      }
+
+      function removeFromCart(productString) {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        cart = cart.filter((product) => product !== productString);
+        setCookie("cart", JSON.stringify(cart));
+        createCartElements();
+        updateCartCount();
+      }
+
+      function updateCartCount() {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        if (cart.length !== 0) {
+          document.getElementById("navbarBackpackCount").style.display = "flex";
+          document.getElementById("navbarBackpackCount").innerHTML =
+            cart.length;
+        } else {
+          document.getElementById("navbarBackpackCount").style.display = "none";
+        }
+      }
+
+      function showCheckoutButton() {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        if (cart.length !== 0) {
+          document.getElementById("cartCheckoutButton").style.display = "flex";
+          document.getElementById("cartCheckoutText").innerHTML =
+            "Found everything you need? <br />Let's prepare your digital downloads!";
+        } else {
+          document.getElementById("cartCheckoutButton").style.display = "none";
+          document.getElementById("cartCheckoutText").innerHTML =
+            "Please add items to your backpack to check out :)";
+        }
+      }
+    </script>
+    <script id="searchScript">
+      function toggleSearch(bool) {
+        const searchLightbox = document.getElementById("searchLightbox");
+        if (bool) {
+          searchLightbox.style.display = "flex";
+        } else {
+          searchLightbox.style.display = "none";
+        }
+      }
+
+      function handleSearch(query) {
+        window.location.href = `search?query=${encodeURIComponent(query)}`;
+      }
+    </script>
+  </head>
+  <body>
+    <div id="cartBackdrop">
+      <div id="cartLeaveContainer" onClick="displayCart(false)"></div>
+      <div id="cartDisplayContainer"></div>
+    </div>
+    <div id="searchLightbox">
+      <div id="searchInputContainer">
+        <input id="searchInput" placeholder="Search" />
+        <div id="searchInputSearchContainer">
+          <div
+            id="searchInputSearchButton"
+            onclick="handleSearch(document.getElementById('searchInput').value)"
+          ></div>
+        </div>
+      </div>
+      <div id="searchLightboxX" onclick="toggleSearch(false)"></div>
+    </div>
+    <div id="navbar">
+      <div id="navbarMenuContainer">
+        <div class="navbarMenuOption">About</div>
+        <a class="navbarMenuOption" href="./guides">Guides</a>
+        <div class="navbarMenuOption">Programs</div>
+        <div class="navbarMenuOption">Private Tutoring</div>
+      </div>
+      <a id="navbarLogoContainer" href="..">
+        <div id="navbarMainLogo">GuidEd</div>
+        <div id="navbarSubLogo">By Stacy</div>
+      </a>
+      <div id="navbarOptionsContainer">
+        <a
+          id="navbarDonateButton"
+          href="https://www.paypal.com/donate/?hosted_button_id=L75PL47XJCQCE"
+          target="_blank"
+          >Donate</a
+        >
+        <div id="navbarSearchIcon" onclick="toggleSearch(true)"></div>
+        <div id="navbarBackpackIcon" onClick="displayCart(true)">
+          <div id="navbarBackpackCount">1</div>
+        </div>
+      </div>
+    </div>
+    <div id="pagebody">
+      <div id="privacyContainer">
+        <div id="privacyTitle">Privacy Policy</div>
+        <div class="privacyText">
+          This Privacy Policy describes how edu.stacyvazquez.com (the “Site” or
+          “we”) collects, uses, and discloses your Personal Information when you
+          visit or “checkout” content from the Site.
+        </div>
+        <div class="privacyHeading">Contact</div>
+        <div class="privacyText">
+          After reviewing this policy, if you have additional questions, want
+          more information about our privacy practices, or would like to make a
+          complaint, please contact us by e-mail at guidedbystacy@gmail.com.
+        </div>
+        <div class="privacyHeading">Collecting Personal Information</div>
+        <div class="privacyText">
+          When you visit the Site, we collect certain information about your
+          interaction with the Site, and information necessary to handle the
+          “checkout” process. We may also collect additional information if you
+          contact us for support. In this Privacy Policy, we refer to any
+          information about an identifiable individual (including the
+          information below) as “Personal Information”. See the list below for
+          more information about what Personal Information we collect and why.
+        </div>
+        <div class="privacyHeading">Site Interaction information</div>
+        <div class="privacyText">
+          Purpose of collection: to load the Site accurately for you, to prevent
+          spam, and to accurately collect analytics regarding our 'guides'.
+          <br />
+          <br />
+          Source of collection: Collected using cookies when you add an item to
+          the “backpack” / “cart”, select the “Remember Me” checkmark in the
+          checkout page, and / or rate a “guide” in its corresponding “guide”
+          page.
+          <br />
+          <br />
+          Disclosure for a business purpose: to allow users to add items to
+          their “backpack”/”cart” and be able to checkout; to allow a faster
+          checkout process for users that opt-in to the “Remember Me”
+          functionality; to prevent a device from rating a “guide” more than
+          once (necessary for accurate ratings and reviews and for
+          spam-protection)
+          <br />
+          <br />
+          Personal Information collected: cookie information, “checkout
+          information” (including first name, last name, email, grade level,
+          city and state, and whether the user opted into being added to the
+          GuidEd mailing list), and what “guides” the user has rated on the
+          device.
+        </div>
+        <div class="privacyHeading">Order information</div>
+        <div class="privacyText">
+          Purpose of collection: to provide products or services to you, to
+          provide you with order confirmations, communicate with you, screen our
+          orders for potential risk or fraud, and when in line with the
+          preferences you have shared with us, provide you with information or
+          advertising relating to our products or services.
+          <br />
+          <br />
+          Disclosure for a business purpose: <br /><br />
+          Source of collection: collected from you. <br /><br />
+          Personal Information collected: first name, last name, email address,
+          grade level (optionally shared), and city and state (optionally
+          shared)
+        </div>
+        <div class="privacyHeading">Customer support information</div>
+        <div class="privacyText">
+          Purpose of collection: to provide customer support.<br /><br />
+          Source of collection: collected from you <br /><br />Disclosure for a
+          business purpose: <br /><br />Personal Information collected: first
+          name, last name, email, and any other information a customer willingly
+          shares to help us provide the requested support
+        </div>
+        <div class="privacyHeading">Sharing Personal Information</div>
+        <div class="privacyText">
+          We share your Personal Information with service providers to help us
+          provide our services and fulfill our contracts with you, as described
+          above.
+        </div>
+        <div class="privacyText">
+          For example: We share your Personal Information with Google Products
+          such as Google Forms, Google Sheets, and Google Scripts, to manage and
+          execute “orders”. Google Forms receives Order Information and relays
+          it to Google Sheets. Google Sheets then relays the information to
+          Google Scripts.
+        </div>
+        <div class="privacyText">
+          We may share your Personal Information to comply with applicable laws
+          and regulations, to respond to a subpoena, search warrant or other
+          lawful request for information we receive, or to otherwise protect our
+          rights.
+        </div>
+        <div class="privacyHeading">Using Personal Information</div>
+        <div class="privacyText">
+          We use your personal Information to provide our services to you, which
+          includes: offering products and services, fulfillment of your order,
+          and keeping you up to date on new products, services, and
+          opportunities (an optional service users can opt-in to during the
+          checkout process).
+        </div>
+        <div class="privacyHeading">LAWFUL BASIS</div>
+        <div class="privacyText">
+          Pursuant to the General Data Protection Regulation (“GDPR”), if you
+          are a resident of the European Economic Area (“EEA”), we process your
+          personal information under the following lawful bases: <br />
+          <br />
+          Your consent; The performance of the contract between you and the
+          Site; Compliance with our legal obligations; To protect your vital
+          interests; To perform a task carried out in the public interest; For
+          our legitimate interests, which do not override your fundamental
+          rights and freedoms.
+        </div>
+        <div class="privacyHeading">RETENTION</div>
+        <div class="privacyText">
+          When you place an order through the Site, we will retain your Personal
+          Information for our records unless and until you ask us to erase this
+          information. For more information on your right of erasure, please see
+          the 'Your rights' section below.
+        </div>
+        <div class="privacyHeading">AUTOMATED DECISION-MAKING</div>
+        <div class="privacyText">
+          If you are a resident of the EEA, you have the right to object to
+          processing based solely on automated decision-making (which includes
+          profiling), when that decision-making has a legal effect on you or
+          otherwise significantly affects you. <br />
+          <br />
+          We do not engage in fully automated decision-making that has a legal
+          or otherwise significant effect using customer data. <br />
+          <br />
+          Services that include elements of automated decision-making include:
+          Temporary blacklist of email addresses flagged for fraudulent behavior
+          such as filling out a honeypot entry in any one of our forms.
+        </div>
+        <div class="privacyHeading">Your rights</div>
+        <div class="privacyText">
+          GDPR <br />
+          <br />If you are a resident of the EEA, you have the right to access
+          the Personal Information we hold about you, to port it to a new
+          service, and to ask that your Personal Information be corrected,
+          updated, or erased. <br /><br />
+          If you would like to exercise these rights, please contact us through
+          the contact information above.
+          <br /><br />
+          CCPA <br /><br />
+          If you are a resident of California, you have the right to access the
+          Personal Information we hold about you (also known as the 'Right to
+          Know'), to port it to a new service, and to ask that your Personal
+          Information be corrected, updated, or erased. <br /><br />
+          If you would like to exercise these rights, please contact us through
+          the contact information above. <br /><br />
+          If you would like to designate an authorized agent to submit these
+          requests on your behalf, please contact us at the address above.
+        </div>
+        <div class="privacyHeading">Cookies</div>
+        <div class="privacyText">
+          A cookie is a small amount of information that's downloaded to your
+          computer or device when you visit our Site. We use a number of
+          different cookies, including functional and performance cookies.
+          Cookies make your browsing experience better by allowing the website
+          to remember your actions and preferences (such as checkout information
+          or “backpack” selections). This means you don't have to re-enter this
+          information each time you return to the site or browse from one page
+          to another. We use the following cookies to optimize your experience
+          on our Site and to provide our services.
+        </div>
+        <div class="privacyHeading2">
+          COOKIES NECESSARY FOR THE FUNCTIONING OF THE STORE
+        </div>
+        <div class="privacyText">
+          <table>
+            <tr>
+              <td style="text-align: center" class="td1">Name</td>
+              <td style="text-align: center" class="td2">Function</td>
+              <td style="text-align: center" class="td3">Duration</td>
+            </tr>
+            <tr>
+              <td class="td1">cart</td>
+              <td class="td2">
+                Remembers items users added to their “backpack” or “cart” to
+                allow checkout.
+              </td>
+              <td class="td3">Until deleted</td>
+            </tr>
+            <tr>
+              <td class="td1">rememberMe</td>
+              <td class="td2">
+                Remembers user checkout / order information for a faster
+                checkout (opted into)
+              </td>
+              <td class="td3">Until deleted</td>
+            </tr>
+            <tr>
+              <td class="td1">ratings</td>
+              <td class="td2">
+                Remembers products / “guides” the user has rated on the device
+                to prevent spam
+              </td>
+              <td class="td3">Until deleted</td>
+            </tr>
+          </table>
+        </div>
+        <div class="privacyText">
+          The length of time that a cookie remains on your computer or mobile
+          device depends on whether it is a “persistent” or “session” cookie.
+          Session cookies last until you stop browsing and persistent cookies
+          last until they expire or are deleted. All of the cookies we use are
+          persistent and won't expire until they are deleted. You can control
+          and manage cookies in various ways. <br />
+          <br />
+          Please keep in mind that removing or blocking cookies can negatively
+          impact your user experience and parts of our website may no longer be
+          fully accessible. Most browsers automatically accept cookies, but you
+          can choose whether or not to accept cookies through your browser
+          controls, often found in your browser's “Tools” or “Preferences” menu.
+          For more information on how to modify your browser settings or how to
+          block, manage or filter cookies can be found in your browser's help
+          file or through such sites as: www.allaboutcookies.org.
+        </div>
+        <div class="privacyHeading">DO NOT TRACK</div>
+        <div class="privacyText">
+          Please note that because there is no consistent industry understanding
+          of how to respond to “Do Not Track” signals, we do not alter our data
+          collection and usage practices when we detect such a signal from your
+          browser.
+        </div>
+        <div class="privacyHeading">Changes</div>
+        <div class="privacyText">
+          We may update this Privacy Policy from time to time in order to
+          reflect, for example, changes to our practices or for other
+          operational, legal, or regulatory reasons.
+        </div>
+        <div class="privacyHeading">Complaints</div>
+        <div class="privacyText">
+          As noted above, if you would like to make a complaint, please contact
+          us by e-mail using the details provided under “Contact” above. If you
+          are not satisfied with our response to your complaint, you have the
+          right to lodge your complaint with the relevant data protection
+          authority. You can contact your local data protection authority, or
+          our supervisory authority. <br />
+          <br />Last updated: 8/12/2023
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
