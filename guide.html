@@ -322,8 +322,11 @@
         document.getElementById(
           "emailBrandBox"
         ).href = `mailto:?body=${encodeURIComponent(pageURL)}`;
-        // ("https://www.facebook.com/dialog/share?app_id=975691220307362&href=google.com&display=popup");
-      }
+        document.getElementById(
+          "facebookBrandBox"
+        ).href = `https://www.facebook.com/dialog/share?app_id=821318592860872&href=${encodeURIComponent(
+          pageURL
+        )}&display=popup`;
 
       function toggleShareLightbox(bool) {
         if (bool) {
