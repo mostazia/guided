@@ -13,14 +13,6 @@
     var r = document.querySelector(":root");
     var timer = null;
 
-    function scrollableCSS() {
-      const pageHeight = document.body.scrollHeight;
-      const windowHeight = window.innerHeight;
-      if (pageHeight < windowHeight) {
-        r.style.setProperty("--pageScroll", "0vw");
-      }
-    }
-
     function scrollFunction() {
       r.style.setProperty("--scrollbarColor", "#a8ead5");
       if (
@@ -41,7 +33,6 @@
   </script>
   <script id="cartScript" type="text/javascript">
     function displayCart(bool) {
-      scrollableCSS();
       if (bool) {
         document.getElementById("cartBackdrop").style.display = "flex";
         createCartElements();
@@ -151,20 +142,46 @@
       }
     }
   </script>
+  <script id="searchScript">
+    function toggleSearch(bool) {
+      const searchLightbox = document.getElementById("searchLightbox");
+      if (bool) {
+        searchLightbox.style.display = "flex";
+      } else {
+        searchLightbox.style.display = "none";
+      }
+    }
+
+    function handleSearch(query) {
+      window.location.href = `search?query=${encodeURIComponent(query)}`;
+    }
+  </script>
 </head>
 <body>
   <div id="cartBackdrop">
     <div id="cartLeaveContainer" onClick="displayCart(false)"></div>
     <div id="cartDisplayContainer"></div>
   </div>
+  <div id="searchLightbox">
+    <div id="searchInputContainer">
+      <input id="searchInput" placeholder="Search" />
+      <div id="searchInputSearchContainer">
+        <div
+          id="searchInputSearchButton"
+          onclick="handleSearch(document.getElementById('searchInput').value)"
+        ></div>
+      </div>
+    </div>
+    <div id="searchLightboxX" onclick="toggleSearch(false)"></div>
+  </div>
   <div id="navbar">
     <div id="navbarMenuContainer">
-      <div class="navbarMenuOption">Mission</div>
+      <div class="navbarMenuOption">About</div>
       <a class="navbarMenuOption" href="./guides">Guides</a>
       <div class="navbarMenuOption">Programs</div>
       <div class="navbarMenuOption">Private Tutoring</div>
     </div>
-    <a id="navbarLogoContainer" href="">
+    <a id="navbarLogoContainer" href="..">
       <div id="navbarMainLogo">GuidEd</div>
       <div id="navbarSubLogo">By Stacy</div>
     </a>
@@ -175,6 +192,7 @@
         target="_blank"
         >Donate</a
       >
+      <div id="navbarSearchIcon" onclick="toggleSearch(true)"></div>
       <div id="navbarBackpackIcon" onClick="displayCart(true)">
         <div id="navbarBackpackCount">1</div>
       </div>

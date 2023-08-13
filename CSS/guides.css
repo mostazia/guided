@@ -13,7 +13,6 @@
 #guidesMainContainer {
   width: 80vw;
   min-height: 90vh;
-  /* border: 2px solid slateblue; */
   padding-top: 6vh;
   padding-bottom: 6vh;
   box-sizing: border-box;
@@ -85,7 +84,7 @@
 
 #sortDropdownMenu {
   position: absolute;
-  right: calc(12vw + 4.5vh * 4 - var(--scrollable));
+  left: calc(100vw - (12vw + 2 * (4.5vh * 4)));
   top: calc(23vh - (7vh - 4.5vh) / 2);
   height: calc(4 * 4.5vh);
   width: calc(4.5vh * 4);
@@ -182,7 +181,7 @@
 
 #filterDropdownMenu {
   position: absolute;
-  right: calc(10vw - var(--scrollable));
+  left: calc(90vw - 4 * 4.5vh);
   top: calc(23vh - (7vh - 4.5vh) / 2);
   height: calc(2 * 4.5vh);
   width: calc(4.5vh * 4);
