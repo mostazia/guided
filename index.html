@@ -50,6 +50,14 @@
           if (cart.length !== 0) {
             updateCartCount();
           }
+
+          document
+            .getElementById("searchInput")
+            .addEventListener("keydown", function (event) {
+              if (event.key === "Enter") {
+                handleSearch(document.getElementById("searchInput").value);
+              }
+            });
         })
       );
     </script>

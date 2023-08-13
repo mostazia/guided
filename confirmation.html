@@ -156,6 +156,38 @@
       window.location.href = `search?query=${encodeURIComponent(query)}`;
     }
   </script>
+  <script id="confirmationGenerationScript">
+    document.addEventListener(
+      "DOMContentLoaded",
+      (loadContent = () => {
+        document
+          .getElementById("searchInput")
+          .addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+              handleSearch(document.getElementById("searchInput").value);
+            }
+          });
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const conCode = urlParams.get("cc");
+        document.getElementById(
+          "confirmationMessage"
+        ).innerHTML = `Your confirmation code is: ${conCode}
+      <br /><br />
+      We have received your order and will process it as soon as possible. We
+      typically process orders instantly, but we might experience delays due to
+      a high volume of orders. So, we ask that you please wait at least day
+      before reaching out about a missing order. It is possible that your order
+      may be flagged as spam, so keep an eye on that folder as well. If you
+      still don't receive your order, please reach out to us at
+      <a href="mailto:guidedbystacy@gmail.com" class="conEmailLink"> guidedbystacy@gmail.com. </a>
+      <br /><br />
+      You will be able to download, print, and use the files you requested as
+      soon as we email your order! Thank you for making us part of your learning
+      journey. It is truly an honor :)`;
+      })
+    );
+  </script>
 </head>
 <body>
   <div id="cartBackdrop">
