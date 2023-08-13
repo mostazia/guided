@@ -410,6 +410,8 @@ a {
   height: calc(0.5 * var(--navbarHeight));
   border: 0.325vh solid var(--freshGuac);
   border-right: 0vh solid transparent;
+  border-top-left-radius: calc(0.25 * var(--navbarHeight));
+  border-bottom-left-radius: calc(0.25 * var(--navbarHeight));
   background: transparent;
   padding-left: calc(70vw * 0.025);
   padding-right: calc(70vw * 0.025);
@@ -432,6 +434,8 @@ a {
   justify-content: center;
   border: 0.325vh solid var(--freshGuac);
   border-left: 0vh solid transparent;
+  border-top-right-radius: calc(0.25 * var(--navbarHeight));
+  border-bottom-right-radius: calc(0.25 * var(--navbarHeight));
   box-sizing: border-box;
 }
 
