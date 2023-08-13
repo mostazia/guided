@@ -1,0 +1,103 @@
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --freshGuac: #aebe89;
+  --aloeCream: #dae3bb;
+  --whiteLace: #fff7ec;
+  --brookGreen: #a8ead5;
+  --colaBrown: #2b2119;
+  --scrollable: 0.5vw;
+}
+
+#searchMainContainer {
+  width: 80vw;
+  min-height: 90vh;
+  padding-top: 6vh;
+  padding-bottom: 6vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#searchHeadingContainer {
+  width: 100%;
+  height: 7vh;
+  max-height: 7vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#searchHeading {
+  font-size: 6vh;
+  font-family: "Barlow Condensed", sans-serif;
+  color: var(--colaBrown);
+  font-weight: 500;
+  text-align: left;
+}
+
+#searchTotal {
+  margin-left: auto;
+  margin-right: 0;
+  font-family: "Urbanist", sans-serif;
+  font-size: 3vh;
+  font-weight: 300;
+  color: var(--freshGuac);
+  user-select: none;
+}
+
+#searchPreviewContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 7.5vh;
+}
+
+.resultPreviewBox {
+  width: 100%;
+  aspect-ratio: 7;
+  border-radius: calc(80vw * 0.025);
+  box-sizing: border-box;
+  border: 0.325vh solid var(--freshGuac);
+  background: transparent;
+  margin-bottom: 5vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.resultPreviewImage {
+  width: 35%;
+  height: 100%;
+  background-image: url(../Images/10000001_1.jpeg);
+  background-size: cover;
+  background-position: center;
+}
+
+.resultPreviewTextBox {
+  margin-left: 3vw;
+  height: 80%;
+  max-width: calc(80vw - 65vh - 0.35 * (80vw - 65vw) - 3vw);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.resultPreviewName {
+  color: var(--freshGuac);
+  font-size: calc(80vw / 7 * 0.2);
+  font-family: "Urbanist", sans-serif;
+  font-weight: 500;
+}
+
+.resultPreviewSub {
+  color: var(--colaBrown);
+  font-size: calc(80vw / 7 * 0.125);
+  font-family: "Urbanist", sans-serif;
+  font-weight: 400;
+}
