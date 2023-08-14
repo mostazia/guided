@@ -1,5 +1,6 @@
 var _apbio = {
   name: "AP Biology",
+  code: "apbio",
   link: "./guides?f=apbio",
   items: [
     "_10000001",

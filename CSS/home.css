@@ -288,3 +288,88 @@
   line-height: 1.5;
   text-align: center;
 }
+
+/* CSS SCRIPT */
+
+@media screen and (min-height: 100vw) {
+  .stripHeading {
+    font-size: 2.75vh;
+    text-align: center;
+  }
+
+  #homeStripMain {
+    height: 50vh;
+    width: 100vw;
+    border-bottom: 0.325 solid var(--aloeCream);
+  }
+
+  #mainStripLLeaves {
+    width: 48vw;
+    height: unset;
+    position: relative;
+    margin-top: auto;
+    margin-bottom: 0;
+  }
+
+  #mainStripRLeaves {
+    width: 48vw;
+    height: unset;
+    position: relative;
+    margin-top: 0;
+    margin-bottom: auto;
+  }
+
+  #mainStripPreviewContainer {
+    max-width: 90vw;
+    width: 90vw;
+    height: 50vh;
+    z-index: 5;
+  }
+
+  #mainStripHeading {
+    font-size: 5vh;
+    margin-top: 4vh;
+  }
+
+  #mainStripDescription {
+    font-size: 2.25vh;
+    font-weight: 400;
+    margin-top: 2vh;
+    line-height: 1.5;
+  }
+
+  #mainStripDocPreview {
+    width: 90%;
+    aspect-ratio: unset;
+    margin-top: 5vh;
+    border-top-left-radius: 2vh;
+    border-top-right-radius: 2vh;
+  }
+
+  #homeStripAbout {
+    height: 50vh;
+    width: 100vw;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 0.325vh solid var(--aloeCream);
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+  }
+
+  .homeStripAboutContainer {
+    width: 80%;
+    height: 22vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  #homeStripGuides {
+    display: flex;
+  }
+  #homeStripTestimonials {
+    display: none;
+  }
+}

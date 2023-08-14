@@ -57,7 +57,6 @@ a {
 #navbar {
   height: var(--navbarHeight);
   width: 100vw;
-  /* border: 2px solid salmon; */
   background-color: var(--whiteLace);
   box-sizing: border-box;
   border-bottom: 0.25vh solid var(--aloeCream);
@@ -461,4 +460,189 @@ a {
 
 #searchLightboxX:hover {
   background-image: url("../Images/BackpackXIconHover.png");
+}
+
+/* MOBILE CSS */
+
+#navbarMobileMenuContainer {
+  width: 25vw;
+  height: 75%;
+  box-sizing: border-box;
+  padding-left: 3vw;
+  align-items: center;
+  justify-content: left;
+  display: none;
+}
+
+#navbarMobileMenuButton {
+  height: 100%;
+  aspect-ratio: 1;
+  background: pink;
+  display: none;
+}
+
+#navbarMobileBackpackContainer {
+  width: 25vw;
+  height: 75%;
+  box-sizing: border-box;
+  padding-right: 3vw;
+  align-items: center;
+  justify-content: right;
+  display: none;
+}
+
+#navbarMobileBackpack {
+  height: 100%;
+  aspect-ratio: 1;
+  background-size: contain;
+  background-image: url("../Images/NavbarBackpackIcon.png");
+  display: none;
+}
+
+#navbarMobileBackpackCount {
+  height: calc(100vw / 7 * 0.75 * 0.35);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: var(--aloeCream);
+  position: relative;
+  z-index: 40;
+  left: calc(100vw / 7 * 0.75 - (100vw / 7 * 0.75 * 0.35) / 2);
+  color: var(--colaBrown);
+  font-size: calc(100vw / 7 * 0.75 * 0.35 * 0.75);
+  font-weight: 400;
+  font-family: "Barlow Condensed", sans-serif;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (min-height: 100vw) {
+  body {
+    overflow-x: hidden;
+  }
+
+  #pagebody {
+    margin-top: calc(100vw / 7);
+    width: 100vw;
+  }
+
+  #navbar {
+    height: unset;
+    width: 100vw;
+    aspect-ratio: 7;
+  }
+
+  #navbarLogoContainer {
+    width: 50vw;
+  }
+
+  #navbarMainLogo {
+    font-size: calc(0.5 * 100vw / 7);
+  }
+
+  #navbarSubLogo {
+    font-size: calc(0.2 * 100vw / 7);
+  }
+
+  #navbarMenuContainer {
+    display: none;
+  }
+
+  #navbarMobileMenuContainer {
+    display: flex;
+  }
+
+  #navbarMobileMenuButton {
+    display: block;
+  }
+
+  #navbarOptionsContainer {
+    display: none;
+  }
+
+  #navbarMobileBackpackContainer {
+    display: flex;
+  }
+
+  #navbarMobileBackpack {
+    display: block;
+  }
+
+  #cartLeaveContainer {
+    width: 0;
+    height: 0;
+    display: none;
+  }
+
+  #cartDisplayContainer {
+    width: 100vw;
+    height: 80vh;
+    padding-top: 1.5vh;
+    padding-bottom: 1.5vh;
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+
+  #cartDisplayHeading {
+    height: 6vh;
+    width: 100%;
+    margin-bottom: 1.5vh;
+  }
+
+  #cartDisplayTitle {
+    font-size: 3vh;
+  }
+
+  #cartDisplayCount {
+    font-size: calc(2.5vh * 0.75);
+    margin-top: calc(1.5vh / 2 * 0.75);
+    margin-left: 5vw;
+  }
+
+  #cartDisplayX {
+    height: calc(3vh * 0.75);
+  }
+
+  .cartItemContainer {
+    border: 0.325vh solid var(--freshGuac);
+    width: 100%;
+    aspect-ratio: 3.5;
+    border-radius: calc(90vw * 0.05);
+    margin-top: 1.5vh;
+    margin-bottom: 1.5vh;
+  }
+
+  .cartItemName {
+    font-size: calc(90vw / 4.5 * 0.2);
+  }
+
+  .cartItemSubject {
+    font-size: calc(90vw / 4.5 * 0.15);
+  }
+
+  .cartItemRemove {
+    font-size: calc(90vw / 4.5 * 0.15);
+  }
+
+  #cartCheckoutContainer {
+    width: 100vw;
+    height: 20vh;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    aspect-ratio: unset;
+    left: 0;
+    bottom: 0;
+    box-sizing: border-box;
+  }
+
+  #cartCheckoutText {
+    font-size: calc(35vh * 0.05);
+    text-align: center;
+  }
+
+  #cartCheckoutButton {
+    width: 70%;
+    aspect-ratio: 7;
+    font-size: calc(100vw * 0.7 / 7 * 0.5);
+  }
 }
