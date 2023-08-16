@@ -36,7 +36,11 @@
 
       function loadPreview(orientation, size) {
         const urlParams = new URLSearchParams(window.location.search);
-        const guideCode = urlParams.get("g");
+        const guideCode = urlParams.get("g") || "";
+
+        if (guideCode === "") {
+          window.location.href = "./404";
+        }
 
         const guideName = window["_" + guideCode].preview;
         const guideSub = window["_" + guideCode].subject;
@@ -313,10 +317,10 @@
     </div>
     <div id="navbar">
       <div id="navbarMenuContainer">
-        <div class="navbarMenuOption">About</div>
+        <a class="navbarMenuOption" href="./about">About</a>
         <a class="navbarMenuOption" href="./guides">Guides</a>
-        <div class="navbarMenuOption">Programs</div>
-        <div class="navbarMenuOption">Private Tutoring</div>
+        <a class="navbarMenuOption" href="./programs">Programs</a>
+        <a class="navbarMenuOption" href="./tutoring">Private Tutoring</a>
       </div>
       <a id="navbarLogoContainer" href="..">
         <div id="navbarMainLogo">GuidEd</div>

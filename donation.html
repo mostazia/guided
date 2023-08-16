@@ -1,127 +1,126 @@
 <!DOCTYPE html>
 <html>
-  <html>
-    <head>
-      <meta charset="UTF-8" content="initial-scale=1" />
-      <title>GuidEd by Stacy</title>
-      <link rel="stylesheet" href="CSS/donation.css" />
-      <link rel="stylesheet" href="CSS/template.css" />
-      <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-      <link rel="icon" href="favicon.ico" type="image/x-icon" />
-      <script type="text/javascript" src="JS/products.js"></script>
-      <script id="onLoadScript">
-        document.addEventListener(
-          "DOMContentLoaded",
-          (loadContent = () => {
-            let cart = JSON.parse(getCookie("cart") || "[]");
-            if (cart.length !== 0) {
-              updateCartCount();
-            }
-
-            document
-              .getElementById("searchInput")
-              .addEventListener("keydown", function (event) {
-                if (event.key === "Enter") {
-                  handleSearch(document.getElementById("searchInput").value);
-                }
-              });
-          })
-        );
-      </script>
-      <script id="navbarHeightScript">
-        window.onscroll = function () {
-          scrollFunction();
-        };
-        var r = document.querySelector(":root");
-        var timer = null;
-
-        function scrollFunction() {
-          r.style.setProperty("--scrollbarColor", "#a8ead5");
-          if (
-            document.body.scrollTop > 1 ||
-            document.documentElement.scrollTop > 1
-          ) {
-            r.style.setProperty("--navbarHeight", "10vh");
-          } else {
-            r.style.setProperty("--navbarHeight", "12vh");
-          }
-          if (timer !== null) {
-            clearTimeout(timer);
-          }
-          timer = setTimeout(function () {
-            r.style.setProperty("--scrollbarColor", "#dae3bb");
-          }, 100);
-        }
-      </script>
-      <script id="cartScript" type="text/javascript">
-        function displayCart(bool) {
-          if (bool) {
-            document.getElementById("cartBackdrop").style.display = "flex";
-            createCartElements();
-          } else {
-            document.getElementById("cartBackdrop").style.display = "none";
-          }
-        }
-
-        function addToCart(productString) {
+  <head>
+    <meta charset="UTF-8" content="initial-scale=1" />
+    <title>GuidEd by Stacy</title>
+    <link rel="stylesheet" href="CSS/donation.css" />
+    <link rel="stylesheet" href="CSS/template.css" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <script type="text/javascript" src="JS/products.js"></script>
+    <script id="onLoadScript">
+      document.addEventListener(
+        "DOMContentLoaded",
+        (loadContent = () => {
           let cart = JSON.parse(getCookie("cart") || "[]");
-          if (!cart.includes(productString)) {
-            cart.push(productString);
-            setCookie("cart", JSON.stringify(cart));
+          if (cart.length !== 0) {
             updateCartCount();
-            if (cart.length === 1) {
-              displayCart(true);
-            }
+          }
+
+          document
+            .getElementById("searchInput")
+            .addEventListener("keydown", function (event) {
+              if (event.key === "Enter") {
+                handleSearch(document.getElementById("searchInput").value);
+              }
+            });
+        })
+      );
+    </script>
+    <script id="navbarHeightScript">
+      window.onscroll = function () {
+        scrollFunction();
+      };
+      var r = document.querySelector(":root");
+      var timer = null;
+
+      function scrollFunction() {
+        r.style.setProperty("--scrollbarColor", "#a8ead5");
+        if (
+          document.body.scrollTop > 1 ||
+          document.documentElement.scrollTop > 1
+        ) {
+          r.style.setProperty("--navbarHeight", "10vh");
+        } else {
+          r.style.setProperty("--navbarHeight", "12vh");
+        }
+        if (timer !== null) {
+          clearTimeout(timer);
+        }
+        timer = setTimeout(function () {
+          r.style.setProperty("--scrollbarColor", "#dae3bb");
+        }, 100);
+      }
+    </script>
+    <script id="cartScript" type="text/javascript">
+      function displayCart(bool) {
+        if (bool) {
+          document.getElementById("cartBackdrop").style.display = "flex";
+          createCartElements();
+        } else {
+          document.getElementById("cartBackdrop").style.display = "none";
+        }
+      }
+
+      function addToCart(productString) {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        if (!cart.includes(productString)) {
+          cart.push(productString);
+          setCookie("cart", JSON.stringify(cart));
+          updateCartCount();
+          if (cart.length === 1) {
+            displayCart(true);
           }
         }
-        function getCookie(name) {
-          const value = `; ${document.cookie}`;
-          const parts = value.split(`; ${name}=`);
-          if (parts.length === 2) return parts.pop().split(";").shift();
-        }
+      }
+      function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(";").shift();
+      }
 
-        function setCookie(name, value) {
-          document.cookie = `${name}=${value}; path=/`;
-        }
+      function setCookie(name, value) {
+        document.cookie = `${name}=${value}; path=/`;
+      }
 
-        function createCartElements() {
-          let cart = JSON.parse(getCookie("cart") || "[]");
-          let cartContainer = document.getElementById("cartDisplayContainer");
+      function createCartElements() {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        let cartContainer = document.getElementById("cartDisplayContainer");
 
-          cartContainer.innerHTML =
-            "<div id=" +
-            "cartDisplayHeading" +
-            ">" +
-            "<div id=" +
-            "cartDisplayTitle" +
-            ">Backpack</div>" +
-            "<div id=" +
-            "cartDisplayCount" +
-            `>${cart.length} Items</div>` +
-            "<div id=" +
-            "cartDisplayX" +
-            " " +
-            "onClick=" +
-            "displayCart(false)" +
-            "></div> </div>" +
-            "<div id=" +
-            "cartCheckoutContainer" +
-            "> <div id=" +
-            "cartCheckoutText" +
-            "></div>" +
-            `<a href="checkout?from=donation" id=` +
-            "cartCheckoutButton" +
-            ">Check Out</a> </div>";
+        cartContainer.innerHTML =
+          "<div id=" +
+          "cartDisplayHeading" +
+          ">" +
+          "<div id=" +
+          "cartDisplayTitle" +
+          ">Backpack</div>" +
+          "<div id=" +
+          "cartDisplayCount" +
+          `>${cart.length} Items</div>` +
+          "<div id=" +
+          "cartDisplayX" +
+          " " +
+          "onClick=" +
+          "displayCart(false)" +
+          "></div> </div>" +
+          "<div id=" +
+          "cartCheckoutContainer" +
+          "> <div id=" +
+          "cartCheckoutText" +
+          "></div>" +
+          `<a href="checkout?from=donation" id=` +
+          "cartCheckoutButton" +
+          ">Check Out</a> </div>";
 
-          showCheckoutButton();
-          cart.forEach((product) => {
-            var name = window[product].name;
-            var subject = window[product].subject;
-            var im1 = window[product].im1;
-            if (name.length >= 29) {
-              name = name.substring(0, 25) + " ...";
-            }
-            cartContainer.innerHTML += `
+        showCheckoutButton();
+        cart.forEach((product) => {
+          var name = window[product].name;
+          var subject = window[product].subject;
+          var im1 = window[product].im1;
+          if (name.length >= 29) {
+            name = name.substring(0, 25) + " ...";
+          }
+          cartContainer.innerHTML += `
               <div class="cartItemContainer">
               <div class="cartItemImage" style="background-image: url('${im1}') "></div>
               <div class="cartItemInfoBox">
@@ -130,122 +129,117 @@
                 <div class="cartItemRemove" onClick="removeFromCart('${product}')"> remove </div>
               </div>
             </div>`;
-          });
-        }
+        });
+      }
 
-        function removeFromCart(productString) {
-          let cart = JSON.parse(getCookie("cart") || "[]");
-          cart = cart.filter((product) => product !== productString);
-          setCookie("cart", JSON.stringify(cart));
-          createCartElements();
-          updateCartCount();
-        }
+      function removeFromCart(productString) {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        cart = cart.filter((product) => product !== productString);
+        setCookie("cart", JSON.stringify(cart));
+        createCartElements();
+        updateCartCount();
+      }
 
-        function updateCartCount() {
-          let cart = JSON.parse(getCookie("cart") || "[]");
-          if (cart.length !== 0) {
-            document.getElementById("navbarBackpackCount").style.display =
-              "flex";
-            document.getElementById("navbarBackpackCount").innerHTML =
-              cart.length;
-          } else {
-            document.getElementById("navbarBackpackCount").style.display =
-              "none";
-          }
+      function updateCartCount() {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        if (cart.length !== 0) {
+          document.getElementById("navbarBackpackCount").style.display = "flex";
+          document.getElementById("navbarBackpackCount").innerHTML =
+            cart.length;
+        } else {
+          document.getElementById("navbarBackpackCount").style.display = "none";
         }
+      }
 
-        function showCheckoutButton() {
-          let cart = JSON.parse(getCookie("cart") || "[]");
-          if (cart.length !== 0) {
-            document.getElementById("cartCheckoutButton").style.display =
-              "flex";
-            document.getElementById("cartCheckoutText").innerHTML =
-              "Found everything you need? <br />Let's prepare your digital downloads!";
-          } else {
-            document.getElementById("cartCheckoutButton").style.display =
-              "none";
-            document.getElementById("cartCheckoutText").innerHTML =
-              "Please add items to your backpack to check out :)";
-          }
+      function showCheckoutButton() {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        if (cart.length !== 0) {
+          document.getElementById("cartCheckoutButton").style.display = "flex";
+          document.getElementById("cartCheckoutText").innerHTML =
+            "Found everything you need? <br />Let's prepare your digital downloads!";
+        } else {
+          document.getElementById("cartCheckoutButton").style.display = "none";
+          document.getElementById("cartCheckoutText").innerHTML =
+            "Please add items to your backpack to check out :)";
         }
-      </script>
-      <script id="searchScript">
-        function toggleSearch(bool) {
-          const searchLightbox = document.getElementById("searchLightbox");
-          if (bool) {
-            searchLightbox.style.display = "flex";
-          } else {
-            searchLightbox.style.display = "none";
-          }
+      }
+    </script>
+    <script id="searchScript">
+      function toggleSearch(bool) {
+        const searchLightbox = document.getElementById("searchLightbox");
+        if (bool) {
+          searchLightbox.style.display = "flex";
+        } else {
+          searchLightbox.style.display = "none";
         }
+      }
 
-        function handleSearch(query) {
-          window.location.href = `search?query=${encodeURIComponent(query)}`;
-        }
-      </script>
-    </head>
-    <body>
-      <div id="cartBackdrop">
-        <div id="cartLeaveContainer" onClick="displayCart(false)"></div>
-        <div id="cartDisplayContainer"></div>
-      </div>
-      <div id="searchLightbox">
-        <div id="searchInputContainer">
-          <input id="searchInput" placeholder="Search" />
-          <div id="searchInputSearchContainer">
-            <div
-              id="searchInputSearchButton"
-              onclick="handleSearch(document.getElementById('searchInput').value)"
-            ></div>
-          </div>
-        </div>
-        <div id="searchLightboxX" onclick="toggleSearch(false)"></div>
-      </div>
-      <div id="navbar">
-        <div id="navbarMenuContainer">
-          <div class="navbarMenuOption">About</div>
-          <a class="navbarMenuOption" href="./guides">Guides</a>
-          <div class="navbarMenuOption">Programs</div>
-          <div class="navbarMenuOption">Private Tutoring</div>
-        </div>
-        <a id="navbarLogoContainer" href="..">
-          <div id="navbarMainLogo">GuidEd</div>
-          <div id="navbarSubLogo">By Stacy</div>
-        </a>
-        <div id="navbarOptionsContainer">
-          <a
-            id="navbarDonateButton"
-            href="https://www.paypal.com/donate/?hosted_button_id=L75PL47XJCQCE"
-            target="_blank"
-            >Donate</a
-          >
-          <div id="navbarSearchIcon" onclick="toggleSearch(true)"></div>
-          <div id="navbarBackpackIcon" onClick="displayCart(true)">
-            <div id="navbarBackpackCount">1</div>
-          </div>
+      function handleSearch(query) {
+        window.location.href = `search?query=${encodeURIComponent(query)}`;
+      }
+    </script>
+  </head>
+  <body>
+    <div id="cartBackdrop">
+      <div id="cartLeaveContainer" onClick="displayCart(false)"></div>
+      <div id="cartDisplayContainer"></div>
+    </div>
+    <div id="searchLightbox">
+      <div id="searchInputContainer">
+        <input id="searchInput" placeholder="Search" />
+        <div id="searchInputSearchContainer">
+          <div
+            id="searchInputSearchButton"
+            onclick="handleSearch(document.getElementById('searchInput').value)"
+          ></div>
         </div>
       </div>
-      <div id="confirmationBody">
-        <div id="thankYou">Thank you for donating!</div>
-        <div id="confirmationMessage">
-          Your contribution helps me offer my resources at zero cost, continue
-          to create resources, and pursue my educational dreams! If you have any
-          special requests for your donation (what to spend the money on, etc.)
-          that you did not outline in the PayPal instructions box, please reach
-          out to me at
-          <span
-            ><a class="conEmailLink" href="mailto:guidedbystacy@gmail.com"
-              >guidedbystacy@gmail.com</a
-            ></span
-          >. <br />
-          <br />
-          Once again, thank you for donating. I hope that I am able to reach out
-          soon and show you the fruits of your donation. <br />
-          <br />
-          Cheers, <br />
-          Stacy
+      <div id="searchLightboxX" onclick="toggleSearch(false)"></div>
+    </div>
+    <div id="navbar">
+      <div id="navbarMenuContainer">
+        <a class="navbarMenuOption" href="./about">About</a>
+        <a class="navbarMenuOption" href="./guides">Guides</a>
+        <a class="navbarMenuOption" href="./programs">Programs</a>
+        <a class="navbarMenuOption" href="./tutoring">Private Tutoring</a>
+      </div>
+      <a id="navbarLogoContainer" href="..">
+        <div id="navbarMainLogo">GuidEd</div>
+        <div id="navbarSubLogo">By Stacy</div>
+      </a>
+      <div id="navbarOptionsContainer">
+        <a
+          id="navbarDonateButton"
+          href="https://www.paypal.com/donate/?hosted_button_id=L75PL47XJCQCE"
+          target="_blank"
+          >Donate</a
+        >
+        <div id="navbarSearchIcon" onclick="toggleSearch(true)"></div>
+        <div id="navbarBackpackIcon" onClick="displayCart(true)">
+          <div id="navbarBackpackCount">1</div>
         </div>
       </div>
-    </body>
-  </html>
+    </div>
+    <div id="confirmationBody">
+      <div id="thankYou">Thank you for donating!</div>
+      <div id="confirmationMessage">
+        Your contribution helps me offer my resources at zero cost, continue to
+        create resources, and pursue my educational dreams! If you have any
+        special requests for your donation (what to spend the money on, etc.)
+        that you did not outline in the PayPal instructions box, please reach
+        out to me at
+        <span
+          ><a class="conEmailLink" href="mailto:guidedbystacy@gmail.com"
+            >guidedbystacy@gmail.com</a
+          ></span
+        >. <br />
+        <br />
+        Once again, thank you for donating. I hope that I am able to reach out
+        soon and show you the fruits of your donation. <br />
+        <br />
+        Cheers, <br />
+        Stacy
+      </div>
+    </div>
+  </body>
 </html>

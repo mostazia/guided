@@ -172,7 +172,10 @@
             });
 
           const urlParams = new URLSearchParams(window.location.search);
-          const conCode = urlParams.get("cc");
+          const conCode = urlParams.get("cc") || "";
+          if ((conCode = "")) {
+            window.location.href = "./404";
+          }
           document.getElementById(
             "confirmationMessage"
           ).innerHTML = `Your confirmation code is: ${conCode}
@@ -211,10 +214,10 @@
     </div>
     <div id="navbar">
       <div id="navbarMenuContainer">
-        <div class="navbarMenuOption">About</div>
+        <a class="navbarMenuOption" href="./about">About</a>
         <a class="navbarMenuOption" href="./guides">Guides</a>
-        <div class="navbarMenuOption">Programs</div>
-        <div class="navbarMenuOption">Private Tutoring</div>
+        <a class="navbarMenuOption" href="./programs">Programs</a>
+        <a class="navbarMenuOption" href="./tutoring">Private Tutoring</a>
       </div>
       <a id="navbarLogoContainer" href="..">
         <div id="navbarMainLogo">GuidEd</div>
