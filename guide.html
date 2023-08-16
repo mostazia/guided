@@ -310,6 +310,9 @@
 
       function createShareLinks() {
         document.getElementById(
+          "embedBrandBox"
+        ).href = `./embed?g=${urlParams.get("g")}`;
+        document.getElementById(
           "whatsappBrandBox"
         ).href = `https://api.whatsapp.com/send/?text=${encodeURIComponent(
           pageURL

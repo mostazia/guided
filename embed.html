@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" content="initial-scale=1" />
+    <title>GuidEd by Stacy</title>
+    <link rel="stylesheet" href="CSS/template.css" />
+    <link rel="stylesheet" href="CSS/embed.css" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <script type="text/javascript" src="JS/products.js"></script>
+    <script type="text/javascript" src="JS/subjects.js"></script>
+    <script type="text/javascript" src="JS/embed.js"></script>
+    <script id="onLoadScript">
+      document.addEventListener(
+        "DOMContentLoaded",
+        (loadContent = () => {
+          let cart = JSON.parse(getCookie("cart") || "[]");
+          if (cart.length !== 0) {
+            updateCartCount();
+          }
+
+          document
+            .getElementById("searchInput")
+            .addEventListener("keydown", function (event) {
+              if (event.key === "Enter") {
+                handleSearch(document.getElementById("searchInput").value);
+              }
+            });
+
+          loadPreview("portrait", "Medium");
+        })
+      );
+
+      let curOrientation = "portrait";
+      let curSize = "Medium";
+
+      function loadPreview(orientation, size) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const guideCode = urlParams.get("g");
+
+        const guideName = window["_" + guideCode].preview;
+        const guideSub = window["_" + guideCode].subject;
+        const subCode = window["_" + guideCode].subCode;
+
+        const codeString = `
+        <style>
+          @font-face {
+  font-family: 'Urbanist';
+  src: url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+          }
+  </style>
+        <div style= "${
+          window[orientation + size].PreviewBox
+        }" data-name="${guideName}">
+            <a
+              style="${
+                "background-image: url('https://edu.stacyvazquez.com/Images/" +
+                guideCode +
+                "_1.jpeg');" +
+                window[orientation + size].PreviewImage
+              }"
+              href="https://edu.stacyvazquez.com/guide?g=${guideCode}"
+              onmouseover="this.style.backgroundImage = 'url(https://edu.stacyvazquez.com/Images/${guideCode}_2.png)'"
+              onmouseout="this.style.backgroundImage = 'url(https://edu.stacyvazquez.com/Images/${guideCode}_1.jpeg)'"
+            > </a>
+            <div style="${window[orientation + size].PreviewInfo}">
+              <a style="${
+                window[orientation + size].PreviewName
+              }" href="https://edu.stacyvazquez.com/guide?g=${guideCode}"
+                >${guideName}</a
+              >
+              <a style="${
+                window[orientation + size].PreviewSub
+              }"" href="https://edu.stacyvazquez.com/guides?f=${
+          window[subCode].code
+        }">${guideSub}</a>
+              <a style="${
+                window[orientation + size].PreviewAdd
+              }" href="https://edu.stacyvazquez.com/guide?g=${guideCode}">
+                View in Site
+              </a>
+            </div>
+          </div>`;
+
+        const copyString = `
+        &lt;style&gt;
+          @font-face {
+  font-family: 'Urbanist';
+  src: url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+          }
+  &lt;/style&gt;
+        &lt;div style= "${
+          window[orientation + size].PreviewBox
+        }" data-name="${guideName}"&gt;
+            &lt;a
+              style="${
+                "background-image: url('https://edu.stacyvazquez.com/Images/" +
+                guideCode +
+                "_1.jpeg');" +
+                window[orientation + size].PreviewImage
+              }"
+              href="https://edu.stacyvazquez.com/guide?g=${guideCode}"
+              onmouseover="this.style.backgroundImage = 'url(https://edu.stacyvazquez.com/Images/${guideCode}_2.png)'"
+              onmouseout="this.style.backgroundImage = 'url(https://edu.stacyvazquez.com/Images/${guideCode}_1.jpeg)'"
+            &gt; &lt;/a&gt;
+            &lt;div style="${window[orientation + size].PreviewInfo}"&gt;
+              &lt;a style="${
+                window[orientation + size].PreviewName
+              }" href="https://edu.stacyvazquez.com/guide?g=${guideCode}"
+                &gt;${guideName}&lt;/a
+              &gt;
+              &lt;a style="${
+                window[orientation + size].PreviewSub
+              }"" href="https://edu.stacyvazquez.com/guides?f=${
+          window[subCode].code
+        }"&gt;${guideSub}&lt;/a&gt;
+              &lt;a style="${
+                window[orientation + size].PreviewAdd
+              }" href="https://edu.stacyvazquez.com/guide?g=${guideCode}"&gt;
+                View in Site
+              &lt;/a&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;`;
+
+        document.getElementById("embedPreviewContainer").innerHTML = codeString;
+        document.getElementById("embedCodeBox").innerHTML = copyString;
+        return codeString;
+      }
+
+      function updatePreview(attribute, value) {
+        if (attribute === "orientation") {
+          curOrientation = value;
+        } else {
+          curSize = value;
+        }
+        loadPreview(curOrientation, curSize);
+      }
+
+      function copyCode() {
+        let codeString = loadPreview(curOrientation, curSize);
+        navigator.clipboard.writeText(codeString);
+        alert("Copied HTML code to clipboard!");
+      }
+    </script>
+    <script id="navbarHeightScript">
+      window.onscroll = function () {
+        scrollFunction();
+      };
+      var r = document.querySelector(":root");
+      var timer = null;
+
+      function scrollFunction() {
+        r.style.setProperty("--scrollbarColor", "#a8ead5");
+        if (
+          document.body.scrollTop > 1 ||
+          document.documentElement.scrollTop > 1
+        ) {
+          r.style.setProperty("--navbarHeight", "10vh");
+        } else {
+          r.style.setProperty("--navbarHeight", "12vh");
+        }
+        if (timer !== null) {
+          clearTimeout(timer);
+        }
+        timer = setTimeout(function () {
+          r.style.setProperty("--scrollbarColor", "#dae3bb");
+        }, 100);
+      }
+    </script>
+    <script id="cartScript" type="text/javascript">
+      function displayCart(bool) {
+        if (bool) {
+          document.getElementById("cartBackdrop").style.display = "flex";
+          createCartElements();
+        } else {
+          document.getElementById("cartBackdrop").style.display = "none";
+        }
+      }
+
+      function addToCart(productString) {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        if (!cart.includes(productString)) {
+          cart.push(productString);
+          setCookie("cart", JSON.stringify(cart));
+          updateCartCount();
+          if (cart.length === 1) {
+            displayCart(true);
+          }
+        }
+      }
+      function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(";").shift();
+      }
+
+      function setCookie(name, value) {
+        document.cookie = `${name}=${value}; path=/`;
+      }
+
+      function createCartElements() {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        let cartContainer = document.getElementById("cartDisplayContainer");
+
+        cartContainer.innerHTML =
+          "<div id=" +
+          "cartDisplayHeading" +
+          ">" +
+          "<div id=" +
+          "cartDisplayTitle" +
+          ">Backpack</div>" +
+          "<div id=" +
+          "cartDisplayCount" +
+          `>${cart.length} Items</div>` +
+          "<div id=" +
+          "cartDisplayX" +
+          " " +
+          "onClick=" +
+          "displayCart(false)" +
+          "></div> </div>" +
+          "<div id=" +
+          "cartCheckoutContainer" +
+          "> <div id=" +
+          "cartCheckoutText" +
+          "></div>" +
+          `<a href="checkout?from=donation" id=` +
+          "cartCheckoutButton" +
+          ">Check Out</a> </div>";
+
+        showCheckoutButton();
+        cart.forEach((product) => {
+          var name = window[product].name;
+          var subject = window[product].subject;
+          var im1 = window[product].im1;
+          if (name.length >= 29) {
+            name = name.substring(0, 25) + " ...";
+          }
+          cartContainer.innerHTML += `
+                <div class="cartItemContainer">
+                <div class="cartItemImage" style="background-image: url('${im1}') "></div>
+                <div class="cartItemInfoBox">
+                  <div class="cartItemName"> ${name} </div>
+                  <div class="cartItemSubject"> ${subject} </div>
+                  <div class="cartItemRemove" onClick="removeFromCart('${product}')"> remove </div>
+                </div>
+              </div>`;
+        });
+      }
+
+      function removeFromCart(productString) {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        cart = cart.filter((product) => product !== productString);
+        setCookie("cart", JSON.stringify(cart));
+        createCartElements();
+        updateCartCount();
+      }
+
+      function updateCartCount() {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        if (cart.length !== 0) {
+          document.getElementById("navbarBackpackCount").style.display = "flex";
+          document.getElementById("navbarBackpackCount").innerHTML =
+            cart.length;
+        } else {
+          document.getElementById("navbarBackpackCount").style.display = "none";
+        }
+      }
+
+      function showCheckoutButton() {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        if (cart.length !== 0) {
+          document.getElementById("cartCheckoutButton").style.display = "flex";
+          document.getElementById("cartCheckoutText").innerHTML =
+            "Found everything you need? <br />Let's prepare your digital downloads!";
+        } else {
+          document.getElementById("cartCheckoutButton").style.display = "none";
+          document.getElementById("cartCheckoutText").innerHTML =
+            "Please add items to your backpack to check out :)";
+        }
+      }
+    </script>
+    <script id="searchScript">
+      function toggleSearch(bool) {
+        const searchLightbox = document.getElementById("searchLightbox");
+        if (bool) {
+          searchLightbox.style.display = "flex";
+        } else {
+          searchLightbox.style.display = "none";
+        }
+      }
+
+      function handleSearch(query) {
+        window.location.href = `search?query=${encodeURIComponent(query)}`;
+      }
+    </script>
+  </head>
+  <body>
+    <div id="cartBackdrop">
+      <div id="cartLeaveContainer" onClick="displayCart(false)"></div>
+      <div id="cartDisplayContainer"></div>
+    </div>
+    <div id="searchLightbox">
+      <div id="searchInputContainer">
+        <input id="searchInput" placeholder="Search" />
+        <div id="searchInputSearchContainer">
+          <div
+            id="searchInputSearchButton"
+            onclick="handleSearch(document.getElementById('searchInput').value)"
+          ></div>
+        </div>
+      </div>
+      <div id="searchLightboxX" onclick="toggleSearch(false)"></div>
+    </div>
+    <div id="navbar">
+      <div id="navbarMenuContainer">
+        <div class="navbarMenuOption">About</div>
+        <a class="navbarMenuOption" href="./guides">Guides</a>
+        <div class="navbarMenuOption">Programs</div>
+        <div class="navbarMenuOption">Private Tutoring</div>
+      </div>
+      <a id="navbarLogoContainer" href="..">
+        <div id="navbarMainLogo">GuidEd</div>
+        <div id="navbarSubLogo">By Stacy</div>
+      </a>
+      <div id="navbarOptionsContainer">
+        <a
+          id="navbarDonateButton"
+          href="https://www.paypal.com/donate/?hosted_button_id=L75PL47XJCQCE"
+          target="_blank"
+          >Donate</a
+        >
+        <div id="navbarSearchIcon" onclick="toggleSearch(true)"></div>
+        <div id="navbarBackpackIcon" onClick="displayCart(true)">
+          <div id="navbarBackpackCount">1</div>
+        </div>
+      </div>
+    </div>
+    <div id="pagebody">
+      <div id="embedBody">
+        <div id="embedPreviewContainer"></div>
+        <div id="embedCodeContainer">
+          <div id="embedOptionsMenu">
+            <div id="embedViewMenu">
+              <div class="embedMenuHeading">View:</div>
+              <div
+                class="embedMenuOption"
+                onclick="updatePreview('orientation', 'portrait')"
+              >
+                Portrait
+              </div>
+              <div
+                class="embedMenuOption"
+                onclick="updatePreview('orientation', 'landscape')"
+              >
+                Landscape
+              </div>
+            </div>
+            <div id="embedSizeMenu">
+              <div class="embedMenuHeading">Size:</div>
+              <div
+                class="embedMenuOption"
+                onclick="updatePreview('size', 'Small')"
+              >
+                Small
+              </div>
+              <div
+                class="embedMenuOption"
+                onclick="updatePreview('size', 'Medium')"
+              >
+                Medium
+              </div>
+              <div
+                class="embedMenuOption"
+                onclick="updatePreview('size', 'Large')"
+              >
+                Large
+              </div>
+              <div
+                class="embedMenuOption"
+                onclick="updatePreview('size', 'XLarge')"
+              >
+                X-Large
+              </div>
+            </div>
+          </div>
+          <div id="embedCodePort">
+            <div id="embedCodeBox"></div>
+            <div id="embedButtonBox">
+              <div id="embedCopyButton" onclick="copyCode()">Copy</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
