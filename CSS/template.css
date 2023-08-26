@@ -475,9 +475,10 @@ a {
 }
 
 #navbarMobileMenuButton {
-  height: 100%;
+  height: 75%;
   aspect-ratio: 1;
-  background: pink;
+  background-image: url("../Images/NavbarMobileMenuIcon.png");
+  background-size: contain;
   display: none;
 }
 
@@ -514,6 +515,16 @@ a {
   display: none;
   align-items: center;
   justify-content: center;
+}
+
+#navbarMobileMenuLightbox {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(168, 234, 213, 0.85);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
 }
 
 @media screen and (min-height: 100vw) {

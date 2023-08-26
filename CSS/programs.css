@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --freshGuac: #aebe89;
+  --aloeCream: #dae3bb;
+  --whiteLace: #fff7ec;
+  --brookGreen: #a8ead5;
+  --colaBrown: #2b2119;
+}
+
+#programsBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  min-height: 90vh;
+}
+
+#programsHeading {
+  font-size: 6vh;
+  font-family: "Barlow Condensed", sans-serif;
+  color: var(--colaBrown);
+  font-weight: 500;
+  text-align: center;
+  margin-top: 6vh;
+  margin-bottom: 6vh;
+}
+
+.programStrip {
+  width: 100%;
+  /* border: 1px solid red; */
+  height: 75vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: start;
+}
+
+.programInfoContainer {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.programName {
+  max-width: 90%;
+  margin-bottom: 4vh;
+  font-size: 5vh;
+  font-family: "Urbanist", sans-serif;
+  font-weight: 500;
+  color: var(--freshGuac);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.programDescription {
+  max-width: 90%;
+  font-size: 3vh;
+  font-family: "Urbanist", sans-serif;
+  font-weight: 300;
+  color: var(--colaBrown);
+  text-align: center;
+  line-height: 1.75;
+}
+
+.programButton {
+  margin-top: 4vh;
+  margin-bottom: 4vh;
+  width: 20%;
+  aspect-ratio: 3;
+  border-radius: calc(90vw * 0.6 * 0.2 * 0.05);
+  background: var(--aloeCream);
+  color: white;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: calc(90vw * 0.6 * 0.2 / 3 * 0.65);
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.programButton:hover {
+  box-sizing: border-box;
+  border: 0.325vh solid var(--freshGuac);
+  color: var(--freshGuac);
+  background: transparent;
+}
+
+.programLogoContainer {
+  width: 40%;
+  aspect-ratio: 1;
+  background-position: center;
+  background-size: contain;
+}
