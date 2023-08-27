@@ -458,7 +458,7 @@ input[type="checkbox"] {
     width: 100vw;
     position: static;
     flex-direction: column;
-    height: 80vh;
+    height: 100vh;
     padding-top: 1.5vh;
     padding-bottom: 1.5vh;
     padding-left: 5vw;
@@ -508,7 +508,7 @@ input[type="checkbox"] {
   }
 
   #cartCheckoutContainer {
-    position: absolute;
+    position: fixed;
     width: 100vw;
     height: 20vh;
     padding-left: 5vw;
