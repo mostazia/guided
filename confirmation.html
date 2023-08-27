@@ -162,7 +162,7 @@
 
           const urlParams = new URLSearchParams(window.location.search);
           const conCode = urlParams.get("cc") || "";
-          if ((conCode = "")) {
+          if ((conCode === "")) {
             window.location.href = "./404";
           }
           document.getElementById(
