@@ -520,11 +520,66 @@ a {
 #navbarMobileMenuLightbox {
   width: 100vw;
   height: 100vh;
-  background: rgba(168, 234, 213, 0.85);
+  background: rgba(168, 234, 213, 0.9);
   position: fixed;
   top: 0;
   left: 0;
   z-index: 50;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbarMobileMenuOption {
+  width: 75%;
+  aspect-ratio: 5;
+  border-bottom: 0.325vh solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Urbanist", sans-serif;
+  color: white;
+  font-size: calc(75vw / 15);
+  font-weight: 600;
+}
+
+#navbarMobileSearchBox {
+  width: 75%;
+  aspect-ratio: 5;
+  border-bottom: 0.325vh solid white;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: calc(75vw * 0.05);
+  padding-right: calc(75vw * 0.05);
+  box-sizing: border-box;
+}
+
+#navbarMobileSearchInput {
+  width: 80%;
+  height: 100%;
+  background: transparent;
+  outline: none;
+  border: none;
+  font-family: "Urbanist", sans-serif;
+  color: white;
+  font-size: calc(75vw / 15);
+  font-weight: 400;
+}
+
+#navbarMobileSearchInput::placeholder {
+  font-family: "Urbanist", sans-serif;
+  color: white;
+  font-size: calc(75vw / 15);
+  font-weight: 400;
+}
+
+#navbarMobileSearchIcon {
+  width: 10%;
+  aspect-ratio: 1;
+  background-image: url("../Images/NavbarMobileSearchIcon.png");
+  background-size: contain;
 }
 
 @media screen and (min-height: 100vw) {

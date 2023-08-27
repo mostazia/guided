@@ -145,20 +145,6 @@
         }
       }
     </script>
-    <script id="searchScript">
-      function toggleSearch(bool) {
-        const searchLightbox = document.getElementById("searchLightbox");
-        if (bool) {
-          searchLightbox.style.display = "flex";
-        } else {
-          searchLightbox.style.display = "none";
-        }
-      }
-
-      function handleSearch(query) {
-        window.location.href = `search?query=${encodeURIComponent(query)}`;
-      }
-    </script>
     <script id="confirmationGenerationScript">
       document.addEventListener(
         "DOMContentLoaded",
@@ -167,7 +153,10 @@
             .getElementById("searchInput")
             .addEventListener("keydown", function (event) {
               if (event.key === "Enter") {
-                handleSearch(document.getElementById("searchInput").value);
+                let query =
+                  document.getElementById("searchInput").value ||
+                  document.getElementById("navbarMobileSearchInput").value;
+                handleSearch(query);
               }
             });
 
@@ -194,8 +183,75 @@
         })
       );
     </script>
+    <script id="searchScript">
+      function toggleSearch(bool) {
+        const searchLightbox = document.getElementById("searchLightbox");
+        if (bool) {
+          searchLightbox.style.display = "flex";
+        } else {
+          searchLightbox.style.display = "none";
+        }
+      }
+
+      function toggleSearchMobile(bool) {
+        const searchBox = document.getElementById("navbarMobileSearchBox");
+        const searchButton = document.getElementById("mobileSearch");
+        if (bool) {
+          searchBox.style.display = "flex";
+          searchButton.style.display = "none";
+        } else {
+          searchBox.style.display = "none";
+          searchButton.style.display = "flex";
+        }
+      }
+
+      function handleSearch(query) {
+        window.location.href = `search?query=${encodeURIComponent(query)}`;
+      }
+    </script>
+    <script id="mobileNavbarScript">
+      function toggleMenu(bool) {
+        const menu = document.getElementById("navbarMobileMenuLightbox");
+        if (bool) {
+          menu.style.display = "flex";
+        } else {
+          menu.style.display = "none";
+        }
+      }
+    </script>
   </head>
   <body>
+    <div id="navbarMobileMenuLightbox">
+      <div
+        class="navbarMobileMenuOption"
+        id="mobileSearch"
+        onclick="toggleSearchMobile(true)"
+      >
+        Search
+      </div>
+      <div id="navbarMobileSearchBox">
+        <input id="navbarMobileSearchInput" placeholder="Search" />
+        <div
+          id="navbarMobileSearchIcon"
+          onclick="handleSearch(document.getElementById('navbarMobileSearchInput').value)"
+        ></div>
+      </div>
+      <a
+        class="navbarMobileMenuOption"
+        href="https://www.paypal.com/donate/?hosted_button_id=L75PL47XJCQCE"
+        >Donate</a
+      >
+      <!-- <a class="navbarMobileMenuOption" href="./about">About</a> -->
+      <a class="navbarMobileMenuOption" href="./guides">Guides</a>
+      <a class="navbarMobileMenuOption" href="./programs">Programs</a>
+      <a class="navbarMobileMenuOption" href="./tutoring">Private Tutoring</a>
+      <a
+        onclick="toggleMenu(false)"
+        class="navbarMobileMenuOption"
+        style="border-bottom: none; font-weight: 700"
+        >Close</a
+      >
+    </div>
     <div id="cartBackdrop">
       <div id="cartLeaveContainer" onClick="displayCart(false)"></div>
       <div id="cartDisplayContainer"></div>
@@ -219,7 +275,10 @@
         <a class="navbarMenuOption" href="./programs">Programs</a>
         <a class="navbarMenuOption" href="./tutoring">Private Tutoring</a>
       </div>
-      <a id="navbarLogoContainer" href="..">
+      <div id="navbarMobileMenuContainer">
+        <div id="navbarMobileMenuButton" onclick="toggleMenu(true)"></div>
+      </div>
+      <a id="navbarLogoContainer" href="./">
         <div id="navbarMainLogo">GuidEd</div>
         <div id="navbarSubLogo">By Stacy</div>
       </a>
@@ -233,6 +292,11 @@
         <div id="navbarSearchIcon" onclick="toggleSearch(true)"></div>
         <div id="navbarBackpackIcon" onClick="displayCart(true)">
           <div id="navbarBackpackCount">1</div>
+        </div>
+      </div>
+      <div id="navbarMobileBackpackContainer">
+        <div id="navbarMobileBackpack" onclick="displayCart(true)">
+          <div id="navbarMobileBackpackCount"></div>
         </div>
       </div>
     </div>

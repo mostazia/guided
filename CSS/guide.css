@@ -464,3 +464,213 @@
   text-align: center;
   display: none;
 }
+
+/* MOBILE CSS */
+
+@media screen and (min-height: 100vw) {
+  #guidePageContainer {
+    width: 95%;
+    min-height: unset;
+    flex-direction: column;
+  }
+
+  #guidePageImageBox {
+    top: unset;
+    margin-top: 2vh;
+    width: 100%;
+    height: calc(95vw - 2 * (95vw * 0.25 / 3) + (95vw * 0.25) + 3vh);
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: space-between;
+    position: static;
+  }
+
+  #guidePageCarousel {
+    margin-top: calc(-1 * (95vw - 95vw * 0.25) / 2);
+    margin-bottom: calc(-1 * (95vw - 95vw * 0.25) / 2);
+    width: unset;
+    height: 95vw;
+    aspect-ratio: 0.25;
+    margin-right: unset;
+    margin-left: unset;
+    transform: rotate(270deg);
+  }
+
+  .guidePageCarouselArrow {
+    height: 50%;
+    aspect-ratio: 1;
+    transform: rotate(45deg);
+    box-sizing: border-box;
+    border-top: 0.325vh solid var(--freshGuac);
+    border-left: 0.325vh solid var(--freshGuac);
+    margin-top: calc(((95vw * 0.25 / 3) - 0.25 * (95vw * 0.25 / 3)) / 2);
+  }
+
+  #guidePageImageCarousel {
+    height: calc(95vw - (95vw * 0.25 / 3 * 2));
+  }
+
+  .guidePageCarouselImg {
+    margin-bottom: 4vw;
+    transform: rotate(90deg);
+  }
+
+  #guidePageImageMain {
+    width: calc(95vw - 2 * (95vw * 0.25 / 3));
+    aspect-ratio: 1;
+    border-radius: calc(95vw 0.025);
+  }
+
+  #guidePageInfoBox {
+    width: 100%;
+    min-height: unset;
+    padding-right: calc(95vw / 2 * 0.05);
+  }
+
+  #guidePageSubject {
+    margin-top: 3vh;
+    font-size: 2vh;
+    height: 2.5vh;
+  }
+
+  #guidePageNew {
+    height: 2.5vh;
+    font-size: 2vh;
+  }
+
+  #guidePageName {
+    margin-top: 3vh;
+    font-size: 4vh;
+  }
+
+  #guidePageRatingContainer {
+    font-size: 3.5vh;
+  }
+
+  #guideButtonContainer {
+    margin-top: 3vh;
+    height: calc(60vw / 6);
+    justify-content: space-between;
+  }
+
+  #addToBackpackButton {
+    height: calc(60vw / 6);
+    width: 60vw;
+    font-size: calc(60vw / 10);
+  }
+
+  #shareGuideIcon {
+    height: unset;
+    width: 8vw;
+    aspect-ratio: 1;
+    background-image: url("../Images/GuidePageShareIcon.png");
+    background-size: contain;
+    margin-left: 1vw;
+    cursor: pointer;
+  }
+
+  #shareGuideLightbox {
+    height: unset;
+    width: 90vw;
+    aspect-ratio: 1.5;
+    border-radius: calc(90vw * 0.025);
+  }
+
+  #shareGuideLBHeading {
+    margin-top: calc(90vw * 0.025);
+    height: 6vw;
+    width: calc(95vw - 2 * (95vw * 0.075));
+    font-size: 5vw;
+  }
+
+  #shareGuideLBX {
+    height: 5vw;
+  }
+
+  #shareGuideShareBox {
+    height: calc(90vw / 1.5 - 2 * (90vw * 0.025) - 6vw);
+    width: calc(95vw - 2 * (95vw * 0.075));
+  }
+
+  #shareGuideShareColumn {
+    width: 100%;
+    height: calc(0.45 * (90vw / 1.5 - 2 * (90vw * 0.025) - 4vh));
+  }
+
+  .shareGuideBrandBox {
+    height: unset;
+    width: calc(95vw - 2 * (95vw * 0.075) / 6 - 5vw);
+    flex-grow: 0;
+  }
+
+  .shareGuideBrandIcon {
+    width: 90%;
+  }
+
+  .shareGuideBrandText {
+    font-size: calc((95vw - 2 * (95vw * 0.075) / 6 - 5vw) * 0.0375);
+  }
+
+  #shareGuideLinkContainer {
+    width: 100%;
+    aspect-ratio: 9;
+    border-radius: calc((95vw - 2 * (95vw * 0.075)) / 9 * 0.5);
+    padding-left: calc((95vw - 2 * (95vw * 0.075)) / 9 * 0.5);
+    padding-right: calc((95vw - 2 * (95vw * 0.075)) / 9 * 0.5);
+    font-size: calc((95vw - 2 * (95vw * 0.075)) / 9 * 0.35);
+  }
+
+  #shareGuideLinkButton {
+    height: calc((95vw - 2 * (95vw * 0.075)) / 9 * 0.65);
+    border-radius: calc((95vw - 2 * (95vw * 0.075)) / 9 * 0.325);
+  }
+
+  #guideDescriptionText {
+    margin-top: 3vh;
+    margin-bottom: 4vh;
+    font-size: 2.5vw;
+  }
+
+  #rateGuideLightbox {
+    height: unset;
+    width: 95vw;
+    aspect-ratio: 1.5;
+    border-radius: calc(95vw * 0.025);
+  }
+
+  #rateGuideLBHeading {
+    margin-top: calc(95vw * 0.025);
+    height: 6vw;
+    width: calc(95vw - 2 * (95vw * 0.05));
+    font-size: 5vw;
+  }
+
+  #rateGuideLBX {
+    height: 5vw;
+  }
+
+  #rateGuideRateBox {
+    height: calc(90vw / 1.5 - 2 * (90vw * 0.025) - 6vw);
+    width: calc(95vw - 2 * (95vw * 0.075));
+  }
+
+  #rateGuideStarColumn {
+    height: calc(0.45 * (90vw / 1.5 - 2 * (90vw * 0.025) - 6vw));
+  }
+
+  .rateGuideStar {
+    height: unset;
+    width: calc(95vw - 2 * (95vw * 0.075) / 6 - 5vw);
+    font-size: calc((95vw - 2 * (95vw * 0.075) / 6 - 5vw) / 5 / 0.7 / 1.5);
+  }
+
+  #rateGuideSubmit {
+    height: 10vw;
+    border-radius: calc(10vw * 0.5);
+    font-size: 5vw;
+  }
+
+  #rateGuideConfirmation {
+    font-size: 5vw;
+  }
+}
