@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" content="initial-scale=1" />
+    <title>GuidEd by Stacy</title>
+    <link rel="stylesheet" href="../CSS/mailingconfirm.css" />
+    <link rel="stylesheet" href="../CSS/template.css" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <script type="text/javascript" src="JS/products.js"></script>
+    <script id="onLoadScript">
+      document.addEventListener(
+        "DOMContentLoaded",
+        (loadContent = () => {
+          let cart = JSON.parse(getCookie("cart") || "[]");
+          if (cart.length !== 0) {
+            updateCartCount();
+          }
+
+          document
+            .getElementById("searchInput")
+            .addEventListener("keydown", function (event) {
+              if (event.key === "Enter") {
+                let query =
+                  document.getElementById("searchInput").value ||
+                  document.getElementById("navbarMobileSearchInput").value;
+                handleSearch(query);
+              }
+            });
+
+          const urlParams = new URLSearchParams(window.location.search);
+          const conCode = urlParams.get("cc") || "";
+          const conKey = urlParams.get("k") || "";
+          if (conCode === "" || conKey === "") {
+            window.location.href = "../404";
+          } else {
+            submitConfirm(conCode, conKey);
+          }
+        })
+      );
+
+      function submitConfirm(code, key) {
+        document.getElementById("mconCC").value = code;
+        document.getElementById("mconKey").value = key;
+        document.getElementById("mconForm").submit();
+      }
+    </script>
+    <script id="navbarHeightScript">
+      window.onscroll = function () {
+        scrollFunction();
+      };
+      var r = document.querySelector(":root");
+      var timer = null;
+
+      function scrollFunction() {
+        r.style.setProperty("--scrollbarColor", "#a8ead5");
+        if (
+          document.body.scrollTop > 1 ||
+          document.documentElement.scrollTop > 1
+        ) {
+          r.style.setProperty("--navbarHeight", "10vh");
+        } else {
+          r.style.setProperty("--navbarHeight", "12vh");
+        }
+        if (timer !== null) {
+          clearTimeout(timer);
+        }
+        timer = setTimeout(function () {
+          r.style.setProperty("--scrollbarColor", "#dae3bb");
+        }, 100);
+      }
+    </script>
+    <script id="cartScript" type="text/javascript">
+      function displayCart(bool) {
+        if (bool) {
+          document.getElementById("cartBackdrop").style.display = "flex";
+          createCartElements();
+        } else {
+          document.getElementById("cartBackdrop").style.display = "none";
+        }
+      }
+
+      function addToCart(productString) {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        if (!cart.includes(productString)) {
+          cart.push(productString);
+          setCookie("cart", JSON.stringify(cart));
+          updateCartCount();
+          if (cart.length === 1) {
+            displayCart(true);
+          }
+        }
+      }
+      function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(";").shift();
+      }
+
+      function setCookie(name, value) {
+        document.cookie = `${name}=${value}; path=/`;
+      }
+
+      function createCartElements() {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        let cartContainer = document.getElementById("cartDisplayContainer");
+
+        cartContainer.innerHTML =
+          "<div id=" +
+          "cartDisplayHeading" +
+          ">" +
+          "<div id=" +
+          "cartDisplayTitle" +
+          ">Backpack</div>" +
+          "<div id=" +
+          "cartDisplayCount" +
+          `>${cart.length} Items</div>` +
+          "<div id=" +
+          "cartDisplayX" +
+          " " +
+          "onClick=" +
+          "displayCart(false)" +
+          "></div> </div>" +
+          "<div id=" +
+          "cartCheckoutContainer" +
+          "> <div id=" +
+          "cartCheckoutText" +
+          "></div>" +
+          `<a href="checkout?from=donation" id=` +
+          "cartCheckoutButton" +
+          ">Check Out</a> </div>";
+
+        showCheckoutButton();
+        cart.forEach((product) => {
+          var name = window[product].name;
+          var subject = window[product].subject;
+          var im1 = window[product].im1;
+          if (name.length >= 29) {
+            name = name.substring(0, 25) + " ...";
+          }
+          cartContainer.innerHTML += `
+              <div class="cartItemContainer">
+              <div class="cartItemImage" style="background-image: url('${im1}') "></div>
+              <div class="cartItemInfoBox">
+                <div class="cartItemName"> ${name} </div>
+                <div class="cartItemSubject"> ${subject} </div>
+                <div class="cartItemRemove" onClick="removeFromCart('${product}')"> remove </div>
+              </div>
+            </div>`;
+        });
+      }
+
+      function removeFromCart(productString) {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        cart = cart.filter((product) => product !== productString);
+        setCookie("cart", JSON.stringify(cart));
+        createCartElements();
+        updateCartCount();
+      }
+
+      function updateCartCount() {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        if (cart.length !== 0) {
+          document.getElementById("navbarBackpackCount").style.display = "flex";
+          document.getElementById("navbarBackpackCount").innerHTML =
+            cart.length;
+        } else {
+          document.getElementById("navbarBackpackCount").style.display = "none";
+        }
+      }
+
+      function showCheckoutButton() {
+        let cart = JSON.parse(getCookie("cart") || "[]");
+        if (cart.length !== 0) {
+          document.getElementById("cartCheckoutButton").style.display = "flex";
+          document.getElementById("cartCheckoutText").innerHTML =
+            "Found everything you need? <br />Let's prepare your digital downloads!";
+        } else {
+          document.getElementById("cartCheckoutButton").style.display = "none";
+          document.getElementById("cartCheckoutText").innerHTML =
+            "Please add items to your backpack to check out :)";
+        }
+      }
+    </script>
+    <script id="searchScript">
+      function toggleSearch(bool) {
+        const searchLightbox = document.getElementById("searchLightbox");
+        if (bool) {
+          searchLightbox.style.display = "flex";
+        } else {
+          searchLightbox.style.display = "none";
+        }
+      }
+
+      function toggleSearchMobile(bool) {
+        const searchBox = document.getElementById("navbarMobileSearchBox");
+        const searchButton = document.getElementById("mobileSearch");
+        if (bool) {
+          searchBox.style.display = "flex";
+          searchButton.style.display = "none";
+        } else {
+          searchBox.style.display = "none";
+          searchButton.style.display = "flex";
+        }
+      }
+
+      function handleSearch(query) {
+        window.location.href = `search?query=${encodeURIComponent(query)}`;
+      }
+    </script>
+    <script id="mobileNavbarScript">
+      function toggleMenu(bool) {
+        const menu = document.getElementById("navbarMobileMenuLightbox");
+        if (bool) {
+          menu.style.display = "flex";
+        } else {
+          menu.style.display = "none";
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="navbarMobileMenuLightbox">
+      <div
+        class="navbarMobileMenuOption"
+        id="mobileSearch"
+        onclick="toggleSearchMobile(true)"
+      >
+        Search
+      </div>
+      <div id="navbarMobileSearchBox">
+        <input id="navbarMobileSearchInput" placeholder="Search" />
+        <div
+          id="navbarMobileSearchIcon"
+          onclick="handleSearch(document.getElementById('navbarMobileSearchInput').value)"
+        ></div>
+      </div>
+      <a
+        class="navbarMobileMenuOption"
+        href="https://www.paypal.com/donate/?hosted_button_id=L75PL47XJCQCE"
+        >Donate</a
+      >
+      <!-- <a class="navbarMobileMenuOption" href="./about">About</a> -->
+      <a class="navbarMobileMenuOption" href="./guides">Guides</a>
+      <a class="navbarMobileMenuOption" href="./programs">Programs</a>
+      <a class="navbarMobileMenuOption" href="./tutoring">Private Tutoring</a>
+      <a
+        onclick="toggleMenu(false)"
+        class="navbarMobileMenuOption"
+        style="border-bottom: none; font-weight: 700"
+        >Close</a
+      >
+    </div>
+    <div id="cartBackdrop">
+      <div id="cartLeaveContainer" onClick="displayCart(false)"></div>
+      <div id="cartDisplayContainer"></div>
+    </div>
+    <div id="searchLightbox">
+      <div id="searchInputContainer">
+        <input id="searchInput" placeholder="Search" />
+        <div id="searchInputSearchContainer">
+          <div
+            id="searchInputSearchButton"
+            onclick="handleSearch(document.getElementById('searchInput').value)"
+          ></div>
+        </div>
+      </div>
+      <div id="searchLightboxX" onclick="toggleSearch(false)"></div>
+    </div>
+    <div id="navbar">
+      <div id="navbarMenuContainer">
+        <!-- <a class="navbarMenuOption" href="../about">About</a> -->
+        <a class="navbarMenuOption" href="../guides">Guides</a>
+        <a class="navbarMenuOption" href="../programs">Programs</a>
+        <a class="navbarMenuOption" href="../tutoring">Private Tutoring</a>
+      </div>
+      <div id="navbarMobileMenuContainer">
+        <div id="navbarMobileMenuButton" onclick="toggleMenu(true)"></div>
+      </div>
+      <a id="navbarLogoContainer" href="./">
+        <div id="navbarMainLogo">GuidEd</div>
+        <div id="navbarSubLogo">By Stacy</div>
+      </a>
+      <div id="navbarOptionsContainer">
+        <a
+          id="navbarDonateButton"
+          href="https://www.paypal.com/donate/?hosted_button_id=L75PL47XJCQCE"
+          target="_blank"
+          >Donate</a
+        >
+        <div id="navbarSearchIcon" onclick="toggleSearch(true)"></div>
+        <div id="navbarBackpackIcon" onClick="displayCart(true)">
+          <div id="navbarBackpackCount">1</div>
+        </div>
+      </div>
+      <div id="navbarMobileBackpackContainer">
+        <div id="navbarMobileBackpack" onclick="displayCart(true)">
+          <div id="navbarMobileBackpackCount"></div>
+        </div>
+      </div>
+    </div>
+    <div id="pagebody">
+      <div id="mconBody">
+        <div id="mconHeading">Thank you!</div>
+        <div id="mconMessage">
+          We have received your confirmation! You will now start receiving
+          emails from our mailing list! If you wish to unsubscribe, you may do
+          so <span><a href="./unsubscribe" class="mconLink">here</a></span
+          >. <br /><br />
+          You may click
+          <span><a href="../guides" class="mconLink">here</a></span> to be
+          redirected to our Guides page!
+        </div>
+        <form
+          id="mconForm"
+          action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSe5bfqCnnzcrheCHhIXFd39TwcczyCnlAa5MkkpR4V51BBjVw/formResponse"
+          method="post"
+          target="hidden_iframe"
+        >
+          <input
+            id="mconCC"
+            type="text"
+            placeholder="CC"
+            name="entry.1901324414"
+          />
+          <input
+            id="mconKey"
+            type="text"
+            placeholder="Key"
+            name="entry.778709377"
+          />
+          <input
+            id="mconEmail"
+            type="text"
+            placeholder="Email"
+            name="entry.713199376"
+          />
+          />
+        </form>
+        <iframe name="hidden_iframe" style="display: none"></iframe>
+      </div>
+    </div>
+  </body>
+</html>

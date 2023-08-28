@@ -195,7 +195,6 @@
           let rememberMe = JSON.parse(getCookie("rememberMe") || "[]");
           createCartElements();
           allowCheckout();
-          updateMailingOption();
           updateCartInput();
           if (rememberMe.length !== 0) {
             document.getElementById("firstNameInput").value = rememberMe[0];
@@ -213,7 +212,8 @@
             document.getElementById("rememberMeCheck").checked = true;
           } else {
             document.getElementById("rememberMeCheck").checked = false;
-            document.getElementById("emailSignUpCheck").checked = false;
+            document.getElementById("emailSignUpCheck").checked = true;
+            updateMailingOption();
           }
         })
       );
