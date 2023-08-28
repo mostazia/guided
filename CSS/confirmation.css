@@ -41,3 +41,22 @@
   color: var(--freshGuac);
   text-decoration: underline;
 }
+
+/* MOBILE CSS */
+
+@media screen and (min-height: 100vw) {
+  #confirmationBody {
+    height: unset;
+    margin-top: calc(100vw / 7);
+  }
+  #thankYou {
+    width: 90%;
+    font-size: 12.5vw;
+    margin-bottom: 3vh;
+    margin-top: 3vh;
+  }
+  #confirmationMessage {
+    width: 90%;
+    font-size: 4vw;
+  }
+}
