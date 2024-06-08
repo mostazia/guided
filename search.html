@@ -7,11 +7,17 @@
     <link rel="stylesheet" href="CSS/template.css" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <script type="text/javascript" src="JS/shared-elements.js"></script>
     <script type="text/javascript" src="JS/products.js"></script>
     <script id="onLoadScript">
       document.addEventListener(
         "DOMContentLoaded",
         (loadContent = () => {
+          for (element of topElements) {
+            document.getElementById("body").innerHTML =
+              element + document.getElementById("body").innerHTML;
+          }
+
           let cart = JSON.parse(getCookie("cart") || "[]");
           if (cart.length !== 0) {
             updateCartCount();
@@ -31,6 +37,10 @@
           const urlParams = new URLSearchParams(window.location.search);
           let query = urlParams.get("query") || "";
           conductSearch(query);
+
+          for (element of bottomElements) {
+            document.getElementById("body").innerHTML += element;
+          }
         })
       );
 
@@ -247,86 +257,7 @@
       }
     </script>
   </head>
-  <body>
-    <div id="navbarMobileMenuLightbox">
-      <div
-        class="navbarMobileMenuOption"
-        id="mobileSearch"
-        onclick="toggleSearchMobile(true)"
-      >
-        Search
-      </div>
-      <div id="navbarMobileSearchBox">
-        <input id="navbarMobileSearchInput" placeholder="Search" />
-        <div
-          id="navbarMobileSearchIcon"
-          onclick="handleSearch(document.getElementById('navbarMobileSearchInput').value)"
-        ></div>
-      </div>
-      <a
-        class="navbarMobileMenuOption"
-        href="https://www.paypal.com/donate/?hosted_button_id=L75PL47XJCQCE"
-        >Donate</a
-      >
-      <!-- <a class="navbarMobileMenuOption" href="./about">About</a> -->
-      <a class="navbarMobileMenuOption" href="./guides">Guides</a>
-      <a class="navbarMobileMenuOption" href="./programs">Programs</a>
-      <a class="navbarMobileMenuOption" href="./tutoring">Private Tutoring</a>
-      <a
-        onclick="toggleMenu(false)"
-        class="navbarMobileMenuOption"
-        style="border-bottom: none; font-weight: 700"
-        >Close</a
-      >
-    </div>
-    <div id="cartBackdrop">
-      <div id="cartLeaveContainer" onClick="displayCart(false)"></div>
-      <div id="cartDisplayContainer"></div>
-    </div>
-    <div id="searchLightbox">
-      <div id="searchInputContainer">
-        <input id="searchInput" placeholder="Search" />
-        <div id="searchInputSearchContainer">
-          <div
-            id="searchInputSearchButton"
-            onclick="handleSearch(document.getElementById('searchInput').value)"
-          ></div>
-        </div>
-      </div>
-      <div id="searchLightboxX" onclick="toggleSearch(false)"></div>
-    </div>
-    <div id="navbar">
-      <div id="navbarMenuContainer">
-        <!-- <a class="navbarMenuOption" href="./about">About</a> -->
-        <a class="navbarMenuOption" href="./guides">Guides</a>
-        <a class="navbarMenuOption" href="./programs">Programs</a>
-        <a class="navbarMenuOption" href="./tutoring">Private Tutoring</a>
-      </div>
-      <div id="navbarMobileMenuContainer">
-        <div id="navbarMobileMenuButton" onclick="toggleMenu(true)"></div>
-      </div>
-      <a id="navbarLogoContainer" href="./">
-        <div id="navbarMainLogo">GuidEd</div>
-        <div id="navbarSubLogo">By Stacy</div>
-      </a>
-      <div id="navbarOptionsContainer">
-        <a
-          id="navbarDonateButton"
-          href="https://www.paypal.com/donate/?hosted_button_id=L75PL47XJCQCE"
-          target="_blank"
-          >Donate</a
-        >
-        <div id="navbarSearchIcon" onclick="toggleSearch(true)"></div>
-        <div id="navbarBackpackIcon" onClick="displayCart(true)">
-          <div id="navbarBackpackCount">1</div>
-        </div>
-      </div>
-      <div id="navbarMobileBackpackContainer">
-        <div id="navbarMobileBackpack" onclick="displayCart(true)">
-          <div id="navbarMobileBackpackCount"></div>
-        </div>
-      </div>
-    </div>
+  <body id="body">
     <div id="pagebody">
       <div id="searchMainContainer">
         <div id="searchHeadingContainer">

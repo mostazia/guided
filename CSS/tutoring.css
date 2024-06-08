@@ -51,7 +51,7 @@
 }
 
 #tutoringAdText {
-  max-width: calc(90vw * 0.75 * 0.9);
+  max-width: calc(90vw * 0.75 * 0.875);
   margin-bottom: 4vh;
   font-size: 3vh;
   font-family: "Urbanist", sans-serif;
@@ -61,7 +61,6 @@
 }
 
 #tutoringSumBox {
-  position: sticky;
   top: 26vh;
   width: min(30%, calc(85vh * 0.825));
   display: flex;

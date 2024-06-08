@@ -462,6 +462,56 @@ a {
   background-image: url("../Images/BackpackXIconHover.png");
 }
 
+/* FOOTER */
+#footer {
+  width: 100vw;
+  height: 12.5vh;
+  background: var(--aloeCream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#footerPages {
+  height: 2.5vh;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  color: var(--colaBrown);
+  font-family: "Urbanist", sans-serif;
+  font-size: 2.5vh;
+  text-decoration: none;
+  width: 40%;
+}
+
+.footerLinks:hover {
+  text-decoration: underline;
+}
+
+#footerSocialMenu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 15%;
+}
+
+.footerSocialIcon {
+  height: 6vh;
+  aspect-ratio: 1;
+  background-size: contain;
+  background-position: center;
+  cursor: pointer;
+}
+
+.footerText {
+  height: 2.5vh;
+  text-align: left;
+  color: var(--colaBrown);
+  font-size: 2.5vh;
+  font-family: "Urbanist", sans-serif;
+  width: 40%;
+}
+
 /* MOBILE CSS */
 
 #navbarMobileMenuContainer {

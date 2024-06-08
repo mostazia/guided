@@ -7,11 +7,16 @@
     <link rel="stylesheet" href="CSS/template.css" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <script type="text/javascript" src="JS/shared-elements.js"></script>
     <script type="text/javascript" src="JS/products.js"></script>
     <script id="onLoadScript">
       document.addEventListener(
         "DOMContentLoaded",
         (loadContent = () => {
+          for (element of topElements) {
+            document.getElementById("body").innerHTML =
+              element + document.getElementById("body").innerHTML;
+          }
           let cart = JSON.parse(getCookie("cart") || "[]");
           if (cart.length !== 0) {
             updateCartCount();
@@ -27,6 +32,9 @@
                 handleSearch(query);
               }
             });
+          for (element of bottomElements) {
+            document.getElementById("body").innerHTML += element;
+          }
         })
       );
     </script>
@@ -204,89 +212,36 @@
       }
     </script>
   </head>
-  <body>
-    <div id="navbarMobileMenuLightbox">
-      <div
-        class="navbarMobileMenuOption"
-        id="mobileSearch"
-        onclick="toggleSearchMobile(true)"
-      >
-        Search
-      </div>
-      <div id="navbarMobileSearchBox">
-        <input id="navbarMobileSearchInput" placeholder="Search" />
-        <div
-          id="navbarMobileSearchIcon"
-          onclick="handleSearch(document.getElementById('navbarMobileSearchInput').value)"
-        ></div>
-      </div>
-      <a
-        class="navbarMobileMenuOption"
-        href="https://www.paypal.com/donate/?hosted_button_id=L75PL47XJCQCE"
-        >Donate</a
-      >
-      <!-- <a class="navbarMobileMenuOption" href="./about">About</a> -->
-      <a class="navbarMobileMenuOption" href="./guides">Guides</a>
-      <a class="navbarMobileMenuOption" href="./programs">Programs</a>
-      <a class="navbarMobileMenuOption" href="./tutoring">Private Tutoring</a>
-      <a
-        onclick="toggleMenu(false)"
-        class="navbarMobileMenuOption"
-        style="border-bottom: none; font-weight: 700"
-        >Close</a
-      >
-    </div>
-    <div id="cartBackdrop">
-      <div id="cartLeaveContainer" onClick="displayCart(false)"></div>
-      <div id="cartDisplayContainer"></div>
-    </div>
-    <div id="searchLightbox">
-      <div id="searchInputContainer">
-        <input id="searchInput" placeholder="Search" />
-        <div id="searchInputSearchContainer">
-          <div
-            id="searchInputSearchButton"
-            onclick="handleSearch(document.getElementById('searchInput').value)"
-          ></div>
-        </div>
-      </div>
-      <div id="searchLightboxX" onclick="toggleSearch(false)"></div>
-    </div>
-    <div id="navbar">
-      <div id="navbarMenuContainer">
-        <!-- <a class="navbarMenuOption" href="./about">About</a> -->
-        <a class="navbarMenuOption" href="./guides">Guides</a>
-        <a class="navbarMenuOption" href="./programs">Programs</a>
-        <a class="navbarMenuOption" href="./tutoring">Private Tutoring</a>
-      </div>
-      <div id="navbarMobileMenuContainer">
-        <div id="navbarMobileMenuButton" onclick="toggleMenu(true)"></div>
-      </div>
-      <a id="navbarLogoContainer" href="./">
-        <div id="navbarMainLogo">GuidEd</div>
-        <div id="navbarSubLogo">By Stacy</div>
-      </a>
-      <div id="navbarOptionsContainer">
-        <a
-          id="navbarDonateButton"
-          href="https://www.paypal.com/donate/?hosted_button_id=L75PL47XJCQCE"
-          target="_blank"
-          >Donate</a
-        >
-        <div id="navbarSearchIcon" onclick="toggleSearch(true)"></div>
-        <div id="navbarBackpackIcon" onClick="displayCart(true)">
-          <div id="navbarBackpackCount">1</div>
-        </div>
-      </div>
-      <div id="navbarMobileBackpackContainer">
-        <div id="navbarMobileBackpack" onclick="displayCart(true)">
-          <div id="navbarMobileBackpackCount"></div>
-        </div>
-      </div>
-    </div>
+  <body id="body">
     <div id="pagebody">
       <div id="programsBody">
         <div id="programsHeading">Programs</div>
+        <div class="programStrip">
+          <div
+            class="programLogoContainer"
+            style="background-image: url('Images/SAPSLogo.png')"
+          ></div>
+          <div class="programInfoContainer">
+            <div class="programName">
+              SAPS: STEM Advancement Program by Stacy
+            </div>
+            <div class="programDescription">
+              The SAPS (STEM Advancement Program by Stacy) Program is a free
+              virtual summer bootcamp created by Stacy Vazquez to introduce
+              middle and high school students to advanced STEM topics. The theme
+              of the Summer 2024 Edition of this bootcamp is Introduction to
+              Computer Science and Python.
+              <br /><br />
+              I'm so excited to launch this program! I'm very passionate about
+              computer science and love to share my knowledge surrounding the
+              field. Back in High School, I participated in a Python-based
+              Women's bootcamp. This bootcamp inspired me to become a computer
+              science major, so I fully believe that this program could be very
+              fruitful for many students. Happy Learning!
+            </div>
+            <a target="_blank" href="saps" class="programButton">Apply</a>
+          </div>
+        </div>
         <div class="programStrip">
           <div class="programInfoContainer">
             <div class="programName">
@@ -310,12 +265,7 @@
               raised her. She aspires to be the mentor and guide she wishes she
               had in high school.
             </div>
-            <a
-              href="https://forms.gle/9KazYxHcX94VV5o26"
-              target="_blank"
-              class="programButton"
-              >Apply</a
-            >
+            <a target="_blank" class="programButtonClosed">Closed</a>
           </div>
           <div
             class="programLogoContainer"
