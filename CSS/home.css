@@ -195,6 +195,7 @@
   padding-bottom: 0.75vh;
   border-top: 0.325vh solid var(--aloeCream);
   box-sizing: border-box;
+  background: var(--whiteLace);
   z-index: 5;
 }
 
@@ -221,8 +222,7 @@
   height: 5vh;
   aspect-ratio: 6;
   background-color: var(--aloeCream);
-  margin-bottom: 0.5vh;
-  margin-top: auto;
+  margin-top: 1vh;
   border-radius: calc(5vh * 6 * 0.05);
   font-size: 2.5vh;
   font-family: "Urbanist", sans-serif;
@@ -252,6 +252,7 @@
 
 .homeGuidePreviewBox:hover > .homeGuidePreviewInfo {
   height: calc(52.5vh - (52.5vh * 0.85 / 1.1) + 9vh);
+  top: -7vh;
 }
 
 .homeGuidePreviewBox:hover > .homeGuidePreviewInfo > .homeGuidePreviewAdd {

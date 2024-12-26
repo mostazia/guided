@@ -255,8 +255,6 @@
 
 .guidesPreviewInfo {
   position: relative;
-  top: auto;
-  bottom: 0;
   height: calc(52.5vh - (52.5vh * 0.85 / 1.1));
   display: flex;
   flex-direction: column;
@@ -264,6 +262,7 @@
   padding-top: 0.75vh;
   padding-bottom: 0.75vh;
   border-top: 0.325vh solid var(--aloeCream);
+  background: var(--whiteLace);
   box-sizing: border-box;
   z-index: 5;
 }
@@ -291,8 +290,7 @@
   height: 5vh;
   aspect-ratio: 6;
   background-color: var(--aloeCream);
-  margin-bottom: 0.5vh;
-  margin-top: auto;
+  margin-top: 1vh;
   border-radius: calc(5vh * 6 * 0.05);
   font-size: 2.5vh;
   font-family: "Urbanist", sans-serif;
@@ -322,7 +320,8 @@
 }
 
 .guidesPreviewBox:hover > .guidesPreviewInfo {
-  height: calc(52.5vh - (52.5vh * 0.85 / 1.1) + 9vh);
+  height: calc(52.5vh - (52.5vh * 0.85 / 1.1) + 7vh);
+  top: -7vh;
 }
 
 .guidesPreviewBox:hover > .guidesPreviewInfo > .guidesPreviewAdd {
